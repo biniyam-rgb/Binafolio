@@ -127,7 +127,7 @@ export const Hero = () => {
               >
                 <img
                   src="/assets/character.jpg"
-                  alt="3D Developer Character — Biniyam Gebrie"
+                  alt="Biniyam Gebrie — Software Developer"
                   className="w-full h-full object-cover object-center select-none pointer-events-none"
                   style={{
                     maskImage: 'radial-gradient(circle at 50% 50%, black 72%, transparent 100%)',

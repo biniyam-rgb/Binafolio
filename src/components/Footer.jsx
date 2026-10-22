@@ -12,14 +12,14 @@ export const Footer = () => {
     <footer className="relative border-t border-[#3A241C] bg-[#0A0706] py-12 text-[#C4B6AE]">
       <div className="container-custom">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          
+
           {/* Brand & Name */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <a
               href="#home"
               className="text-xl font-extrabold tracking-tight text-[#F5F0EC] group inline-flex items-center gap-1.5"
             >
-              <span>bina<span className="text-[#FF5A1F]">.</span>folio</span>
+              <span>bina<span className="text-[#FF5A1F]"></span>folio</span>
               <span className="h-1.5 w-1.5 rounded-full bg-[#FF5A1F]" />
             </a>
             <p className="mt-1 text-xs text-[#8E7D75]">
