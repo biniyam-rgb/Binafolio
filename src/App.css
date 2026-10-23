@@ -768,19 +768,20 @@
 
 .hero-wrapper {
   position: relative;
-  min-height: 100vh;
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 7rem;
-  padding-bottom: 4rem;
+  padding-top: 5.5rem;
+  padding-bottom: 2rem;
   overflow: hidden;
 }
 
 @media (min-width: 1024px) {
   .hero-wrapper {
-    padding-top: 8.5rem;
-    padding-bottom: 6rem;
+    min-height: 92vh;
+    padding-top: 6.5rem;
+    padding-bottom: 2.5rem;
   }
 }
 

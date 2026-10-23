@@ -253,7 +253,14 @@ input, textarea {
 .py-2\.5 { padding-top: 0.625rem; padding-bottom: 0.625rem; }
 .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
 .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+.py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+.py-10 { padding-top: 2.5rem; padding-bottom: 2.5rem; }
 .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+.py-14 { padding-top: 3.5rem; padding-bottom: 3.5rem; }
+.py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+.py-18 { padding-top: 4.5rem; padding-bottom: 4.5rem; }
+.py-20 { padding-top: 5rem; padding-bottom: 5rem; }
 .py-24 { padding-top: 6rem; padding-bottom: 6rem; }
 .py-28 { padding-top: 7rem; padding-bottom: 7rem; }
 .py-32 { padding-top: 8rem; padding-bottom: 8rem; }
@@ -263,9 +270,40 @@ input, textarea {
 .pt-3 { padding-top: 0.75rem; }
 .pt-4 { padding-top: 1rem; }
 .pt-6 { padding-top: 1.5rem; }
+.pt-8 { padding-top: 2rem; }
+.pt-10 { padding-top: 2.5rem; }
+.pt-12 { padding-top: 3rem; }
+.pt-16 { padding-top: 4rem; }
+.pt-20 { padding-top: 5rem; }
+.pt-24 { padding-top: 6rem; }
 .pt-28 { padding-top: 7rem; }
+.pt-32 { padding-top: 8rem; }
+.pt-36 { padding-top: 9rem; }
+
+.pb-2 { padding-bottom: 0.5rem; }
 .pb-4 { padding-bottom: 1rem; }
+.pb-6 { padding-bottom: 1.5rem; }
+.pb-8 { padding-bottom: 2rem; }
+.pb-10 { padding-bottom: 2.5rem; }
+.pb-12 { padding-bottom: 3rem; }
 .pb-16 { padding-bottom: 4rem; }
+
+.mb-4 { margin-bottom: 1rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mb-8 { margin-bottom: 2rem; }
+.mb-10 { margin-bottom: 2.5rem; }
+.mb-12 { margin-bottom: 3rem; }
+.mb-14 { margin-bottom: 3.5rem; }
+.mb-16 { margin-bottom: 4rem; }
+
+.mt-4 { margin-top: 1rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mt-8 { margin-top: 2rem; }
+.mt-10 { margin-top: 2.5rem; }
+.mt-12 { margin-top: 3rem; }
+.mt-14 { margin-top: 3.5rem; }
+.mt-16 { margin-top: 4rem; }
+.mt-18 { margin-top: 4.5rem; }
 
 /* Grid Columns */
 .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
@@ -423,8 +461,25 @@ input, textarea {
   .sm\:h-8 { height: 2rem; }
   .sm\:w-8 { width: 2rem; }
   .sm\:max-w-\[290px\] { max-width: 290px; }
+  .sm\:py-10 { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+  .sm\:py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+  .sm\:py-14 { padding-top: 3.5rem; padding-bottom: 3.5rem; }
+  .sm\:py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+  .sm\:py-18 { padding-top: 4.5rem; padding-bottom: 4.5rem; }
+  .sm\:py-20 { padding-top: 5rem; padding-bottom: 5rem; }
   .sm\:py-32 { padding-top: 8rem; padding-bottom: 8rem; }
   .sm\:py-36 { padding-top: 9rem; padding-bottom: 9rem; }
+  .sm\:pt-20 { padding-top: 5rem; }
+  .sm\:pt-24 { padding-top: 6rem; }
+  .sm\:pt-28 { padding-top: 7rem; }
+  .sm\:pb-6 { padding-bottom: 1.5rem; }
+  .sm\:pb-8 { padding-bottom: 2rem; }
+  .sm\:mb-8 { margin-bottom: 2rem; }
+  .sm\:mb-10 { margin-bottom: 2.5rem; }
+  .sm\:mb-12 { margin-bottom: 3rem; }
+  .sm\:mt-6 { margin-top: 1.5rem; }
+  .sm\:mt-8 { margin-top: 2rem; }
+  .sm\:mt-10 { margin-top: 2.5rem; }
 }
 
 @media (min-width: 768px) {
