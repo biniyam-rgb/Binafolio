@@ -50,18 +50,28 @@ export const Navbar = ({ onOpenResume }) => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pt-4 sm:pt-5 transition-all duration-300">
+    <header className={`fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 transition-all duration-300 ${
+      scrolled ? 'pt-2 sm:pt-3' : 'pt-4 sm:pt-5'
+    }`}>
       <div className="container-custom">
         {/* Floating glassmorphic capsule centered at the top */}
         <div 
-          className={`w-full flex items-center justify-between px-5 sm:px-7 py-2.5 rounded-full border border-white/[0.1] backdrop-blur-2xl bg-[#07090e]/85 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.9),0_0_25px_rgba(255,90,31,0.15)] transition-all duration-300 ${
-            scrolled ? 'border-[#FF5A1F]/30 bg-[#07090e]/95 shadow-[0_15px_45px_-10px_rgba(0,0,0,0.95),0_0_35px_rgba(255,90,31,0.25)]' : ''
+          className={`w-full flex items-center justify-between px-5 sm:px-7 py-2.5 rounded-full border transition-all duration-300 ${
+            scrolled 
+              ? 'border-[#FF5A1F]/35 bg-[#07090e] shadow-[0_15px_45px_-10px_rgba(0,0,0,0.98),0_0_30px_rgba(255,90,31,0.2)]' 
+              : 'border-white/[0.1] backdrop-blur-2xl bg-[#07090e]/85 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.9),0_0_25px_rgba(255,90,31,0.15)]'
           }`}
         >
           {/* ================= LEFT: </> BinaFolio ● ================= */}
           <a
             href="#home"
-            className="flex items-center gap-2 text-base sm:text-lg font-bold tracking-tight text-[#F5F0EC] group py-1"
+            className={`flex items-center gap-2 text-base sm:text-lg font-bold tracking-tight text-[#F5F0EC] group py-1 transition-all duration-300 ${
+              scrolled 
+                ? 'opacity-0 pointer-events-none -translate-x-2' 
+                : 'opacity-100 translate-x-0'
+            }`}
+            tabIndex={scrolled ? -1 : 0}
+            aria-hidden={scrolled}
           >
             <span className="font-mono text-base sm:text-lg font-black tracking-tighter" style={{ color: '#FF7A36', textShadow: '0 0 10px rgba(255, 90, 31, 0.8)' }}>&lt;/&gt;</span>
             <span className="font-['Inter'] font-extrabold tracking-tight text-base sm:text-lg">
