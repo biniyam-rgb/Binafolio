@@ -19,8 +19,11 @@ export const Footer = () => {
               href="#home"
               className="text-xl font-extrabold tracking-tight text-[#F5F0EC] group inline-flex items-center gap-1.5"
             >
-              <span>bina<span className="text-[#FF5A1F]"></span>folio</span>
-              <span className="h-1.5 w-1.5 rounded-full bg-[#FF5A1F]" />
+              <span className="font-extrabold tracking-tight">
+                <span className="text-[#FF7A36] drop-shadow-[0_0_8px_#FF5A1F]">Bina</span>
+                <span className="text-white">Folio</span>
+              </span>
+              <span className="h-1.5 w-1.5 rounded-full bg-[#FF5A1F] shadow-[0_0_8px_#FF5A1F]" />
             </a>
             <p className="mt-1 text-xs text-[#8E7D75]">
               Designed &amp; built for <strong className="text-[#F5F0EC]">{personalData.name}</strong> • Software Engineering, Wollo University

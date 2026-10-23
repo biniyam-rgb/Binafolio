@@ -94,7 +94,16 @@ export const Hero = () => {
                   Software
                 </span>
                 <br />
-                <span className="bg-gradient-to-r from-[#FF7A36] via-[#FF5A1F] to-[#FFB088] bg-clip-text text-transparent drop-shadow-[0_0_42px_rgba(255,90,31,0.65)]">
+                <span 
+                  style={{
+                    background: 'linear-gradient(135deg, #FF7A36 0%, #FF5A1F 50%, #FFA066 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    color: '#FF5A1F',
+                    display: 'inline-block',
+                    filter: 'drop-shadow(0 0 35px rgba(255, 90, 31, 0.65))'
+                  }}
+                >
                   Developer
                 </span>
                 <span className="inline-block ml-1.5 text-[#FF5A1F] font-light drop-shadow-[0_0_14px_#FF5A1F] animate-blink select-none">
@@ -135,7 +144,12 @@ export const Hero = () => {
               {/* Primary: Radiant orange & amber gradient pill */}
               <a
                 href="#projects"
-                className="inline-flex items-center justify-center gap-2.5 px-7 sm:px-8 py-3.5 rounded-full font-bold text-sm text-white bg-gradient-to-r from-[#FF5A1F] via-[#FF7A36] to-[#FFA066] border border-[#FFE2D1]/40 shadow-[0_0_30px_rgba(255,90,31,0.7),0_0_55px_rgba(255,122,54,0.35)] hover:shadow-[0_0_40px_rgba(255,90,31,0.95),0_0_70px_rgba(255,122,54,0.55)] hover:scale-105 active:scale-95 transition-all duration-200 group"
+                className="inline-flex items-center justify-center gap-2.5 px-7 sm:px-8 py-3.5 rounded-full font-bold text-sm text-white border border-[#FFE2D1]/40 hover:scale-105 active:scale-95 transition-all duration-200 group"
+                style={{
+                  background: 'linear-gradient(135deg, #FF5A1F 0%, #FF7A36 50%, #FFA066 100%)',
+                  boxShadow: '0 0 30px rgba(255, 90, 31, 0.7), 0 0 55px rgba(255, 122, 54, 0.35)',
+                  color: '#FFFFFF'
+                }}
               >
                 <span>Explore My Work</span>
                 <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-white drop-shadow-[0_0_4px_white]" />

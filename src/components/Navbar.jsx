@@ -63,9 +63,10 @@ export const Navbar = ({ onOpenResume }) => {
             href="#home"
             className="flex items-center gap-2 text-base sm:text-lg font-bold tracking-tight text-[#F5F0EC] group py-1"
           >
-            <span className="font-mono text-[#FF7A36] text-base sm:text-lg font-black tracking-tighter drop-shadow-[0_0_8px_rgba(255,90,31,0.8)]">&lt;/&gt;</span>
-            <span className="font-['Inter'] font-extrabold tracking-tight text-white drop-shadow-[0_0_12px_rgba(255,255,255,0.25)]">
-              Bina<span className="bg-gradient-to-r from-[#FF7A36] via-[#FF5A1F] to-[#FFA066] bg-clip-text text-transparent drop-shadow-[0_0_12px_#FF5A1F]">Folio</span>
+            <span className="font-mono text-base sm:text-lg font-black tracking-tighter" style={{ color: '#FF7A36', textShadow: '0 0 10px rgba(255, 90, 31, 0.8)' }}>&lt;/&gt;</span>
+            <span className="font-['Inter'] font-extrabold tracking-tight text-base sm:text-lg">
+              <span style={{ color: '#FF7A36', textShadow: '0 0 14px rgba(255, 122, 54, 0.8)' }}>Bina</span>
+              <span style={{ color: '#FFFFFF', textShadow: '0 0 14px rgba(255, 255, 255, 0.45)' }}>Folio</span>
             </span>
             <span className="h-2 w-2 rounded-full bg-[#FF5A1F] shadow-[0_0_10px_#FF5A1F,0_0_16px_#FF7A36] ml-0.5 animate-pulse" />
           </a>
@@ -104,7 +105,12 @@ export const Navbar = ({ onOpenResume }) => {
           <div className="flex items-center gap-3">
             <button
               onClick={onOpenResume}
-              className="hidden sm:inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-bold text-white bg-gradient-to-r from-[#FF5A1F] via-[#FF7A36] to-[#FFA066] border border-[#FFE0D0]/40 shadow-[0_0_20px_rgba(255,90,31,0.65),0_0_35px_rgba(255,122,54,0.35)] hover:shadow-[0_0_30px_rgba(255,90,31,0.9),0_0_45px_rgba(255,122,54,0.5)] hover:scale-105 active:scale-95 transition-all duration-200"
+              className="hidden sm:inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-bold text-white border border-[#FFE0D0]/40 hover:scale-105 active:scale-95 transition-all duration-200"
+              style={{
+                background: 'linear-gradient(135deg, #FF5A1F 0%, #FF7A36 50%, #FFA066 100%)',
+                boxShadow: '0 0 20px rgba(255, 90, 31, 0.65), 0 0 35px rgba(255, 122, 54, 0.35)',
+                color: '#FFFFFF'
+              }}
             >
               <Download className="h-3.5 w-3.5 text-white drop-shadow-[0_0_4px_rgba(255,255,255,0.8)]" />
               <span className="tracking-wide">Resume</span>
