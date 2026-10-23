@@ -29,7 +29,7 @@ export const skillsData = [
     name: "React",
     category: "frontend",
     tagline: "Component Architecture & Hooks",
-    description: "Building interactive, dynamic, and state-driven single-page interfaces with modern component patterns.",
+    description: "Building interactive, dynamic, and state-driven single-page interfaces with modern web standards.",
     badge: "Frontend Core",
     color: "#61DAFB",
     glow: "rgba(97, 218, 251, 0.25)"
@@ -39,7 +39,7 @@ export const skillsData = [
     name: "Laravel",
     category: "backend",
     tagline: "MVC, Eloquent ORM & APIs",
-    description: "Developing robust server-side architectures, RESTful API endpoints, secure authentication, and database migrations.",
+    description: "Developing robust server-side architectures, RESTful API endpoints, and secure authentication.",
     badge: "Backend Core",
     color: "#FF2D20",
     glow: "rgba(255, 45, 32, 0.25)"
@@ -59,7 +59,7 @@ export const skillsData = [
     name: "MySQL",
     category: "backend",
     tagline: "Relational DB & Query Optimization",
-    description: "Designing normalized database schemas, complex relational joins, data integrity, and structured queries.",
+    description: "Designing normalized databases, writing complex query optimizations, and managing schema structures.",
     badge: "Database",
     color: "#4479A1",
     glow: "rgba(68, 121, 161, 0.25)"
