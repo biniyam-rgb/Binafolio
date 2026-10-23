@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight, Mail, X, Code2, MapPin } from 'lucide-react';
 import { ReactIcon, LaravelIcon } from './TechIcons';
@@ -64,6 +64,26 @@ const MySqlDolphinIcon = ({ className = "" }) => (
 export const Hero = () => {
   const [activeTab, setActiveTab] = useState('app'); // 'app' | 'api'
   const [isCardHovered, setIsCardHovered] = useState(false);
+  const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
+
+  // Keyboard navigation & body scroll lock for photo lightbox
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setIsPhotoModalOpen(false);
+      }
+    };
+    if (isPhotoModalOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [isPhotoModalOpen]);
 
   return (
     <section id="home" className="hero-wrapper relative min-h-screen flex flex-col justify-between pt-32 sm:pt-36 pb-12 overflow-hidden">
@@ -87,7 +107,11 @@ export const Hero = () => {
               className="flex items-center gap-3 mb-5"
             >
               <span className="h-2.5 w-2.5 rounded-full bg-[#FF5A1F] shadow-[0_0_12px_#FF5A1F,0_0_22px_#FF7A36] shrink-0 animate-pulse" />
-              <div className="hero-avatar-badge cursor-pointer">
+              <div 
+                onClick={() => setIsPhotoModalOpen(true)}
+                className="hero-avatar-badge cursor-pointer"
+                title="Click to view full photo"
+              >
                 {/* Biniyam Portrait Icon */}
                 <div className="hero-avatar-wrapper">
                   <img 
@@ -745,6 +769,191 @@ export const Hero = () => {
         </div>
 
       </div>
+
+      {/* =========================================================================
+          6. High-Definition Animated Photo Lightbox Modal
+          ========================================================================= */}
+      <AnimatePresence>
+        {isPhotoModalOpen && (
+          <div className="photo-modal-overlay">
+            {/* Blurred Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={() => setIsPhotoModalOpen(false)}
+              className="photo-modal-backdrop"
+            />
+
+            {/* Modal Card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: 25 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.82, y: 15 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="photo-modal-card"
+            >
+              {/* Inner ambient glow gradients */}
+              <div 
+                style={{
+                  position: 'absolute',
+                  top: '-20%',
+                  right: '-20%',
+                  width: '260px',
+                  height: '260px',
+                  borderRadius: '9999px',
+                  background: 'radial-gradient(circle, rgba(255, 90, 31, 0.28) 0%, transparent 70%)',
+                  filter: 'blur(35px)',
+                  pointerEvents: 'none'
+                }} 
+              />
+              <div 
+                style={{
+                  position: 'absolute',
+                  bottom: '-15%',
+                  left: '-15%',
+                  width: '220px',
+                  height: '220px',
+                  borderRadius: '9999px',
+                  background: 'radial-gradient(circle, rgba(0, 216, 255, 0.22) 0%, transparent 70%)',
+                  filter: 'blur(35px)',
+                  pointerEvents: 'none'
+                }} 
+              />
+
+              {/* Modal Header */}
+              <div 
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  marginBottom: '0.85rem',
+                  position: 'relative',
+                  zIndex: 2
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                  <span style={{ width: '8px', height: '8px', borderRadius: '9999px', background: '#FF5A1F', boxShadow: '0 0 10px #FF5A1F' }} />
+                  <span style={{ fontSize: '0.8125rem', fontFamily: 'JetBrains Mono, monospace', color: '#FFA066', fontWeight: 600, letterSpacing: '0.04em' }}>
+                    PROFILE SPOTLIGHT
+                  </span>
+                </div>
+
+                <button
+                  onClick={() => setIsPhotoModalOpen(false)}
+                  aria-label="Close photo preview"
+                  className="photo-modal-close-btn"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+
+              {/* Large Image Frame */}
+              <div 
+                style={{
+                  position: 'relative',
+                  width: '100%',
+                  height: '420px',
+                  maxHeight: '62vh',
+                  borderRadius: '20px',
+                  overflow: 'hidden',
+                  border: '1px solid rgba(255, 122, 54, 0.35)',
+                  boxShadow: 'inset 0 0 30px rgba(0, 0, 0, 0.8)'
+                }}
+              >
+                <motion.img 
+                  initial={{ scale: 1.06 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.45, ease: 'easeOut' }}
+                  src="/assets/character.jpg" 
+                  alt="Biniyam Gebrie" 
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center top',
+                    display: 'block'
+                  }} 
+                />
+
+                {/* Dark Vignette Bottom Gradient for Text Contrast */}
+                <div 
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'linear-gradient(to top, rgba(7, 9, 14, 0.95) 0%, rgba(7, 9, 14, 0.45) 35%, transparent 65%)',
+                    pointerEvents: 'none'
+                  }} 
+                />
+
+                {/* Bottom Overlay Info on Top of Photo */}
+                <div 
+                  style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    padding: '1.25rem',
+                    zIndex: 3
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem' }}>
+                    <span style={{ position: 'relative', display: 'inline-flex', width: '8px', height: '8px' }}>
+                      <span style={{ position: 'absolute', inset: 0, borderRadius: '9999px', background: '#10B981', opacity: 0.75, animation: 'ping 1.8s infinite' }} />
+                      <span style={{ position: 'relative', width: '8px', height: '8px', borderRadius: '9999px', background: '#10B981', boxShadow: '0 0 6px #10B981' }} />
+                    </span>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#10B981', letterSpacing: '0.02em' }}>
+                      Open to Opportunities &amp; Collaboration
+                    </span>
+                  </div>
+
+                  <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#FFFFFF', letterSpacing: '-0.02em', margin: 0, textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}>
+                    Biniyam Gebrie
+                  </h3>
+
+                  <p style={{ fontSize: '0.875rem', color: '#FFB37C', fontWeight: 500, margin: '0.2rem 0 0 0' }}>
+                    Software Engineering Student • Wollo University, Kombolcha
+                  </p>
+                </div>
+              </div>
+
+              {/* Modal Quick Footer Actions */}
+              <div 
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  marginTop: '0.9rem',
+                  paddingTop: '0.75rem',
+                  borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+                  fontSize: '0.78rem',
+                  color: '#8E9CAE'
+                }}
+              >
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <MapPin size={13} style={{ color: '#FF7A36' }} /> Kombolcha, Ethiopia
+                </span>
+                <a 
+                  href="#contact" 
+                  onClick={() => setIsPhotoModalOpen(false)}
+                  style={{
+                    color: '#FFA066',
+                    fontWeight: 600,
+                    textDecoration: 'none',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.25rem',
+                    transition: 'color 0.2s ease'
+                  }}
+                >
+                  <span>Connect with Biniyam &rarr;</span>
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
