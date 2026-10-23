@@ -180,29 +180,61 @@ export const Hero = () => {
               RIGHT COLUMN: 3D-Tilted IDE & Glowing Orbit (Image 2)
               ========================================================================= */}
           <div className="hero-col-right relative flex items-center justify-center pt-8 lg:pt-0 [perspective:1200px]">
-            <div className="relative w-full max-w-[500px] flex items-center justify-center">
+            <div 
+              style={{
+                position: 'relative',
+                width: '100%',
+                maxWidth: '500px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
 
-              {/* Dual-Tone Ambient Backlight Glow behind Editor (Orange & Luminous Teal/Cyan) */}
-              <div 
-                className="absolute -inset-10 -z-10 rounded-[40px] pointer-events-none opacity-85"
+              {/* Dual-Tone Ambient Backlight Glow behind Editor (Orange & Luminous Teal/Cyan) with Delayed Blossom */}
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.7 }}
+                animate={{ opacity: 0.85, scale: 1 }}
+                transition={{ duration: 1.3, delay: 0.35, ease: 'easeOut' }}
+                className="pointer-events-none"
                 style={{
+                  position: 'absolute',
+                  inset: '-2.5rem',
+                  borderRadius: '40px',
+                  zIndex: -10,
                   background: 'radial-gradient(circle at 35% 35%, rgba(255, 90, 31, 0.42) 0%, rgba(255, 122, 54, 0.16) 45%, transparent 70%)',
                   filter: 'blur(60px)',
                   transform: 'translateZ(0)'
                 }}
               />
-              <div 
-                className="absolute -inset-12 -z-10 rounded-[50px] pointer-events-none opacity-75"
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.7 }}
+                animate={{ opacity: 0.75, scale: 1 }}
+                transition={{ duration: 1.3, delay: 0.4, ease: 'easeOut' }}
+                className="pointer-events-none"
                 style={{
+                  position: 'absolute',
+                  inset: '-3rem',
+                  borderRadius: '50px',
+                  zIndex: -10,
                   background: 'radial-gradient(circle at 80% 25%, rgba(0, 216, 255, 0.3) 0%, transparent 55%), radial-gradient(circle at 20% 85%, rgba(0, 216, 255, 0.18) 0%, transparent 50%)',
                   filter: 'blur(55px)',
                   transform: 'translateZ(0)'
                 }}
               />
 
-              {/* ================= ELLIPTICAL ORBITAL RING SVG ================= */}
-              <svg 
-                className="absolute w-[620px] sm:w-[680px] h-[620px] sm:h-[680px] -z-10 pointer-events-none select-none drop-shadow-[0_0_25px_rgba(255,90,31,0.65)]" 
+              {/* ================= ELLIPTICAL ORBITAL RING SVG WITH DELAYED ENTRANCE ================= */}
+              <motion.svg 
+                initial={{ opacity: 0, scale: 0.75, rotate: -35 }}
+                animate={{ opacity: 1, scale: 1, rotate: -15 }}
+                transition={{ duration: 1.2, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="pointer-events-none select-none drop-shadow-[0_0_25px_rgba(255,90,31,0.65)]"
+                style={{
+                  position: 'absolute',
+                  width: '640px',
+                  height: '640px',
+                  zIndex: -10
+                }}
                 viewBox="0 0 740 740"
               >
                 <defs>
@@ -229,7 +261,6 @@ export const Hero = () => {
                   stroke="url(#orbitGlowGrad)" 
                   strokeWidth="2.5" 
                   filter="url(#neonHaloFilter)"
-                  transform="rotate(-15 370 370)"
                 />
 
                 {/* Subtle Concentric Dashed Ring for Visual Depth */}
@@ -240,51 +271,57 @@ export const Hero = () => {
                   strokeWidth="1.2" 
                   strokeDasharray="6 8"
                   opacity="0.45"
-                  transform="rotate(-15 370 370)"
                 />
-              </svg>
+              </motion.svg>
 
-              {/* ================= 3D ISOMETRIC AMBER/ORANGE CUBES (ALONG ORBIT PERIMETER) ================= */}
-              {/* Positioned strictly outside along the orbital ellipse so they NEVER overlap the code text */}
+              {/* ================= 3D ISOMETRIC AMBER/ORANGE CUBES (EXPLICIT ORBIT PERIMETER) ================= */}
+              {/* Positioned strictly outside along the orbital perimeter so they NEVER overlap code lines */}
               
               {/* Cube 1: Below terminal left */}
-              <div className="absolute -bottom-10 left-[8%] z-10 pointer-events-none">
+              <div style={{ position: 'absolute', bottom: '-30px', left: '10%', zIndex: 10, pointerEvents: 'none' }}>
                 <IsometricCube size={22} delay={0} />
               </div>
 
-              {/* Cube 2: Below terminal center-right */}
-              <div className="absolute -bottom-14 left-[40%] z-10 pointer-events-none">
+              {/* Cube 2: Below terminal center */}
+              <div style={{ position: 'absolute', bottom: '-46px', left: '38%', zIndex: 10, pointerEvents: 'none' }}>
                 <IsometricCube size={24} delay={0.8} />
               </div>
 
               {/* Cube 3: Below terminal far right */}
-              <div className="absolute -bottom-11 right-[22%] z-10 pointer-events-none">
+              <div style={{ position: 'absolute', bottom: '-32px', right: '24%', zIndex: 10, pointerEvents: 'none' }}>
                 <IsometricCube size={20} delay={1.4} />
               </div>
 
               {/* Cube 4: Mid-left flank orbit */}
-              <div className="absolute bottom-[24%] -left-8 z-10 pointer-events-none">
+              <div style={{ position: 'absolute', bottom: '24%', left: '-32px', zIndex: 10, pointerEvents: 'none' }}>
                 <IsometricCube size={22} delay={2.1} />
               </div>
 
               {/* Cube 5: Top-left outer orbit */}
-              <div className="absolute -top-7 left-[14%] z-10 pointer-events-none">
+              <div style={{ position: 'absolute', top: '-26px', left: '14%', zIndex: 10, pointerEvents: 'none' }}>
                 <IsometricCube size={18} delay={1.1} />
               </div>
 
-              {/* ================= 4 HIGH-CONTRAST 3D GLASS TECH BADGES ================= */}
-              {/* Positioned on outer orbital corners: NEVER touch or cover any code text */}
+              {/* ================= 4 HIGH-CONTRAST 3D GLASS TECH BADGES (WITH DELAYED ENTRANCE) ================= */}
+              {/* Positioned strictly on outer perimeter with explicit coordinates: NEVER in the center */}
 
               {/* 1. React: Intensely glowing cyan atom on the TOP-RIGHT */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1, y: [-4, 5, -4] }}
+                initial={{ opacity: 0, scale: 0, rotate: -20 }}
+                animate={{ opacity: 1, scale: 1, rotate: 6, y: [-4, 5, -4] }}
                 transition={{ 
-                  opacity: { duration: 0.5, delay: 0.3 }, 
-                  scale: { duration: 0.5, delay: 0.3 },
-                  y: { repeat: Infinity, duration: 4.5, ease: 'easeInOut' }
+                  opacity: { duration: 0.6, delay: 0.8 }, 
+                  scale: { duration: 0.6, delay: 0.8, ease: [0.16, 1, 0.3, 1] },
+                  rotate: { duration: 0.6, delay: 0.8 },
+                  y: { repeat: Infinity, duration: 4.5, ease: 'easeInOut', delay: 1.4 }
                 }}
-                className="absolute -top-7 -right-3 sm:-top-9 sm:-right-6 z-30 p-2.5 sm:p-3 rounded-2xl bg-[#03111b]/92 border-2 border-[#00D8FF] shadow-[0_0_25px_rgba(0,216,255,0.6),inset_0_0_12px_rgba(0,216,255,0.25)] backdrop-blur-xl transform rotate-6 hover:rotate-0 hover:scale-115 transition-all duration-300 cursor-pointer"
+                style={{
+                  position: 'absolute',
+                  top: '-30px',
+                  right: '-16px',
+                  zIndex: 30
+                }}
+                className="p-2.5 sm:p-3 rounded-2xl bg-[#03111b]/92 border-2 border-[#00D8FF] shadow-[0_0_25px_rgba(0,216,255,0.6),inset_0_0_12px_rgba(0,216,255,0.25)] backdrop-blur-xl hover:rotate-0 hover:scale-115 transition-all duration-300 cursor-pointer"
                 title="React"
               >
                 <ReactIcon size={28} className="text-[#00D8FF] drop-shadow-[0_0_12px_#00D8FF] animate-spin-slow" />
@@ -292,14 +329,21 @@ export const Hero = () => {
 
               {/* 2. Laravel: Brightly glowing red 3D wireframe cube on the MIDDLE-LEFT */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1, y: [5, -5, 5] }}
+                initial={{ opacity: 0, scale: 0, rotate: 20 }}
+                animate={{ opacity: 1, scale: 1, rotate: -8, y: [5, -5, 5] }}
                 transition={{ 
-                  opacity: { duration: 0.5, delay: 0.45 }, 
-                  scale: { duration: 0.5, delay: 0.45 },
-                  y: { repeat: Infinity, duration: 5, ease: 'easeInOut', delay: 0.5 }
+                  opacity: { duration: 0.6, delay: 0.95 }, 
+                  scale: { duration: 0.6, delay: 0.95, ease: [0.16, 1, 0.3, 1] },
+                  rotate: { duration: 0.6, delay: 0.95 },
+                  y: { repeat: Infinity, duration: 5, ease: 'easeInOut', delay: 1.55 }
                 }}
-                className="absolute top-[40%] -left-4 sm:-left-7 z-30 p-2.5 sm:p-3 rounded-2xl bg-[#190705]/92 border-2 border-[#FF2D20] shadow-[0_0_25px_rgba(255,45,32,0.6),inset_0_0_12px_rgba(255,45,32,0.25)] backdrop-blur-xl transform -rotate-8 hover:rotate-0 hover:scale-115 transition-all duration-300 cursor-pointer"
+                style={{
+                  position: 'absolute',
+                  top: '38%',
+                  left: '-32px',
+                  zIndex: 30
+                }}
+                className="p-2.5 sm:p-3 rounded-2xl bg-[#190705]/92 border-2 border-[#FF2D20] shadow-[0_0_25px_rgba(255,45,32,0.6),inset_0_0_12px_rgba(255,45,32,0.25)] backdrop-blur-xl hover:rotate-0 hover:scale-115 transition-all duration-300 cursor-pointer"
                 title="Laravel"
               >
                 <LaravelIcon size={26} className="drop-shadow-[0_0_12px_#FF2D20]" />
@@ -307,14 +351,21 @@ export const Hero = () => {
 
               {/* 3. JavaScript: JS yellow badge on the FAR RIGHT */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1, y: [-5, 5, -5] }}
+                initial={{ opacity: 0, scale: 0, rotate: -20 }}
+                animate={{ opacity: 1, scale: 1, rotate: 12, y: [-5, 5, -5] }}
                 transition={{ 
-                  opacity: { duration: 0.5, delay: 0.6 }, 
-                  scale: { duration: 0.5, delay: 0.6 },
-                  y: { repeat: Infinity, duration: 4.8, ease: 'easeInOut', delay: 1 }
+                  opacity: { duration: 0.6, delay: 1.1 }, 
+                  scale: { duration: 0.6, delay: 1.1, ease: [0.16, 1, 0.3, 1] },
+                  rotate: { duration: 0.6, delay: 1.1 },
+                  y: { repeat: Infinity, duration: 4.8, ease: 'easeInOut', delay: 1.7 }
                 }}
-                className="absolute top-[56%] -right-4 sm:-right-7 z-30 p-2 sm:p-2.5 rounded-2xl bg-[#191605]/92 border-2 border-[#F7DF1E] shadow-[0_0_25px_rgba(247,223,30,0.55),inset_0_0_12px_rgba(247,223,30,0.25)] backdrop-blur-xl transform rotate-12 hover:rotate-0 hover:scale-115 transition-all duration-300 cursor-pointer"
+                style={{
+                  position: 'absolute',
+                  top: '56%',
+                  right: '-28px',
+                  zIndex: 30
+                }}
+                className="p-2 sm:p-2.5 rounded-2xl bg-[#191605]/92 border-2 border-[#F7DF1E] shadow-[0_0_25px_rgba(247,223,30,0.55),inset_0_0_12px_rgba(247,223,30,0.25)] backdrop-blur-xl hover:rotate-0 hover:scale-110 transition-all duration-300 cursor-pointer"
                 title="JavaScript"
               >
                 <div className="h-7 w-7 rounded-lg bg-[#F7DF1E] flex items-center justify-end pr-1 pb-0.5 shadow-md">
@@ -324,29 +375,39 @@ export const Hero = () => {
 
               {/* 4. MySQL: Brightly glowing blue dolphin badge on the LOWER-RIGHT */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1, y: [5, -5, 5] }}
+                initial={{ opacity: 0, scale: 0, rotate: -20 }}
+                animate={{ opacity: 1, scale: 1, rotate: 6, y: [5, -5, 5] }}
                 transition={{ 
-                  opacity: { duration: 0.5, delay: 0.75 }, 
-                  scale: { duration: 0.5, delay: 0.75 },
-                  y: { repeat: Infinity, duration: 5.2, ease: 'easeInOut', delay: 1.5 }
+                  opacity: { duration: 0.6, delay: 1.25 }, 
+                  scale: { duration: 0.6, delay: 1.25, ease: [0.16, 1, 0.3, 1] },
+                  rotate: { duration: 0.6, delay: 1.25 },
+                  y: { repeat: Infinity, duration: 5.2, ease: 'easeInOut', delay: 1.85 }
                 }}
-                className="absolute -bottom-7 right-1 sm:-bottom-8 sm:right-3 z-30 px-3 py-1.5 sm:py-2 rounded-2xl bg-[#04121c]/92 border-2 border-[#00D8FF] shadow-[0_0_25px_rgba(0,216,255,0.6),inset_0_0_12px_rgba(0,216,255,0.25)] backdrop-blur-xl transform rotate-6 hover:rotate-0 hover:scale-115 transition-all duration-300 cursor-pointer"
+                style={{
+                  position: 'absolute',
+                  bottom: '-30px',
+                  right: '8px',
+                  zIndex: 30
+                }}
+                className="px-3 py-1.5 sm:py-2 rounded-2xl bg-[#04121c]/92 border-2 border-[#00D8FF] shadow-[0_0_25px_rgba(0,216,255,0.6),inset_0_0_12px_rgba(0,216,255,0.25)] backdrop-blur-xl hover:rotate-0 hover:scale-110 transition-all duration-300 cursor-pointer"
                 title="MySQL"
               >
                 <MySqlDolphinIcon />
               </motion.div>
 
-              {/* ================= THE 3D-ANGLED ISOMETRIC GLASS TERMINAL ================= */}
+              {/* ================= THE 3D-ANGLED ISOMETRIC GLASS TERMINAL (WITH DELAYED ENTRANCE) ================= */}
               <motion.div
-                initial={{ opacity: 0, y: 25 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                initial={{ opacity: 0, y: 55, scale: 0.9, rotateY: -22, rotateX: 18, rotateZ: 3 }}
+                animate={{ opacity: 1, y: 0, scale: 1, rotateY: -12, rotateX: 8, rotateZ: 1 }}
+                transition={{ 
+                  duration: 1.1, 
+                  delay: 0.48, 
+                  ease: [0.16, 1, 0.3, 1] 
+                }}
                 className="relative z-20 w-full rounded-2xl overflow-hidden bg-[#070a10]/95 backdrop-blur-2xl border-r border-b border-white/[0.08]"
                 style={{
                   width: '100%',
                   maxWidth: '480px',
-                  transform: 'rotateY(-12deg) rotateX(8deg) rotateZ(1deg)',
                   transformStyle: 'preserve-3d',
                   borderTop: '2.5px solid #FF7A36',
                   borderLeft: '2.5px solid #FF7A36',

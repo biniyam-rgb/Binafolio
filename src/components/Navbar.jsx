@@ -81,21 +81,18 @@ export const Navbar = ({ onOpenResume }) => {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleLinkClick(e, link.href)}
-                  className={`relative flex flex-col items-center justify-center px-4 py-1.5 rounded-full transition-all duration-200 group ${
-                    isActive
-                      ? 'bg-gradient-to-b from-[#2e140a] to-[#1a0a05] border border-[#FF5A1F] shadow-[0_0_16px_rgba(255,90,31,0.5),inset_0_0_10px_rgba(255,90,31,0.25)] text-[#FF7A36] font-semibold'
-                      : 'text-[#94A3B8] hover:text-[#F5F0EC] hover:bg-white/[0.04]'
-                  }`}
+                  className={`nav-link-btn ${isActive ? 'active' : ''}`}
+                  title={link.name}
                 >
-                  <Icon className={`h-4 w-4 transition-transform duration-200 group-hover:scale-110 ${
-                    isActive ? 'text-[#FF7A36] drop-shadow-[0_0_8px_#FF5A1F]' : 'text-[#94A3B8] group-hover:text-white'
-                  }`} />
-                  <span className="text-[10px] tracking-wide mt-0.5 font-medium">{link.name}</span>
+                  <Icon className="nav-link-icon" />
+
+                  {/* Text label: only revealed when hovering the icon */}
+                  <span className="nav-link-label">
+                    {link.name}
+                  </span>
 
                   {/* Vivid glowing neon dot beneath active item */}
-                  {isActive && (
-                    <span className="absolute -bottom-1 h-1.5 w-1.5 rounded-full bg-[#FF5A1F] shadow-[0_0_8px_#FF5A1F,0_0_14px_#FF7A36]" />
-                  )}
+                  {isActive && <span className="nav-active-dot" />}
                 </a>
               );
             })}
