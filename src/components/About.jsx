@@ -101,8 +101,8 @@ export const About = () => {
           <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#F5F0EC]">
             A Little <span className="text-gradient-orange">About Me</span>
           </h2>
-          <p className="mt-3 text-base sm:text-lg text-[#C4B6AE] max-w-2xl">
-            Software engineering student with a deep enthusiasm for full-stack development, clean architecture, and practical problem solving.
+          <p className="mt-3 text-base sm:text-lg text-[#C4B6AE] max-w-xl">
+            Software engineering student focused on building clean, full-stack web applications.
           </p>
         </motion.div>
 
@@ -131,43 +131,40 @@ export const About = () => {
                 <span>The Engineering Journey</span>
               </h3>
               
-              <div className="space-y-4 text-sm sm:text-base text-[#C4B6AE] leading-relaxed">
+              <div className="space-y-3.5 text-sm sm:text-base text-[#C4B6AE] leading-relaxed">
                 <p>
-                  I'm <strong className="text-[#F5F0EC]">{personalData.name}</strong>, currently pursuing my undergraduate degree in Software Engineering at <strong className="text-[#FF7A36]">{personalData.university}</strong>.
+                  I'm <strong className="text-[#F5F0EC]">{personalData.name}</strong>, studying Software Engineering at <strong className="text-[#FF7A36]">{personalData.university}</strong>.
                 </p>
                 <p>
-                  My journey in software engineering began with curiosity about how the web connects people and systems. Over time, that curiosity evolved into a dedicated passion for engineering full-stack applications — bridging creative user interfaces with secure, reliable server backends.
-                </p>
-                <p>
-                  I primarily work with{' '}
+                  I build full-stack web applications combining interactive interfaces in{' '}
                   <motion.span 
                     whileHover={{ scale: 1.05 }} 
                     className="inline-block px-1.5 py-0.5 rounded bg-[#61DAFB]/10 text-[#61DAFB] font-semibold border border-[#61DAFB]/20 transition-colors"
                   >
                     React
                   </motion.span>{' '}
-                  on the client side and{' '}
+                  with structured, secure backends using{' '}
                   <motion.span 
                     whileHover={{ scale: 1.05 }} 
                     className="inline-block px-1.5 py-0.5 rounded bg-[#FF2D20]/10 text-[#FF5A1F] font-semibold border border-[#FF2D20]/20 transition-colors"
                   >
                     Laravel
-                  </motion.span>{' '}
-                  with{' '}
+                  </motion.span>
+                  ,{' '}
                   <motion.span 
                     whileHover={{ scale: 1.05 }} 
                     className="inline-block px-1.5 py-0.5 rounded bg-[#777BB4]/10 text-[#A5B4FC] font-semibold border border-[#777BB4]/20 transition-colors"
                   >
                     PHP
-                  </motion.span>{' '}
-                  and{' '}
+                  </motion.span>
+                  , and{' '}
                   <motion.span 
                     whileHover={{ scale: 1.05 }} 
                     className="inline-block px-1.5 py-0.5 rounded bg-[#00758F]/15 text-[#38BDF8] font-semibold border border-[#00758F]/25 transition-colors"
                   >
                     MySQL
-                  </motion.span>{' '}
-                  on the backend. I enjoy understanding every layer of a project, from relational database schema design to responsive animations.
+                  </motion.span>
+                  .
                 </p>
               </div>
 
@@ -175,7 +172,7 @@ export const About = () => {
               <motion.div 
                 whileHover={{ scale: 1.01, borderColor: 'rgba(255, 90, 31, 0.45)' }}
                 transition={{ duration: 0.2 }}
-                className="mt-6 rounded-xl border border-[#3A241C] bg-[#1C110D] p-4 sm:p-5 relative overflow-hidden group/goal cursor-default transition-all hover:shadow-[0_4px_20px_rgba(255,90,31,0.12)]"
+                className="mt-5 rounded-xl border border-[#3A241C] bg-[#1C110D] p-4 sm:p-4.5 relative overflow-hidden group/goal cursor-default transition-all hover:shadow-[0_4px_20px_rgba(255,90,31,0.12)]"
               >
                 <div className="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-[#FF5A1F] to-[#7D290E] group-hover/goal:w-1.5 transition-all" />
                 <div className="flex items-start gap-3">
@@ -192,7 +189,7 @@ export const About = () => {
                       <span className="h-1.5 w-1.5 rounded-full bg-[#FF5A1F] animate-pulse" />
                     </h4>
                     <p className="mt-1 text-xs sm:text-sm text-[#F5F0EC] leading-relaxed">
-                      {personalData.careerGoal}
+                      Engineer reliable, high-impact full-stack applications that solve real-world problems.
                     </p>
                   </div>
                 </div>
