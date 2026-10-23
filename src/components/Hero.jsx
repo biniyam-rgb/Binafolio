@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, Mail, X, Code2 } from 'lucide-react';
+import { ArrowUpRight, Mail, X, Code2, MapPin } from 'lucide-react';
 import { ReactIcon, LaravelIcon } from './TechIcons';
 
 // =========================================================================
@@ -139,40 +139,54 @@ export const Hero = () => {
               , turning ideas into elegant, and high-impact digital solutions.
             </p>
 
-            {/* 5. Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto mb-10">
-              {/* Primary: Radiant orange & amber gradient pill */}
-              <a
-                href="#projects"
-                className="inline-flex items-center justify-center gap-2.5 px-7 sm:px-8 py-3.5 rounded-full font-bold text-sm text-white border border-[#FFE2D1]/40 hover:scale-105 active:scale-95 transition-all duration-200 group"
-                style={{
-                  background: 'linear-gradient(135deg, #FF5A1F 0%, #FF7A36 50%, #FFA066 100%)',
-                  boxShadow: '0 0 30px rgba(255, 90, 31, 0.7), 0 0 55px rgba(255, 122, 54, 0.35)',
-                  color: '#FFFFFF'
-                }}
-              >
+            {/* 5. Modern Action Buttons */}
+            <motion.div 
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="hero-cta-group"
+            >
+              {/* Primary: Radiant orange & amber gradient pill with specular arrow bubble */}
+              <a href="#projects" className="hero-btn-primary">
                 <span>Explore My Work</span>
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-white drop-shadow-[0_0_4px_white]" />
+                <span className="hero-btn-arrow-bubble">
+                  <ArrowUpRight size={14} className="text-white" />
+                </span>
               </a>
 
-              {/* Secondary: Dark outlined glass pill */}
-              <a
-                href="#contact"
-                className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3.5 rounded-full font-semibold text-sm text-[#F5F0EC] bg-[#07090e]/90 hover:bg-[#131b28] border-2 border-[#FF5A1F]/60 hover:border-[#FF7A36] shadow-[0_0_20px_rgba(255,90,31,0.3)] hover:shadow-[0_0_32px_rgba(255,90,31,0.55)] hover:scale-105 active:scale-95 transition-all duration-200 group"
-              >
-                <Mail className="h-4 w-4 text-[#FF7A36] group-hover:scale-110 transition-transform drop-shadow-[0_0_6px_#FF5A1F]" />
+              {/* Secondary: Ultra-sleek dark glassmorphic capsule */}
+              <a href="#contact" className="hero-btn-secondary">
+                <Mail size={16} className="hero-btn-mail-icon" />
                 <span>Let's Connect</span>
               </a>
-            </div>
+            </motion.div>
 
-            {/* 6. Bottom Meta: Campus & Full-Stack Focus */}
-            <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm font-medium text-[#FF9E66] drop-shadow-[0_0_8px_rgba(255,122,54,0.45)]">
-              <span className="text-base select-none">📍</span>
-              <span>Campus: Wollo University, Kombolcha</span>
-              <span className="text-white/40 font-bold mx-1.5">•</span>
-              <span className="text-base select-none">⚙️</span>
-              <span className="text-[#FFB37C] font-semibold">Full-Stack Focus</span>
-            </div>
+            {/* 6. Modern Floating Glass Status Bar */}
+            <motion.div 
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65, delay: 0.32, ease: [0.16, 1, 0.3, 1] }}
+              className="hero-meta-bar"
+            >
+              {/* Campus Location */}
+              <div className="hero-meta-item">
+                <MapPin size={14} className="hero-meta-icon" />
+                <span className="hero-meta-label">Campus:</span>
+                <span className="hero-meta-value">Wollo University, Kombolcha</span>
+              </div>
+
+              {/* Glowing Amber Divider */}
+              <div className="hero-meta-divider" />
+
+              {/* Full-Stack Focus with Live Radar Beacon */}
+              <div className="hero-meta-badge">
+                <span className="hero-meta-beacon">
+                  <span className="hero-meta-beacon-ping" />
+                  <span className="hero-meta-beacon-core" />
+                </span>
+                <span>Full-Stack Focus</span>
+              </div>
+            </motion.div>
 
           </div>
 
