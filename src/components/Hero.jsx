@@ -1,263 +1,620 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowUpRight, Mail, GraduationCap } from 'lucide-react';
-import { personalData } from '../data/portfolioData';
-import { ReactIcon, LaravelIcon, JavascriptIcon, MysqlIcon } from './TechIcons';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowUpRight, Mail, X, Code2 } from 'lucide-react';
+import { ReactIcon, LaravelIcon } from './TechIcons';
+
+// =========================================================================
+// 3D Isometric Mini-Cube Component for Glowing Orbit Path
+// =========================================================================
+const IsometricCube = ({ size = 22, className = "", delay = 0 }) => (
+  <motion.div
+    animate={{ 
+      y: [-5, 5, -5],
+      rotate: [0, 4, 0]
+    }}
+    transition={{
+      duration: 4,
+      repeat: Infinity,
+      ease: 'easeInOut',
+      delay
+    }}
+    className={`pointer-events-none drop-shadow-[0_0_12px_rgba(255,90,31,0.85)] ${className}`}
+  >
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      {/* Top face (bright peach/amber highlight) */}
+      <polygon points="12,2 22,7.5 12,13 2,7.5" fill="#FFC299" opacity="0.95" />
+      {/* Left face (vibrant neon orange) */}
+      <polygon points="2,7.5 12,13 12,23 2,17.5" fill="#FF5A1F" />
+      {/* Right face (deep luminous amber/burnt orange) */}
+      <polygon points="12,13 22,7.5 22,17.5 12,23" fill="#C84411" />
+      {/* Specular edge lines */}
+      <line x1="12" y1="2" x2="12" y2="13" stroke="#FFF0E6" strokeWidth="0.8" opacity="0.9" />
+      <line x1="2" y1="7.5" x2="12" y2="13" stroke="#FFF0E6" strokeWidth="0.6" opacity="0.6" />
+      <line x1="22" y1="7.5" x2="12" y2="13" stroke="#FFF0E6" strokeWidth="0.6" opacity="0.6" />
+    </svg>
+  </motion.div>
+);
+
+// =========================================================================
+// High-Contrast MySQL Dolphin Icon Component
+// =========================================================================
+const MySqlDolphinIcon = ({ className = "" }) => (
+  <div className={`flex flex-col items-center justify-center select-none ${className}`}>
+    <svg width="34" height="24" viewBox="0 0 100 85" fill="none" className="drop-shadow-[0_0_8px_rgba(0,117,143,0.7)]">
+      <path
+        d="M85 45C85 45 68 25 45 28C22 31 15 50 15 50C15 50 25 42 42 42C59 42 75 55 85 45Z"
+        fill="#00D8FF"
+      />
+      <path
+        d="M85 45C92 38 98 25 98 25C98 25 90 32 82 36C74 40 50 36 35 48C20 60 12 75 12 75C12 75 22 62 38 58C54 54 75 58 85 45Z"
+        fill="#008EA8"
+      />
+      <path
+        d="M38 58C30 52 22 52 18 53C12 55 6 62 6 62C6 62 12 58 20 57C26 56 32 57 38 58Z"
+        fill="#FF9E3B"
+      />
+      <circle cx="78" cy="38" r="2.8" fill="#FFFFFF" />
+    </svg>
+    <span className="text-[10px] font-black tracking-tight text-[#00D8FF] font-sans -mt-0.5 leading-none drop-shadow-[0_0_6px_rgba(0,216,255,0.6)]">
+      MySQL<span className="text-[#FF9E3B]">.</span>
+    </span>
+  </div>
+);
 
 export const Hero = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 24 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.7,
-        ease: [0.16, 1, 0.3, 1]
-      }
-    }
-  };
+  const [activeTab, setActiveTab] = useState('app'); // 'app' | 'api'
 
   return (
-    <section id="home" className="hero-wrapper">
+    <section id="home" className="hero-wrapper relative min-h-screen flex flex-col justify-between pt-32 sm:pt-36 pb-12 overflow-hidden">
       <div className="container-custom relative z-10 w-full my-auto">
-        <div className="hero-grid-layout">
+        
+        {/* =========================================================================
+            SIDE-BY-SIDE ONE ROW LAYOUT: Image 1 Copy & Image 2 IDE
+            ========================================================================= */}
+        <div className="hero-row-layout">
           
-          {/* ================= LEFT SIDE: Typography & CTA ================= */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="hero-left-content"
-          >
-            {/* Small Introductory Label */}
-            <motion.div variants={itemVariants} className="mb-4">
-              <div className="badge-orange-pill">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF5A1F] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF5A1F]"></span>
+          {/* =========================================================================
+              LEFT COLUMN: High-Impact Copy & CTAs (Image 1)
+              ========================================================================= */}
+          <div className="hero-col-left flex flex-col items-start text-left z-20">
+            
+            {/* 1. Luminous orange-amber outlined badge with waving hand */}
+            <div className="flex items-center gap-3 mb-5">
+              <span className="h-2.5 w-2.5 rounded-full bg-[#FF5A1F] shadow-[0_0_12px_#FF5A1F,0_0_22px_#FF7A36] shrink-0 animate-pulse" />
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#140D0A]/90 border border-[#FF7A36]/60 shadow-[0_0_25px_rgba(255,90,31,0.38),inset_0_0_15px_rgba(255,90,31,0.18)] text-xs sm:text-sm font-medium text-[#F5F0EC] backdrop-blur-md">
+                <span className="text-base select-none inline-block animate-wave origin-[70%_70%]">👋</span>
+                <span>Hey, I'm <strong className="font-extrabold text-white tracking-wide drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">Biniyam</strong></span>
+              </div>
+            </div>
+
+            {/* 2. Headline: Software \n Developer| */}
+            <div className="mb-4">
+              <h1 className="text-5xl sm:text-6xl lg:text-[4.75rem] xl:text-[5.25rem] font-black tracking-tight leading-[1.04] text-white">
+                <span className="text-white drop-shadow-[0_0_28px_rgba(255,255,255,0.35)]">
+                  Software
                 </span>
-                <span>Hey, I'm <strong className="font-bold text-[#F5F0EC]">Biniyam</strong></span>
-              </div>
-            </motion.div>
-
-            {/* Oversized Bold Headline */}
-            <motion.div variants={itemVariants} className="space-y-1 mb-5">
-              <h1 className="text-4xl sm:text-6xl xl:text-7xl font-extrabold tracking-tight text-[#F5F0EC]">
-                Software <br />
-                <span className="text-gradient-orange">Developer</span>
+                <br />
+                <span className="bg-gradient-to-r from-[#FF7A36] via-[#FF5A1F] to-[#FFB088] bg-clip-text text-transparent drop-shadow-[0_0_42px_rgba(255,90,31,0.65)]">
+                  Developer
+                </span>
+                <span className="inline-block ml-1.5 text-[#FF5A1F] font-light drop-shadow-[0_0_14px_#FF5A1F] animate-blink select-none">
+                  |
+                </span>
               </h1>
-            </motion.div>
+            </div>
 
-            {/* Subtitle */}
-            <motion.div variants={itemVariants} className="mb-4">
-              <div className="flex items-center gap-2 text-base sm:text-lg lg:text-xl font-medium text-[#FF7A36]">
-                <GraduationCap className="h-5 w-5 shrink-0 text-[#FF5A1F]" />
-                <span>Software Engineering Student &amp; Aspiring Full-Stack Developer</span>
-              </div>
-            </motion.div>
+            {/* 3. Subtitle: 🎓 Software Engineering Student & Aspiring Full-Stack Developer */}
+            <div className="flex items-center gap-2 text-sm sm:text-base lg:text-lg font-semibold text-[#FF9E66] drop-shadow-[0_0_14px_rgba(255,122,54,0.55)] mb-6">
+              <span className="text-xl shrink-0 select-none">🎓</span>
+              <span className="tracking-tight">Software Engineering Student &amp; Aspiring Full-Stack Developer</span>
+            </div>
 
-            {/* Short Introduction */}
-            <motion.div variants={itemVariants} className="mb-8 max-w-xl">
-              <p className="text-base sm:text-lg text-[#C4B6AE] leading-relaxed">
-                Building modern, scalable web applications with <span className="text-[#F5F0EC] font-semibold">React</span>, <span className="text-[#F5F0EC] font-semibold">Laravel</span>, and <span className="text-[#F5F0EC] font-semibold">MySQL</span>.
-                Studying at <span className="text-[#F5F0EC] font-semibold">Wollo University</span>, turning ideas into elegant and high-impact digital solutions.
-              </p>
-            </motion.div>
+            {/* 4. Bio Paragraph with glowing highlighted tech stacks */}
+            <p className="text-base sm:text-lg text-[#C8D3DE] leading-relaxed mb-8 max-w-xl font-normal">
+              I build modern, scalable web applications with{' '}
+              <span className="font-bold text-[#61DAFB] drop-shadow-[0_0_10px_rgba(97,218,251,0.65)] px-1.5 py-0.5 rounded bg-[#61DAFB]/10 border border-[#61DAFB]/30">
+                React
+              </span>
+              ,{' '}
+              <span className="font-bold text-[#FF2D20] drop-shadow-[0_0_10px_rgba(255,45,32,0.65)] px-1.5 py-0.5 rounded bg-[#FF2D20]/10 border border-[#FF2D20]/30">
+                Laravel
+              </span>
+              , and{' '}
+              <span className="font-bold text-[#38BDF8] drop-shadow-[0_0_10px_rgba(56,189,248,0.65)] px-1.5 py-0.5 rounded bg-[#00758F]/15 border border-[#00758F]/40">
+                MySQL
+              </span>
+              . Studying at{' '}
+              <span className="font-bold text-[#FFAA40] drop-shadow-[0_0_12px_rgba(255,170,64,0.65)] px-1.5 py-0.5 rounded bg-[#FFAA40]/10 border border-[#FFAA40]/30">
+                Wollo University
+              </span>
+              , turning ideas into elegant, and high-impact digital solutions.
+            </p>
 
-            {/* Buttons & Actions */}
-            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4 w-full sm:w-auto">
-              <a href="#projects" className="btn-primary-orange group">
+            {/* 5. Action Buttons */}
+            <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto mb-10">
+              {/* Primary: Radiant orange & amber gradient pill */}
+              <a
+                href="#projects"
+                className="inline-flex items-center justify-center gap-2.5 px-7 sm:px-8 py-3.5 rounded-full font-bold text-sm text-white bg-gradient-to-r from-[#FF5A1F] via-[#FF7A36] to-[#FFA066] border border-[#FFE2D1]/40 shadow-[0_0_30px_rgba(255,90,31,0.7),0_0_55px_rgba(255,122,54,0.35)] hover:shadow-[0_0_40px_rgba(255,90,31,0.95),0_0_70px_rgba(255,122,54,0.55)] hover:scale-105 active:scale-95 transition-all duration-200 group"
+              >
                 <span>Explore My Work</span>
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-white drop-shadow-[0_0_4px_white]" />
               </a>
 
-              <a href="#contact" className="btn-secondary-dark group">
-                <Mail className="h-4 w-4 text-[#FF7A36]" />
+              {/* Secondary: Dark outlined glass pill */}
+              <a
+                href="#contact"
+                className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3.5 rounded-full font-semibold text-sm text-[#F5F0EC] bg-[#07090e]/90 hover:bg-[#131b28] border-2 border-[#FF5A1F]/60 hover:border-[#FF7A36] shadow-[0_0_20px_rgba(255,90,31,0.3)] hover:shadow-[0_0_32px_rgba(255,90,31,0.55)] hover:scale-105 active:scale-95 transition-all duration-200 group"
+              >
+                <Mail className="h-4 w-4 text-[#FF7A36] group-hover:scale-110 transition-transform drop-shadow-[0_0_6px_#FF5A1F]" />
                 <span>Let's Connect</span>
               </a>
-            </motion.div>
+            </div>
 
-            {/* University Tag Badge */}
-            <motion.div variants={itemVariants} className="mt-8 pt-6 border-t border-[#3A241C] flex items-center gap-3 text-xs sm:text-sm text-[#8E7D75]">
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#FF5A1F]" />
-              <span>Campus: <strong className="text-[#C4B6AE] font-medium">Wollo University, Kombolcha</strong></span>
-              <span className="text-[#3A241C]">•</span>
-              <span className="text-[#C4B6AE]">Full-Stack Focus</span>
-            </motion.div>
-          </motion.div>
+            {/* 6. Bottom Meta: Campus & Full-Stack Focus */}
+            <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm font-medium text-[#FF9E66] drop-shadow-[0_0_8px_rgba(255,122,54,0.45)]">
+              <span className="text-base select-none">📍</span>
+              <span>Campus: Wollo University, Kombolcha</span>
+              <span className="text-white/40 font-bold mx-1.5">•</span>
+              <span className="text-base select-none">⚙️</span>
+              <span className="text-[#FFB37C] font-semibold">Full-Stack Focus</span>
+            </div>
 
-          {/* ================= RIGHT SIDE: 3D Character & Floating Icons ================= */}
-          <div className="relative flex items-center justify-center">
-            
-            {/* The Visual Stage Container */}
-            <div className="hero-character-stage">
+          </div>
 
-              {/* Cinematic Warm Orange Glow Behind Character */}
+          {/* =========================================================================
+              RIGHT COLUMN: 3D-Tilted IDE & Glowing Orbit (Image 2)
+              ========================================================================= */}
+          <div className="hero-col-right relative flex items-center justify-center pt-8 lg:pt-0 [perspective:1200px]">
+            <div className="relative w-full max-w-[500px] flex items-center justify-center">
+
+              {/* Dual-Tone Ambient Backlight Glow behind Editor (Orange & Luminous Teal/Cyan) */}
               <div 
-                className="absolute w-[340px] sm:w-[440px] h-[340px] sm:h-[440px] rounded-full pointer-events-none"
+                className="absolute -inset-10 -z-10 rounded-[40px] pointer-events-none opacity-85"
                 style={{
-                  background: 'radial-gradient(circle, rgba(255, 90, 31, 0.42) 0%, rgba(125, 41, 14, 0.22) 40%, rgba(20, 12, 9, 0) 70%)',
-                  filter: 'blur(40px)',
+                  background: 'radial-gradient(circle at 35% 35%, rgba(255, 90, 31, 0.42) 0%, rgba(255, 122, 54, 0.16) 45%, transparent 70%)',
+                  filter: 'blur(60px)',
+                  transform: 'translateZ(0)'
+                }}
+              />
+              <div 
+                className="absolute -inset-12 -z-10 rounded-[50px] pointer-events-none opacity-75"
+                style={{
+                  background: 'radial-gradient(circle at 80% 25%, rgba(0, 216, 255, 0.3) 0%, transparent 55%), radial-gradient(circle at 20% 85%, rgba(0, 216, 255, 0.18) 0%, transparent 50%)',
+                  filter: 'blur(55px)',
                   transform: 'translateZ(0)'
                 }}
               />
 
-              {/* Concentric Orbital Rings */}
-              <div className="hero-orbital-1" />
-              <div className="hero-orbital-2" />
-              <div className="hero-orbital-3" />
-
-              {/* Character Visual Asset */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.88, y: 30 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                className="hero-character-portal animate-float-subtle"
+              {/* ================= ELLIPTICAL ORBITAL RING SVG ================= */}
+              <svg 
+                className="absolute w-[620px] sm:w-[680px] h-[620px] sm:h-[680px] -z-10 pointer-events-none select-none drop-shadow-[0_0_25px_rgba(255,90,31,0.65)]" 
+                viewBox="0 0 740 740"
               >
-                <img
-                  src="/assets/character.jpg"
-                  alt="Biniyam Gebrie — Software Developer"
-                  className="w-full h-full object-cover object-center select-none pointer-events-none"
-                  style={{
-                    maskImage: 'radial-gradient(circle at 50% 50%, black 72%, transparent 100%)',
-                    WebkitMaskImage: 'radial-gradient(circle at 50% 50%, black 72%, transparent 100%)'
-                  }}
+                <defs>
+                  <linearGradient id="orbitGlowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#00D8FF" stopOpacity="0.75" />
+                    <stop offset="25%" stopColor="#FF7A36" stopOpacity="0.9" />
+                    <stop offset="60%" stopColor="#FF5A1F" stopOpacity="0.95" />
+                    <stop offset="85%" stopColor="#FFAA40" stopOpacity="0.85" />
+                    <stop offset="100%" stopColor="#00D8FF" stopOpacity="0.65" />
+                  </linearGradient>
+                  <filter id="neonHaloFilter" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="3.5" result="blur" />
+                    <feMerge>
+                      <feMergeNode in="blur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
+
+                {/* Main Glowing Orbital Ring */}
+                <ellipse 
+                  cx="370" cy="370" rx="340" ry="250" 
+                  fill="none" 
+                  stroke="url(#orbitGlowGrad)" 
+                  strokeWidth="2.5" 
+                  filter="url(#neonHaloFilter)"
+                  transform="rotate(-15 370 370)"
                 />
 
-                {/* Inner Warm Lighting Rim Gradient */}
-                <div 
-                  className="absolute inset-0 rounded-full pointer-events-none"
-                  style={{
-                    background: 'radial-gradient(circle at 50% 50%, transparent 60%, rgba(255, 90, 31, 0.35) 95%, rgba(255, 122, 54, 0.5) 100%)',
-                    mixBlendMode: 'screen'
-                  }}
+                {/* Subtle Concentric Dashed Ring for Visual Depth */}
+                <ellipse 
+                  cx="370" cy="370" rx="315" ry="230" 
+                  fill="none" 
+                  stroke="#FF7A36" 
+                  strokeWidth="1.2" 
+                  strokeDasharray="6 8"
+                  opacity="0.45"
+                  transform="rotate(-15 370 370)"
                 />
-              </motion.div>
+              </svg>
 
-              {/* ================= FLOATING TECHNOLOGY ICONS ================= */}
+              {/* ================= 3D ISOMETRIC AMBER/ORANGE CUBES (ALONG ORBIT PERIMETER) ================= */}
+              {/* Positioned strictly outside along the orbital ellipse so they NEVER overlap the code text */}
               
-              {/* 1. React Badge */}
+              {/* Cube 1: Below terminal left */}
+              <div className="absolute -bottom-10 left-[8%] z-10 pointer-events-none">
+                <IsometricCube size={22} delay={0} />
+              </div>
+
+              {/* Cube 2: Below terminal center-right */}
+              <div className="absolute -bottom-14 left-[40%] z-10 pointer-events-none">
+                <IsometricCube size={24} delay={0.8} />
+              </div>
+
+              {/* Cube 3: Below terminal far right */}
+              <div className="absolute -bottom-11 right-[22%] z-10 pointer-events-none">
+                <IsometricCube size={20} delay={1.4} />
+              </div>
+
+              {/* Cube 4: Mid-left flank orbit */}
+              <div className="absolute bottom-[24%] -left-8 z-10 pointer-events-none">
+                <IsometricCube size={22} delay={2.1} />
+              </div>
+
+              {/* Cube 5: Top-left outer orbit */}
+              <div className="absolute -top-7 left-[14%] z-10 pointer-events-none">
+                <IsometricCube size={18} delay={1.1} />
+              </div>
+
+              {/* ================= 4 HIGH-CONTRAST 3D GLASS TECH BADGES ================= */}
+              {/* Positioned on outer orbital corners: NEVER touch or cover any code text */}
+
+              {/* 1. React: Intensely glowing cyan atom on the TOP-RIGHT */}
               <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.5, type: 'spring', stiffness: 200 }}
-                className="floating-tech-badge badge-pos-react animate-float-gentle"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1, y: [-4, 5, -4] }}
+                transition={{ 
+                  opacity: { duration: 0.5, delay: 0.3 }, 
+                  scale: { duration: 0.5, delay: 0.3 },
+                  y: { repeat: Infinity, duration: 4.5, ease: 'easeInOut' }
+                }}
+                className="absolute -top-7 -right-3 sm:-top-9 sm:-right-6 z-30 p-2.5 sm:p-3 rounded-2xl bg-[#03111b]/92 border-2 border-[#00D8FF] shadow-[0_0_25px_rgba(0,216,255,0.6),inset_0_0_12px_rgba(0,216,255,0.25)] backdrop-blur-xl transform rotate-6 hover:rotate-0 hover:scale-115 transition-all duration-300 cursor-pointer"
+                title="React"
               >
-                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#61DAFB]/10">
-                  <ReactIcon size={22} />
-                </div>
-                <div className="text-left">
-                  <div className="text-xs font-bold text-[#F5F0EC]">React</div>
-                  <div className="text-[10px] font-mono text-[#8E7D75]">Frontend</div>
+                <ReactIcon size={28} className="text-[#00D8FF] drop-shadow-[0_0_12px_#00D8FF] animate-spin-slow" />
+              </motion.div>
+
+              {/* 2. Laravel: Brightly glowing red 3D wireframe cube on the MIDDLE-LEFT */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1, y: [5, -5, 5] }}
+                transition={{ 
+                  opacity: { duration: 0.5, delay: 0.45 }, 
+                  scale: { duration: 0.5, delay: 0.45 },
+                  y: { repeat: Infinity, duration: 5, ease: 'easeInOut', delay: 0.5 }
+                }}
+                className="absolute top-[40%] -left-4 sm:-left-7 z-30 p-2.5 sm:p-3 rounded-2xl bg-[#190705]/92 border-2 border-[#FF2D20] shadow-[0_0_25px_rgba(255,45,32,0.6),inset_0_0_12px_rgba(255,45,32,0.25)] backdrop-blur-xl transform -rotate-8 hover:rotate-0 hover:scale-115 transition-all duration-300 cursor-pointer"
+                title="Laravel"
+              >
+                <LaravelIcon size={26} className="drop-shadow-[0_0_12px_#FF2D20]" />
+              </motion.div>
+
+              {/* 3. JavaScript: JS yellow badge on the FAR RIGHT */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1, y: [-5, 5, -5] }}
+                transition={{ 
+                  opacity: { duration: 0.5, delay: 0.6 }, 
+                  scale: { duration: 0.5, delay: 0.6 },
+                  y: { repeat: Infinity, duration: 4.8, ease: 'easeInOut', delay: 1 }
+                }}
+                className="absolute top-[56%] -right-4 sm:-right-7 z-30 p-2 sm:p-2.5 rounded-2xl bg-[#191605]/92 border-2 border-[#F7DF1E] shadow-[0_0_25px_rgba(247,223,30,0.55),inset_0_0_12px_rgba(247,223,30,0.25)] backdrop-blur-xl transform rotate-12 hover:rotate-0 hover:scale-115 transition-all duration-300 cursor-pointer"
+                title="JavaScript"
+              >
+                <div className="h-7 w-7 rounded-lg bg-[#F7DF1E] flex items-center justify-end pr-1 pb-0.5 shadow-md">
+                  <span className="font-black text-xs text-black font-mono tracking-tighter leading-none">JS</span>
                 </div>
               </motion.div>
 
-              {/* 2. Laravel Badge */}
+              {/* 4. MySQL: Brightly glowing blue dolphin badge on the LOWER-RIGHT */}
               <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.65, type: 'spring', stiffness: 200 }}
-                className="floating-tech-badge badge-pos-laravel animate-float-gentle"
-                style={{ animationDelay: '1.5s' }}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1, y: [5, -5, 5] }}
+                transition={{ 
+                  opacity: { duration: 0.5, delay: 0.75 }, 
+                  scale: { duration: 0.5, delay: 0.75 },
+                  y: { repeat: Infinity, duration: 5.2, ease: 'easeInOut', delay: 1.5 }
+                }}
+                className="absolute -bottom-7 right-1 sm:-bottom-8 sm:right-3 z-30 px-3 py-1.5 sm:py-2 rounded-2xl bg-[#04121c]/92 border-2 border-[#00D8FF] shadow-[0_0_25px_rgba(0,216,255,0.6),inset_0_0_12px_rgba(0,216,255,0.25)] backdrop-blur-xl transform rotate-6 hover:rotate-0 hover:scale-115 transition-all duration-300 cursor-pointer"
+                title="MySQL"
               >
-                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#FF2D20]/10">
-                  <LaravelIcon size={22} />
-                </div>
-                <div className="text-left">
-                  <div className="text-xs font-bold text-[#F5F0EC]">Laravel</div>
-                  <div className="text-[10px] font-mono text-[#8E7D75]">Backend</div>
-                </div>
+                <MySqlDolphinIcon />
               </motion.div>
 
-              {/* 3. JavaScript Badge */}
+              {/* ================= THE 3D-ANGLED ISOMETRIC GLASS TERMINAL ================= */}
               <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.8, type: 'spring', stiffness: 200 }}
-                className="floating-tech-badge badge-pos-js animate-float-subtle"
-                style={{ animationDelay: '0.8s' }}
-              >
-                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#F7DF1E]/10">
-                  <JavascriptIcon size={20} />
-                </div>
-                <span className="text-xs font-semibold text-[#F5F0EC]">JavaScript</span>
-              </motion.div>
-
-              {/* 4. MySQL Badge */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.95, type: 'spring', stiffness: 200 }}
-                className="floating-tech-badge badge-pos-mysql animate-float-subtle"
-                style={{ animationDelay: '2.2s' }}
-              >
-                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#00758F]/10">
-                  <MysqlIcon size={20} />
-                </div>
-                <span className="text-xs font-semibold text-[#F5F0EC]">MySQL</span>
-              </motion.div>
-
-              {/* 5. Floating Glass Highlight Card (bottom) */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 25 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.1, duration: 0.6 }}
-                className="absolute -bottom-6 left-2 sm:left-10 z-20 max-w-[280px]"
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                className="relative z-20 w-full rounded-2xl overflow-hidden bg-[#070a10]/95 backdrop-blur-2xl border-r border-b border-white/[0.08]"
+                style={{
+                  width: '100%',
+                  maxWidth: '480px',
+                  transform: 'rotateY(-12deg) rotateX(8deg) rotateZ(1deg)',
+                  transformStyle: 'preserve-3d',
+                  borderTop: '2.5px solid #FF7A36',
+                  borderLeft: '2.5px solid #FF7A36',
+                  boxShadow: `
+                    -12px -12px 45px -4px rgba(255, 90, 31, 0.65),
+                    -4px -4px 18px 0px rgba(255, 122, 54, 0.85),
+                    0 35px 75px -15px rgba(0, 0, 0, 0.95),
+                    0 0 35px rgba(0, 216, 255, 0.15)
+                  `,
+                }}
               >
-                <div className="glass-panel rounded-2xl p-4 shadow-2xl">
-                  <div className="flex items-center gap-2.5">
-                    <div className="h-2 w-2 rounded-full bg-[#FF5A1F] animate-ping" />
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-[#FF7A36]">Student Engineer</span>
+                {/* Luminous Orange-Amber Laser Beams fiercely bordering left and top edges */}
+                <div className="absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-[#FFE8D6] via-[#FF5A1F] to-transparent shadow-[0_0_18px_#FF5A1F,0_0_30px_#FF7A36] pointer-events-none z-30" />
+                <div className="absolute top-0 left-0 bottom-0 w-[2.5px] bg-gradient-to-b from-[#FFE8D6] via-[#FF5A1F] to-transparent shadow-[0_0_18px_#FF5A1F,0_0_30px_#FF7A36] pointer-events-none z-30" />
+
+                {/* Intense Vertex Halo at top-left corner */}
+                <div className="absolute -top-1.5 -left-1.5 w-6 h-6 rounded-full bg-[#FFE8D6] blur-[3.5px] shadow-[0_0_25px_#FF5A1F,0_0_45px_#FF7A36] pointer-events-none z-30 opacity-90 animate-pulse" />
+
+                {/* IDE Header: macOS Window Controls & Tabs */}
+                <div className="flex items-center justify-between px-4 sm:px-5 py-3 bg-[#05070c] border-b border-white/[0.08] select-none">
+                  
+                  {/* Left: Red, Yellow, Green Window Dots */}
+                  <div className="flex items-center gap-2">
+                    <span className="h-3 w-3 rounded-full bg-[#FF5F56] shadow-[0_0_8px_#FF5F56] border border-[#FF5F56]/60 cursor-pointer hover:opacity-85 transition-opacity" />
+                    <span className="h-3 w-3 rounded-full bg-[#FFBD2E] shadow-[0_0_8px_#FFBD2E] border border-[#FFBD2E]/60 cursor-pointer hover:opacity-85 transition-opacity" />
+                    <span className="h-3 w-3 rounded-full bg-[#27C93F] shadow-[0_0_8px_#27C93F] border border-[#27C93F]/60 cursor-pointer hover:opacity-85 transition-opacity" />
                   </div>
-                  <p className="mt-1 text-xs text-[#F5F0EC] font-medium leading-snug">
-                    "Crafting modern digital solutions with passion and clean code."
-                  </p>
-                  <div className="mt-2 flex items-center justify-between text-[10px] text-[#8E7D75] pt-2 border-t border-[#3A241C]">
-                    <span>Wollo University</span>
-                    <span className="text-[#FF7A36] font-mono">Full-Stack</span>
+
+                  {/* Center Tabs: App.jsx (Active) & api.php (Inactive) */}
+                  <div className="flex items-center gap-2">
+                    {/* Active Tab: App.jsx with glowing cyan React atom icon */}
+                    <button
+                      onClick={() => setActiveTab('app')}
+                      className={`flex items-center gap-2 px-3 py-1 rounded-lg text-xs font-mono transition-all ${
+                        activeTab === 'app'
+                          ? 'bg-[#00D8FF]/15 text-white border border-[#00D8FF]/60 shadow-[0_0_16px_rgba(0,216,255,0.4)] font-bold'
+                          : 'text-[#64748B] hover:text-[#94A3B8] hover:bg-white/[0.04]'
+                      }`}
+                    >
+                      <ReactIcon size={14} className="text-[#00D8FF] drop-shadow-[0_0_8px_#00D8FF] animate-spin-slow" />
+                      <span className="text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.4)]">App.jsx</span>
+                      <X className="h-3 w-3 ml-0.5 text-[#00D8FF]/70 hover:text-white" />
+                    </button>
+
+                    {/* Inactive Tab: api.php with brightly lit PHP logo */}
+                    <button
+                      onClick={() => setActiveTab('api')}
+                      className={`flex items-center gap-2 px-2.5 py-1 rounded-lg text-xs font-mono transition-all ${
+                        activeTab === 'api'
+                          ? 'bg-[#FF5A1F]/15 text-[#FF8A3D] border border-[#FF5A1F]/50 shadow-[0_0_14px_rgba(255,90,31,0.3)] font-bold'
+                          : 'text-[#64748B] hover:text-[#94A3B8] hover:bg-white/[0.04]'
+                      }`}
+                    >
+                      <span className="px-1.5 py-0.2 rounded text-[10px] font-bold bg-[#777BB4]/40 text-[#C7D2FE] border border-[#777BB4]/60 shadow-[0_0_8px_rgba(119,123,180,0.5)] font-sans">
+                        PHP
+                      </span>
+                      <span className="text-[#94A3B8] group-hover:text-white">api.php</span>
+                    </button>
+                  </div>
+
+                  {/* Right: Code Icon */}
+                  <div className="flex items-center text-[#FF7A36] drop-shadow-[0_0_6px_rgba(255,90,31,0.5)]">
+                    <Code2 className="h-4 w-4" />
                   </div>
                 </div>
+
+                {/* IDE Code Editor Body with Spacious Layout & Clear Gray Line Numbers 1-7 */}
+                <div className="p-5 sm:p-6 font-mono text-xs sm:text-[13px] leading-[2.1] overflow-x-auto min-h-[220px] flex flex-col justify-center">
+                  <AnimatePresence mode="wait">
+                    {activeTab === 'app' ? (
+                      <motion.div
+                        key="tab-app-syntax"
+                        initial={{ opacity: 0, x: -6 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 6 }}
+                        transition={{ duration: 0.2 }}
+                        className="space-y-0.5 text-left font-mono"
+                      >
+                        {/* Line 1 */}
+                        <div className="flex items-baseline">
+                          <span className="w-8 shrink-0 select-none text-[#64748B] font-mono text-left font-semibold">1</span>
+                          <span className="whitespace-pre pl-2">
+                            <span className="text-[#38BDF8] font-semibold">const</span>{' '}
+                            <span className="text-white font-medium">developer</span>{' '}
+                            <span className="text-white">=</span>{' '}
+                            <span className="text-[#FFB37C]">&#123;</span>
+                          </span>
+                        </div>
+
+                        {/* Line 2 */}
+                        <div className="flex items-baseline">
+                          <span className="w-8 shrink-0 select-none text-[#64748B] font-mono text-left font-semibold">2</span>
+                          <span className="whitespace-pre pl-5">
+                            <span className="text-[#38BDF8]">name</span>
+                            <span className="text-white">: </span>
+                            <span className="text-[#FB923C] font-semibold drop-shadow-[0_0_8px_rgba(251,146,60,0.4)]">'Biniyam'</span>
+                            <span className="text-white">,</span>
+                          </span>
+                        </div>
+
+                        {/* Line 3 */}
+                        <div className="flex items-baseline">
+                          <span className="w-8 shrink-0 select-none text-[#64748B] font-mono text-left font-semibold">3</span>
+                          <span className="whitespace-pre pl-5">
+                            <span className="text-[#38BDF8]">role</span>
+                            <span className="text-white">: </span>
+                            <span className="text-[#FB923C] font-semibold drop-shadow-[0_0_8px_rgba(251,146,60,0.4)]">'Full-Stack Developer'</span>
+                            <span className="text-white">,</span>
+                          </span>
+                        </div>
+
+                        {/* Line 4 */}
+                        <div className="flex items-baseline">
+                          <span className="w-8 shrink-0 select-none text-[#64748B] font-mono text-left font-semibold">4</span>
+                          <span className="whitespace-pre pl-5">
+                            <span className="text-[#38BDF8]">stack</span>
+                            <span className="text-white">: [</span>
+                            <span className="text-[#FF9E66] font-semibold drop-shadow-[0_0_8px_rgba(255,158,102,0.35)]">'React'</span>
+                            <span className="text-white">, </span>
+                            <span className="text-[#FF7A36] font-semibold drop-shadow-[0_0_8px_rgba(255,122,54,0.35)]">'Laravel'</span>
+                            <span className="text-white">, </span>
+                            <span className="text-[#FFAA40] font-semibold drop-shadow-[0_0_8px_rgba(255,170,64,0.35)]">'MySQL'</span>
+                            <span className="text-white">],</span>
+                          </span>
+                        </div>
+
+                        {/* Line 5 */}
+                        <div className="flex items-baseline">
+                          <span className="w-8 shrink-0 select-none text-[#64748B] font-mono text-left font-semibold">5</span>
+                          <span className="whitespace-pre pl-5">
+                            <span className="text-[#38BDF8]">passion</span>
+                            <span className="text-white">: </span>
+                            <span className="text-[#FB923C] font-semibold drop-shadow-[0_0_8px_rgba(251,146,60,0.35)]">'Building modern digital</span>
+                          </span>
+                        </div>
+
+                        {/* Line 6 */}
+                        <div className="flex items-baseline">
+                          <span className="w-8 shrink-0 select-none text-[#64748B] font-mono text-left font-semibold">6</span>
+                          <span className="whitespace-pre pl-5">
+                            <span className="text-[#FB923C] font-semibold drop-shadow-[0_0_8px_rgba(251,146,60,0.35)]">experiences'</span>
+                            <span className="text-white">,</span>
+                          </span>
+                        </div>
+
+                        {/* Line 7 */}
+                        <div className="flex items-baseline">
+                          <span className="w-8 shrink-0 select-none text-[#64748B] font-mono text-left font-semibold">7</span>
+                          <span className="whitespace-pre pl-2">
+                            <span className="text-[#FFB37C] font-medium">&#125;;</span>
+                          </span>
+                        </div>
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        key="tab-api-syntax"
+                        initial={{ opacity: 0, x: -6 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 6 }}
+                        transition={{ duration: 0.2 }}
+                        className="space-y-0.5 text-left font-mono"
+                      >
+                        {/* Line 1 */}
+                        <div className="flex items-baseline">
+                          <span className="w-8 shrink-0 select-none text-[#64748B] font-mono text-left font-semibold">1</span>
+                          <span className="whitespace-pre pl-2">
+                            <span className="text-[#FF7A36] font-semibold">Route</span>
+                            <span className="text-white">::</span>
+                            <span className="text-[#38BDF8]">get</span>
+                            <span className="text-white">(</span>
+                            <span className="text-[#FB923C] font-semibold">'/developer'</span>
+                            <span className="text-white">, </span>
+                            <span className="text-[#C792EA]">function</span>
+                            <span className="text-white"> () &#123;</span>
+                          </span>
+                        </div>
+
+                        {/* Line 2 */}
+                        <div className="flex items-baseline">
+                          <span className="w-8 shrink-0 select-none text-[#64748B] font-mono text-left font-semibold">2</span>
+                          <span className="whitespace-pre pl-5">
+                            <span className="text-[#C792EA]">return</span>{' '}
+                            <span className="text-[#38BDF8]">response</span>
+                            <span className="text-white">()</span>
+                            <span className="text-white">-&gt;</span>
+                            <span className="text-[#38BDF8]">json</span>
+                            <span className="text-white">([</span>
+                          </span>
+                        </div>
+
+                        {/* Line 3 */}
+                        <div className="flex items-baseline">
+                          <span className="w-8 shrink-0 select-none text-[#64748B] font-mono text-left font-semibold">3</span>
+                          <span className="whitespace-pre pl-8">
+                            <span className="text-[#FB923C] font-semibold">'status'</span>{' '}
+                            <span className="text-white">=&gt;</span>{' '}
+                            <span className="text-[#FF5A1F] font-semibold">'ready_to_build'</span>
+                            <span className="text-white">,</span>
+                          </span>
+                        </div>
+
+                        {/* Line 4 */}
+                        <div className="flex items-baseline">
+                          <span className="w-8 shrink-0 select-none text-[#64748B] font-mono text-left font-semibold">4</span>
+                          <span className="whitespace-pre pl-8">
+                            <span className="text-[#FB923C] font-semibold">'focus'</span>{' '}
+                            <span className="text-white">=&gt;</span>{' '}
+                            <span className="text-[#38BDF8] font-semibold">'Scalable Full-Stack Web'</span>
+                          </span>
+                        </div>
+
+                        {/* Line 5 */}
+                        <div className="flex items-baseline">
+                          <span className="w-8 shrink-0 select-none text-[#64748B] font-mono text-left font-semibold">5</span>
+                          <span className="whitespace-pre pl-5">
+                            <span className="text-white">]);</span>
+                          </span>
+                        </div>
+
+                        {/* Line 6 */}
+                        <div className="flex items-baseline">
+                          <span className="w-8 shrink-0 select-none text-[#64748B] font-mono text-left font-semibold">6</span>
+                          <span className="whitespace-pre pl-2">
+                            <span className="text-white">&#125;);</span>
+                          </span>
+                        </div>
+
+                        {/* Line 7 */}
+                        <div className="flex items-baseline">
+                          <span className="w-8 shrink-0 select-none text-[#64748B] font-mono text-left font-semibold">7</span>
+                          <span className="whitespace-pre pl-2">
+                            <span className="text-[#64748B]">// Ready for production</span>
+                          </span>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </motion.div>
+
+              {/* Glowing Horizontal Laser Halo below Terminal */}
+              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[110%] max-w-[520px] h-[2px] bg-gradient-to-r from-transparent via-[#FF5A1F] to-transparent shadow-[0_0_24px_#FF5A1F] pointer-events-none" />
+              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[65%] h-[4px] bg-gradient-to-r from-transparent via-[#FFAA66] to-transparent blur-[2px] pointer-events-none" />
+              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[25%] h-[6px] bg-gradient-to-r from-transparent via-white to-transparent blur-[2.5px] pointer-events-none" />
 
             </div>
           </div>
 
         </div>
 
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.3, duration: 0.8 }}
-          className="mt-16 flex flex-col items-center justify-center text-center"
-        >
+        {/* =========================================================================
+            5. FOOTER: Scroll Indicator
+            ========================================================================= */}
+        <div className="mt-14 sm:mt-18 flex flex-col items-center justify-center text-center select-none z-20">
           <a
             href="#about"
-            className="inline-flex flex-col items-center gap-2 text-xs font-mono text-[#8E7D75] hover:text-[#FF7A36] transition-colors"
+            className="group flex flex-col items-center gap-3 transition-colors cursor-pointer"
+            aria-label="Scroll to explore"
           >
-            <span>SCROLL TO EXPLORE</span>
-            <div className="flex h-8 w-5 items-start justify-center rounded-full border border-[#3A241C] p-1">
+            {/* Horizontal Track Lines + SCROLL TO EXPLORE */}
+            <div className="flex items-center gap-4 text-xs font-mono tracking-widest text-[#FF9E66]">
+              <div className="h-[1.5px] w-14 sm:w-24 bg-gradient-to-r from-transparent via-[#FF5A1F]/60 to-[#FF7A36]" />
+              <span className="font-bold text-[11px] tracking-[0.28em] text-[#FF9E66] drop-shadow-[0_0_10px_rgba(255,122,54,0.6)] group-hover:text-white transition-colors">
+                SCROLL TO EXPLORE
+              </span>
+              <div className="h-[1.5px] w-14 sm:w-24 bg-gradient-to-l from-transparent via-[#FF5A1F]/60 to-[#FF7A36]" />
+            </div>
+
+            {/* Highly Visible Animated Scroll Mouse / Capsule Icon */}
+            <div className="flex h-9 w-5.5 items-start justify-center rounded-full border-2 border-[#FF7A36] p-1.5 bg-[#07090e]/90 shadow-[0_0_16px_rgba(255,90,31,0.5),inset_0_0_8px_rgba(255,90,31,0.25)] group-hover:border-white group-hover:shadow-[0_0_22px_rgba(255,122,54,0.8)] transition-all">
               <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
-                className="h-1.5 w-1.5 rounded-full bg-[#FF5A1F]"
+                animate={{ y: [0, 10, 0] }}
+                transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
+                className="h-2 w-1.5 rounded-full bg-gradient-to-b from-white to-[#FF7A36] shadow-[0_0_10px_#FF5A1F]"
               />
             </div>
           </a>
-        </motion.div>
+        </div>
 
       </div>
     </section>
   );
 };
+
+export default Hero;

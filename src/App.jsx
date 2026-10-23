@@ -15,7 +15,7 @@ export function App() {
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
 
   return (
-    <div className="relative min-h-screen bg-[#0A0706] text-[#F5F0EC] overflow-hidden selection:bg-[#FF5A1F] selection:text-white">
+    <div className="relative min-h-screen bg-[#07090e] text-[#F5F0EC] overflow-hidden selection:bg-[#FF5A1F] selection:text-white">
       {/* Ambient background glows */}
       <BackgroundGlows />
 

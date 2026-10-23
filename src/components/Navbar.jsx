@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download, Menu, X, Sparkles, FileText } from 'lucide-react';
-import { personalData } from '../data/portfolioData';
+import { Home, User, Code2, Folder, Route, Mail, Download, Menu, X } from 'lucide-react';
 
 const navLinks = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Journey', href: '#journey' },
-  { name: 'Contact', href: '#contact' }
+  { name: 'Home', href: '#home', icon: Home },
+  { name: 'About', href: '#about', icon: User },
+  { name: 'Skills', href: '#skills', icon: Code2 },
+  { name: 'Projects', href: '#projects', icon: Folder },
+  { name: 'Journey', href: '#journey', icon: Route },
+  { name: 'Contact', href: '#contact', icon: Mail }
 ];
 
 export const Navbar = ({ onOpenResume }) => {
@@ -19,11 +18,10 @@ export const Navbar = ({ onOpenResume }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      setScrolled(window.scrollY > 30);
 
-      // Simple active section detection
       const sections = navLinks.map(link => link.href.substring(1));
-      const scrollPos = window.scrollY + 180;
+      const scrollPos = window.scrollY + 200;
 
       for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
@@ -38,7 +36,7 @@ export const Navbar = ({ onOpenResume }) => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -52,76 +50,76 @@ export const Navbar = ({ onOpenResume }) => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 px-4 sm:px-6 lg:px-8 pt-4 transition-all duration-300">
+    <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pt-4 sm:pt-5 transition-all duration-300">
       <div className="container-custom">
-        <nav
-          className={`flex items-center justify-between px-5 py-3 rounded-full transition-all duration-300 ${
-            scrolled
-              ? 'glass-nav shadow-[0_10px_30px_-10px_rgba(0,0,0,0.8)] border-[#3A241C]'
-              : 'bg-[#140C09]/70 backdrop-blur-md border border-[#3A241C]/60'
+        {/* Floating glassmorphic capsule centered at the top */}
+        <div 
+          className={`w-full flex items-center justify-between px-5 sm:px-7 py-2.5 rounded-full border border-white/[0.1] backdrop-blur-2xl bg-[#07090e]/85 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.9),0_0_25px_rgba(255,90,31,0.15)] transition-all duration-300 ${
+            scrolled ? 'border-[#FF5A1F]/30 bg-[#07090e]/95 shadow-[0_15px_45px_-10px_rgba(0,0,0,0.95),0_0_35px_rgba(255,90,31,0.25)]' : ''
           }`}
         >
-          {/* Brand Wordmark Logo */}
+          {/* ================= LEFT: </> BinaFolio ● ================= */}
           <a
             href="#home"
-            className="flex items-center gap-2 text-xl font-extrabold tracking-tight text-[#F5F0EC] group"
+            className="flex items-center gap-2 text-base sm:text-lg font-bold tracking-tight text-[#F5F0EC] group py-1"
           >
-            <span className="font-['Plus_Jakarta_Sans']">
-              bina<span className="text-[#FF5A1F]">.</span>folio
+            <span className="font-mono text-[#FF7A36] text-base sm:text-lg font-black tracking-tighter drop-shadow-[0_0_8px_rgba(255,90,31,0.8)]">&lt;/&gt;</span>
+            <span className="font-['Inter'] font-extrabold tracking-tight text-white drop-shadow-[0_0_12px_rgba(255,255,255,0.25)]">
+              Bina<span className="bg-gradient-to-r from-[#FF7A36] via-[#FF5A1F] to-[#FFA066] bg-clip-text text-transparent drop-shadow-[0_0_12px_#FF5A1F]">Folio</span>
             </span>
-            <span className="h-2 w-2 rounded-full bg-[#FF5A1F] shadow-[0_0_8px_#FF5A1F] animate-pulse" />
+            <span className="h-2 w-2 rounded-full bg-[#FF5A1F] shadow-[0_0_10px_#FF5A1F,0_0_16px_#FF7A36] ml-0.5 animate-pulse" />
           </a>
 
-          {/* Center Navigation Links (Desktop) */}
-          <div className="hidden md:flex items-center gap-1 rounded-full bg-[#0A0706]/70 px-4 py-1.5 border border-[#3A241C]/50">
+          {/* ================= CENTER (Primary Nav): Centered Dark Glass Capsule ================= */}
+          <nav className="hidden md:flex items-center gap-1 lg:gap-1.5 px-3 py-1.5 rounded-full bg-[#0a0e17]/90 border border-[#FF5A1F]/30 shadow-[0_0_20px_rgba(255,90,31,0.15),inset_0_0_12px_rgba(0,0,0,0.5)] backdrop-blur-xl">
             {navLinks.map((link) => {
+              const Icon = link.icon;
               const isActive = activeSection === link.href.substring(1);
               return (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleLinkClick(e, link.href)}
-                  className={`relative px-4 py-1.5 text-sm font-medium transition-all duration-200 rounded-full ${
+                  className={`relative flex flex-col items-center justify-center px-4 py-1.5 rounded-full transition-all duration-200 group ${
                     isActive
-                      ? 'text-[#FF5A1F] font-semibold'
-                      : 'text-[#C4B6AE] hover:text-[#F5F0EC]'
+                      ? 'bg-gradient-to-b from-[#2e140a] to-[#1a0a05] border border-[#FF5A1F] shadow-[0_0_16px_rgba(255,90,31,0.5),inset_0_0_10px_rgba(255,90,31,0.25)] text-[#FF7A36] font-semibold'
+                      : 'text-[#94A3B8] hover:text-[#F5F0EC] hover:bg-white/[0.04]'
                   }`}
                 >
-                  {link.name}
+                  <Icon className={`h-4 w-4 transition-transform duration-200 group-hover:scale-110 ${
+                    isActive ? 'text-[#FF7A36] drop-shadow-[0_0_8px_#FF5A1F]' : 'text-[#94A3B8] group-hover:text-white'
+                  }`} />
+                  <span className="text-[10px] tracking-wide mt-0.5 font-medium">{link.name}</span>
+
+                  {/* Vivid glowing neon dot beneath active item */}
                   {isActive && (
-                    <motion.div
-                      layoutId="activePill"
-                      className="absolute inset-0 rounded-full bg-[#FF5A1F]/10 border border-[#FF5A1F]/30 -z-10"
-                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                    />
+                    <span className="absolute -bottom-1 h-1.5 w-1.5 rounded-full bg-[#FF5A1F] shadow-[0_0_8px_#FF5A1F,0_0_14px_#FF7A36]" />
                   )}
                 </a>
               );
             })}
-          </div>
+          </nav>
 
-          {/* Right Action: Download Resume Button */}
-          <div className="hidden sm:flex items-center gap-3">
+          {/* ================= RIGHT: Brightly Glowing Orange-Amber "Resume" Button ================= */}
+          <div className="flex items-center gap-3">
             <button
               onClick={onOpenResume}
-              className="inline-flex items-center gap-2 rounded-full border border-[#3A241C] bg-[#1C110D] px-4 py-2 text-xs font-semibold text-[#F5F0EC] transition-all duration-200 hover:border-[#FF5A1F] hover:bg-[#251610] hover:text-white hover:shadow-[0_0_20px_rgba(255,90,31,0.3)] active:scale-95"
+              className="hidden sm:inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-bold text-white bg-gradient-to-r from-[#FF5A1F] via-[#FF7A36] to-[#FFA066] border border-[#FFE0D0]/40 shadow-[0_0_20px_rgba(255,90,31,0.65),0_0_35px_rgba(255,122,54,0.35)] hover:shadow-[0_0_30px_rgba(255,90,31,0.9),0_0_45px_rgba(255,122,54,0.5)] hover:scale-105 active:scale-95 transition-all duration-200"
             >
-              <Download className="h-3.5 w-3.5 text-[#FF7A36]" />
-              <span>Download Resume</span>
+              <Download className="h-3.5 w-3.5 text-white drop-shadow-[0_0_4px_rgba(255,255,255,0.8)]" />
+              <span className="tracking-wide">Resume</span>
             </button>
-          </div>
 
-          {/* Mobile Menu Toggle */}
-          <div className="flex md:hidden items-center gap-2">
+            {/* Mobile Menu Toggle Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="rounded-full p-2 text-[#C4B6AE] hover:text-white bg-[#1C110D] border border-[#3A241C]"
+              className="md:hidden rounded-full p-2 text-[#C4B6AE] hover:text-white bg-white/[0.04] border border-white/[0.1] hover:border-[#FF5A1F]/50 transition-colors"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
-        </nav>
+        </div>
       </div>
 
       {/* Mobile Drawer Menu */}
@@ -132,37 +130,41 @@ export const Navbar = ({ onOpenResume }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden mt-2 mx-4 rounded-2xl glass-nav p-5 border border-[#3A241C] shadow-2xl"
+            className="md:hidden container-custom mt-2"
           >
-            <div className="flex flex-col gap-2">
-              {navLinks.map((link) => {
-                const isActive = activeSection === link.href.substring(1);
-                return (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    onClick={(e) => handleLinkClick(e, link.href)}
-                    className={`px-4 py-3 rounded-xl text-base font-medium transition-colors ${
-                      isActive
-                        ? 'bg-[#FF5A1F]/15 text-[#FF7A36] border border-[#FF5A1F]/30'
-                        : 'text-[#C4B6AE] hover:bg-[#1C110D] hover:text-white'
-                    }`}
-                  >
-                    {link.name}
-                  </a>
-                );
-              })}
+            <div className="rounded-2xl border border-[#FF5A1F]/30 backdrop-blur-2xl bg-[#07090e]/95 p-4 shadow-[0_15px_40px_rgba(0,0,0,0.9),0_0_25px_rgba(255,90,31,0.2)]">
+              <div className="grid grid-cols-3 gap-2">
+                {navLinks.map((link) => {
+                  const Icon = link.icon;
+                  const isActive = activeSection === link.href.substring(1);
+                  return (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      onClick={(e) => handleLinkClick(e, link.href)}
+                      className={`flex flex-col items-center justify-center py-2.5 px-2 rounded-xl text-xs transition-all ${
+                        isActive
+                          ? 'bg-[#FF5A1F]/15 text-[#FF7A36] border border-[#FF5A1F]/60 shadow-[0_0_15px_rgba(255,90,31,0.35)] font-semibold'
+                          : 'text-[#94A3B8] hover:bg-white/[0.04] hover:text-white'
+                      }`}
+                    >
+                      <Icon className="h-4 w-4 mb-1" />
+                      <span>{link.name}</span>
+                    </a>
+                  );
+                })}
+              </div>
 
-              <div className="pt-3 mt-2 border-t border-[#3A241C]">
+              <div className="pt-3 mt-3 border-t border-white/[0.08]">
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
                     onOpenResume();
                   }}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#1C110D] border border-[#3A241C] py-3 text-sm font-semibold text-[#F5F0EC] hover:border-[#FF5A1F]"
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#FF5A1F] to-[#FF7A36] py-2.5 text-xs font-bold text-white shadow-[0_0_20px_rgba(255,90,31,0.5)]"
                 >
-                  <Download className="h-4 w-4 text-[#FF7A36]" />
-                  <span>Download Resume</span>
+                  <Download className="h-4 w-4 text-white" />
+                  <span>Resume</span>
                 </button>
               </div>
             </div>
@@ -172,3 +174,5 @@ export const Navbar = ({ onOpenResume }) => {
     </header>
   );
 };
+
+export default Navbar;

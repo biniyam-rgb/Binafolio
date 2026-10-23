@@ -19,6 +19,51 @@
   }
 }
 
+/* =========================================================================
+   Hero Side-by-Side Row Layout (Image 1 Copy & Image 2 IDE in one row)
+   ========================================================================= */
+.hero-row-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+@media (min-width: 900px) {
+  .hero-row-layout {
+    flex-direction: row;
+    gap: 2rem;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .hero-col-left {
+    flex: 1 1 50%;
+    max-width: 580px;
+    width: 50%;
+    min-width: 0;
+  }
+
+  .hero-col-right {
+    flex: 1 1 50%;
+    max-width: 560px;
+    width: 50%;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero-row-layout {
+    gap: 3.5rem;
+  }
+}
+
+
 /* Gradients & Text */
 .text-gradient-orange {
   background: linear-gradient(135deg, #FF7A36 0%, #FF5A1F 50%, #FF9E66 100%);
@@ -276,52 +321,70 @@
   .hero-orbital-3 { width: 360px; height: 360px; }
 }
 
-/* Floating Tech Icon Badges */
-.floating-tech-badge {
-  position: absolute;
-  z-index: 20;
+.hero-ide-stage {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
-  gap: 0.625rem;
-  background: rgba(28, 17, 13, 0.92);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid var(--subtle-borders);
-  border-radius: 16px;
-  padding: 0.6rem 0.9rem;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.7);
-  transition: all 0.3s ease;
+  justify-content: center;
 }
 
-.floating-tech-badge:hover {
-  transform: translateY(-3px) scale(1.04);
+/* Floating Cyber Orbit Tech Badges - Pushed safely outward to prevent text collision */
+.cyber-orbit-badge {
+  position: absolute;
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: rgba(10, 14, 22, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  padding: 0.5rem 0.85rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.85);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.cyber-orbit-badge:hover {
+  transform: translateY(-3px) scale(1.06);
 }
 
 .badge-pos-react {
-  top: 1.5rem;
-  left: 0.5rem;
+  top: -24px;
+  left: -12px;
 }
 
 .badge-pos-laravel {
-  top: 2rem;
-  right: 0.5rem;
+  top: -24px;
+  right: -12px;
 }
 
 .badge-pos-js {
-  bottom: 5.5rem;
-  left: 0rem;
+  bottom: -24px;
+  left: -12px;
 }
 
 .badge-pos-mysql {
-  bottom: 6rem;
-  right: 0rem;
+  bottom: -24px;
+  right: -12px;
 }
 
 @media (min-width: 640px) {
-  .badge-pos-react { top: 2rem; left: 1.5rem; }
-  .badge-pos-laravel { top: 2.5rem; right: 1.5rem; }
-  .badge-pos-js { bottom: 6.5rem; left: 1rem; }
-  .badge-pos-mysql { bottom: 7rem; right: 1rem; }
+  .badge-pos-react { top: -32px; left: -36px; }
+  .badge-pos-laravel { top: -32px; right: -36px; }
+  .badge-pos-js { bottom: -32px; left: -36px; }
+  .badge-pos-mysql { bottom: -32px; right: -36px; }
+}
+
+@media (min-width: 1024px) {
+  .badge-pos-react { top: -36px; left: -44px; }
+  .badge-pos-laravel { top: -36px; right: -44px; }
+  .badge-pos-js { bottom: -36px; left: -44px; }
+  .badge-pos-mysql { bottom: -36px; right: -44px; }
 }
 
 /* =========================================================================

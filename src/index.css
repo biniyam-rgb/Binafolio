@@ -1,19 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --bg-primary: #0A0706;
-  --bg-secondary: #140C09;
-  --bg-card: #1C110D;
-  --bg-card-hover: #261611;
-  --bg-card-elevated: #221510;
+  --bg-primary: #07090e;
+  --bg-secondary: #0c1017;
+  --bg-card: #0f141d;
+  --bg-card-hover: #161c28;
+  --bg-card-elevated: #131924;
   --primary-orange: #FF5A1F;
   --bright-orange: #FF7A36;
   --burnt-orange: #7D290E;
   --main-text: #F5F0EC;
   --secondary-text: #C4B6AE;
   --muted-text: #8E7D75;
-  --subtle-borders: #3A241C;
-  --subtle-borders-hover: #5A3629;
+  --subtle-borders: rgba(255, 255, 255, 0.08);
+  --subtle-borders-hover: rgba(255, 90, 31, 0.4);
   --highlight-border: rgba(255, 90, 31, 0.45);
   --glow-orange: rgba(255, 90, 31, 0.22);
   --glow-orange-intense: rgba(255, 90, 31, 0.45);
@@ -28,7 +28,7 @@
 
 html {
   scroll-behavior: smooth;
-  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background-color: var(--bg-primary);
   color: var(--main-text);
   overflow-x: hidden;
@@ -95,6 +95,8 @@ input, textarea {
 .flex { display: flex; }
 .inline-flex { display: inline-flex; }
 .grid { display: grid; }
+.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .block { display: block; }
 .inline-block { display: inline-block; }
 .hidden { display: none; }
@@ -439,6 +441,7 @@ input, textarea {
   .lg\:flex { display: flex; }
   .lg\:grid { display: grid; }
   .lg\:hidden { display: none; }
+  .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .lg\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
   .lg\:col-span-5 { grid-column: span 5 / span 5; }
@@ -524,3 +527,45 @@ input, textarea {
 .animate-float-gentle { animation: float-gentle 5s ease-in-out infinite; }
 .animate-slow-spin { animation: slow-rotate 60s linear infinite; }
 .animate-pulse-glow { animation: pulse-glow 3.5s ease-in-out infinite; }
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.animate-blink {
+  animation: cursor-blink 0.9s step-start infinite;
+}
+
+@keyframes laser-flare {
+  0%, 100% { opacity: 0.55; transform: scaleX(0.92); }
+  50% { opacity: 1; transform: scaleX(1.08); filter: drop-shadow(0 0 12px #FF5A1F); }
+}
+.animate-laser-flare {
+  animation: laser-flare 3.5s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 16s linear infinite;
+}
+
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+.animate-bounce-subtle {
+  animation: bounce-subtle 2s ease-in-out infinite;
+}
+
+@keyframes wave {
+  0%, 100% { transform: rotate(0deg); }
+  20%, 60% { transform: rotate(14deg); }
+  40%, 80% { transform: rotate(-14deg); }
+}
+.animate-wave {
+  animation: wave 2.2s infinite ease-in-out;
+}
+
