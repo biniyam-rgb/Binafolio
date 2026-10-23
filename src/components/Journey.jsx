@@ -5,11 +5,11 @@ import { journeyData } from '../data/portfolioData';
 
 export const Journey = () => {
   return (
-    <section id="journey" className="relative py-24 sm:py-32 bg-[#0E0907]/70">
+    <section id="journey" className="relative py-12 sm:py-16 bg-[#0E0907]/70">
       <div className="container-custom relative z-10">
 
         {/* Section Header */}
-        <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
+        <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-8 sm:mb-10">
           <div className="badge-orange-pill mb-3">
             <Milestone className="h-3.5 w-3.5" />
             <span>PROGRESSION &amp; PATH</span>

@@ -34,7 +34,7 @@ export const Contact = () => {
   )}&body=${encodeURIComponent(message)}`;
 
   return (
-    <section id="contact" className="relative py-28 sm:py-36 overflow-hidden">
+    <section id="contact" className="relative py-14 sm:py-18 overflow-hidden">
       {/* Background Warm Radial Light */}
       <div 
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none"
@@ -48,7 +48,7 @@ export const Contact = () => {
       <div className="container-custom relative z-10">
 
         {/* Section Header */}
-        <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-16">
+        <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-8 sm:mb-10">
           <div className="badge-orange-pill mb-3">
             <Mail className="h-3.5 w-3.5" />
             <span>GET IN TOUCH</span>
