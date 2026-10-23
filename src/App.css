@@ -145,6 +145,142 @@
 }
 
 /* =========================================================================
+   Hero Avatar Badge Icon (Biniyam Portrait)
+   ========================================================================= */
+.hero-avatar-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.35rem 1rem 0.35rem 0.45rem;
+  border-radius: 9999px;
+  background: rgba(20, 13, 10, 0.92);
+  border: 1px solid rgba(255, 122, 54, 0.55);
+  box-shadow: 0 0 25px rgba(255, 90, 31, 0.38), inset 0 0 15px rgba(255, 90, 31, 0.16);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #F5F0EC;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-avatar-badge:hover {
+  border-color: #FF7A36;
+  box-shadow: 0 0 32px rgba(255, 90, 31, 0.55), inset 0 0 20px rgba(255, 90, 31, 0.22);
+  transform: translateY(-1px);
+}
+
+.hero-avatar-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hero-avatar-img {
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 9999px;
+  object-fit: cover;
+  border: 1.5px solid #FF7A36;
+  box-shadow: 0 0 10px rgba(255, 90, 31, 0.65), 0 0 18px rgba(255, 122, 54, 0.35);
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.hero-avatar-badge:hover .hero-avatar-img {
+  transform: scale(1.08);
+}
+
+.hero-avatar-status {
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background-color: #10B981;
+  border: 1.5px solid #07090e;
+  box-shadow: 0 0 6px #10B981;
+}
+
+.hero-avatar-status-ping {
+  position: absolute;
+  inset: -1px;
+  border-radius: 9999px;
+  background-color: #10B981;
+  opacity: 0.75;
+  animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.hero-avatar-wrapper {
+  cursor: zoom-in;
+}
+
+.hero-avatar-badge {
+  cursor: pointer;
+}
+
+/* =========================================================================
+   Fullscreen Photo Lightbox Modal
+   ========================================================================= */
+.photo-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.photo-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 7, 12, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.photo-modal-card {
+  position: relative;
+  z-index: 10;
+  max-width: 460px;
+  width: 100%;
+  border-radius: 28px;
+  background: #0A0E17;
+  border: 1.5px solid rgba(255, 122, 54, 0.55);
+  box-shadow: 
+    0 30px 80px -15px rgba(0, 0, 0, 0.95), 
+    0 0 50px rgba(255, 90, 31, 0.35), 
+    0 0 25px rgba(0, 216, 255, 0.2);
+  padding: 1.25rem;
+  overflow: hidden;
+}
+
+.photo-modal-close-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #F5F0EC;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.photo-modal-close-btn:hover {
+  background: rgba(255, 90, 31, 0.3) !important;
+  border-color: #FF7A36 !important;
+  color: #FFFFFF !important;
+  transform: rotate(90deg) scale(1.05);
+}
+
+/* =========================================================================
    Modern Hero Action Buttons (Explore My Work & Let's Connect)
    ========================================================================= */
 .hero-cta-group {
