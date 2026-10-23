@@ -86,7 +86,7 @@ export const Hero = () => {
   }, [isPhotoModalOpen]);
 
   return (
-    <section id="home" className="hero-wrapper relative min-h-screen flex flex-col justify-between pt-32 sm:pt-36 pb-12 overflow-hidden">
+    <section id="home" className="hero-wrapper relative flex flex-col justify-between pt-20 sm:pt-24 pb-4 overflow-hidden">
       <div className="container-custom relative z-10 w-full my-auto">
         
         {/* =========================================================================
@@ -742,7 +742,7 @@ export const Hero = () => {
         {/* =========================================================================
             5. FOOTER: Scroll Indicator
             ========================================================================= */}
-        <div className="mt-14 sm:mt-18 flex flex-col items-center justify-center text-center select-none z-20">
+        <div className="mt-6 sm:mt-8 flex flex-col items-center justify-center text-center select-none z-20">
           <a
             href="#about"
             className="group flex flex-col items-center gap-3 transition-colors cursor-pointer"

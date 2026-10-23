@@ -13,11 +13,11 @@ export const About = () => {
   };
 
   return (
-    <section id="about" className="relative py-24 sm:py-32 overflow-hidden">
+    <section id="about" className="relative py-12 sm:py-16 overflow-hidden">
       <div className="container-custom relative z-10">
 
         {/* Section Header */}
-        <div className="flex flex-col items-start mb-16">
+        <div className="flex flex-col items-start mb-8 sm:mb-10">
           <div className="badge-orange-pill mb-3">
             <Sparkles className="h-3.5 w-3.5" />
             <span>BACKGROUND &amp; ASPIRATIONS</span>
