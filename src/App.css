@@ -74,14 +74,14 @@
   padding: 0.5rem 0.75rem;
   border-radius: 9999px;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  color: #94A3B8;
+  color: #FFFFFF;
   text-decoration: none;
   cursor: pointer;
 }
 
 .nav-link-btn:hover {
   color: #FFFFFF;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .nav-link-btn.active {
@@ -92,20 +92,23 @@
 }
 
 .nav-link-icon {
-  width: 1rem;
-  height: 1rem;
+  width: 1.05rem;
+  height: 1.05rem;
   flex-shrink: 0;
-  transition: transform 0.2s ease, color 0.2s ease;
+  color: #FFFFFF;
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.55));
+  transition: transform 0.2s ease, color 0.2s ease, filter 0.2s ease;
 }
 
 .nav-link-btn:hover .nav-link-icon {
-  transform: scale(1.12);
-  color: #FF7A36;
+  transform: scale(1.15);
+  color: #FF9E66;
+  filter: drop-shadow(0 0 8px #FF5A1F);
 }
 
 .nav-link-btn.active .nav-link-icon {
   color: #FF7A36;
-  filter: drop-shadow(0 0 6px #FF5A1F);
+  filter: drop-shadow(0 0 8px #FF5A1F) drop-shadow(0 0 14px rgba(255, 122, 54, 0.6));
 }
 
 /* The expanding text label: only displayed on hover */
@@ -228,11 +231,11 @@
 .photo-modal-overlay {
   position: fixed;
   inset: 0;
-  z-index: 99999;
+  z-index: 99990;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 5.5rem 1rem 1.5rem 1rem;
 }
 
 .photo-modal-backdrop {
@@ -964,6 +967,7 @@
   .about-grid-layout {
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
+    align-items: stretch;
   }
 }
 
@@ -1065,3 +1069,5 @@
   border-color: var(--primary-orange);
   box-shadow: 0 0 15px -3px rgba(255, 90, 31, 0.3);
 }
+
+

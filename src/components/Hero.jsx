@@ -61,18 +61,30 @@ const MySqlDolphinIcon = ({ className = "" }) => (
   </div>
 );
 
-export const Hero = () => {
+export const Hero = ({ 
+  isPhotoModalOpen: externalIsPhotoModalOpen, 
+  setIsPhotoModalOpen: externalSetIsPhotoModalOpen 
+} = {}) => {
   const [activeTab, setActiveTab] = useState('app'); // 'app' | 'api'
   const [isCardHovered, setIsCardHovered] = useState(false);
-  const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
+  const [internalIsPhotoModalOpen, setInternalIsPhotoModalOpen] = useState(false);
 
-  // Keyboard navigation & body scroll lock for photo lightbox
+  const isPhotoModalOpen = externalIsPhotoModalOpen !== undefined ? externalIsPhotoModalOpen : internalIsPhotoModalOpen;
+  const setIsPhotoModalOpen = externalSetIsPhotoModalOpen !== undefined ? externalSetIsPhotoModalOpen : setInternalIsPhotoModalOpen;
+
+  // Keyboard navigation, custom event & body scroll lock for photo lightbox
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
         setIsPhotoModalOpen(false);
       }
     };
+    const handleCloseModals = () => {
+      setIsPhotoModalOpen(false);
+    };
+
+    window.addEventListener('close-modals', handleCloseModals);
+
     if (isPhotoModalOpen) {
       window.addEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'hidden';
@@ -81,9 +93,10 @@ export const Hero = () => {
     }
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('close-modals', handleCloseModals);
       document.body.style.overflow = '';
     };
-  }, [isPhotoModalOpen]);
+  }, [isPhotoModalOpen, setIsPhotoModalOpen]);
 
   return (
     <section id="home" className="hero-wrapper relative flex flex-col justify-between pt-20 sm:pt-24 pb-4 overflow-hidden">

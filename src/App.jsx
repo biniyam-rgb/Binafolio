@@ -13,6 +13,13 @@ import './App.css';
 
 export function App() {
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
+  const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
+
+  const handleNavClick = () => {
+    setIsPhotoModalOpen(false);
+    setIsResumeModalOpen(false);
+    window.dispatchEvent(new CustomEvent('close-modals'));
+  };
 
   return (
     <div className="relative min-h-screen bg-[#07090e] text-[#F5F0EC] overflow-hidden selection:bg-[#FF5A1F] selection:text-white">
@@ -20,11 +27,20 @@ export function App() {
       <BackgroundGlows />
 
       {/* Navigation bar */}
-      <Navbar onOpenResume={() => setIsResumeModalOpen(true)} />
+      <Navbar 
+        onOpenResume={() => {
+          setIsPhotoModalOpen(false);
+          setIsResumeModalOpen(true);
+        }} 
+        onNavClick={handleNavClick}
+      />
 
       {/* Main Content Sections */}
       <main className="relative z-10">
-        <Hero />
+        <Hero 
+          isPhotoModalOpen={isPhotoModalOpen}
+          setIsPhotoModalOpen={setIsPhotoModalOpen}
+        />
         <About />
         <Skills />
         <Projects />
