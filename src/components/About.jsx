@@ -1,17 +1,8 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Code, Sparkles, Terminal, Copy, Check, BookOpen, Layers, Target, Compass } from 'lucide-react';
-import { personalData, developerObjectSnippet } from '../data/portfolioData';
+import React from 'react';
+import { Sparkles, BookOpen, Layers, Target, Compass } from 'lucide-react';
+import { personalData } from '../data/portfolioData';
 
 export const About = () => {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopyCode = () => {
-    navigator.clipboard.writeText(developerObjectSnippet);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
   return (
     <section id="about" className="relative py-12 sm:py-16 overflow-hidden">
       <div className="container-custom relative z-10">
@@ -46,7 +37,7 @@ export const About = () => {
                   I'm <strong className="text-[#F5F0EC]">{personalData.name}</strong>, currently pursuing my undergraduate degree in Software Engineering at <strong className="text-[#FF7A36]">{personalData.university}</strong>.
                 </p>
                 <p>
-                  My journey in computer science began with curiosity about how the web connects people and systems. Over time, that curiosity evolved into a dedicated passion for engineering full-stack applications — bridging creative user interfaces with secure, reliable server backends.
+                  My journey in software engineering began with curiosity about how the web connects people and systems. Over time, that curiosity evolved into a dedicated passion for engineering full-stack applications — bridging creative user interfaces with secure, reliable server backends.
                 </p>
                 <p>
                   I primarily work with <strong className="text-[#F5F0EC]">React</strong> on the client side and <strong className="text-[#F5F0EC]">Laravel</strong> with <strong className="text-[#F5F0EC]">PHP</strong> and <strong className="text-[#F5F0EC]">MySQL</strong> on the backend. I enjoy understanding every layer of a project, from relational database schema design to responsive animations.
@@ -66,6 +57,30 @@ export const About = () => {
                       {personalData.careerGoal}
                     </p>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT COLUMN: Workspace Setup & Key Pillars */}
+          <div className="space-y-6">
+            
+            {/* Workspace Illustration with Glow */}
+            <div className="portfolio-card overflow-hidden group border-[#3A241C] relative">
+              <div className="aspect-video w-full overflow-hidden bg-[#140C09] relative">
+                <img
+                  src="/assets/workspace.jpg"
+                  alt="Software Developer Workspace Setup"
+                  className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#140C09] via-transparent to-transparent opacity-80" />
+                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs">
+                  <span className="rounded-full bg-[#0A0706]/85 backdrop-blur-md px-3 py-1 font-mono text-[#FF7A36] border border-[#3A241C]">
+                    Workspace // Focus &amp; Coding
+                  </span>
+                  <span className="text-[#C4B6AE] font-mono text-[11px] hidden sm:inline">
+                    Kombolcha Campus
+                  </span>
                 </div>
               </div>
             </div>
@@ -102,79 +117,6 @@ export const About = () => {
                 </p>
               </div>
             </div>
-          </div>
-
-          {/* RIGHT COLUMN: Workspace Illustration + Interactive Code Panel */}
-          <div className="space-y-6">
-            
-            {/* Workspace Illustration with Glow */}
-            <div className="portfolio-card overflow-hidden group border-[#3A241C] relative">
-              <div className="aspect-video w-full overflow-hidden bg-[#140C09] relative">
-                <img
-                  src="/assets/workspace.jpg"
-                  alt="Software Developer Workspace Setup"
-                  className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#140C09] via-transparent to-transparent opacity-80" />
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs">
-                  <span className="rounded-full bg-[#0A0706]/85 backdrop-blur-md px-3 py-1 font-mono text-[#FF7A36] border border-[#3A241C]">
-                    Workspace // Focus &amp; Coding
-                  </span>
-                  <span className="text-[#C4B6AE] font-mono text-[11px] hidden sm:inline">
-                    Kombolcha Campus
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Interactive Terminal / Code Panel */}
-            <div className="portfolio-card bg-[#0D0806] border-[#3A241C]">
-              {/* Terminal Header */}
-              <div className="flex items-center justify-between px-4 py-3 border-b border-[#3A241C] bg-[#140C09]/90">
-                <div className="flex items-center gap-2">
-                  <span className="h-3 w-3 rounded-full bg-[#FF5A1F]/70" />
-                  <span className="h-3 w-3 rounded-full bg-[#FF7A36]/50" />
-                  <span className="h-3 w-3 rounded-full bg-[#3A241C]" />
-                  <span className="ml-2 font-mono text-xs text-[#C4B6AE]">developer.config.json</span>
-                </div>
-                <button
-                  onClick={handleCopyCode}
-                  className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-mono text-[#8E7D75] hover:text-[#F5F0EC] hover:bg-[#1C110D] transition-colors"
-                  title="Copy JSON configuration"
-                >
-                  {copied ? (
-                    <>
-                      <Check className="h-3.5 w-3.5 text-[#FF5A1F]" />
-                      <span className="text-[#FF5A1F]">Copied</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="h-3.5 w-3.5" />
-                      <span>Copy</span>
-                    </>
-                  )}
-                </button>
-              </div>
-
-              {/* Code Content */}
-              <div className="p-4 sm:p-5 overflow-x-auto text-xs sm:text-sm font-mono-code text-[#C4B6AE] leading-relaxed">
-                <pre className="text-xs sm:text-[13px]">
-                  <code>
-                    <span className="text-[#8E7D75]">&#123;</span>{'\n'}
-                    {'  '}<span className="text-[#FF7A36]">"developer"</span>: <span className="text-[#8E7D75]">&#123;</span>{'\n'}
-                    {'    '}<span className="text-[#FF7A36]">"name"</span>: <span className="text-[#F5F0EC]">"{personalData.name}"</span>,{'\n'}
-                    {'    '}<span className="text-[#FF7A36]">"brand"</span>: <span className="text-[#F5F0EC]">"{personalData.brandName}"</span>,{'\n'}
-                    {'    '}<span className="text-[#FF7A36]">"status"</span>: <span className="text-[#61DAFB]">"Software Engineering Student"</span>,{'\n'}
-                    {'    '}<span className="text-[#FF7A36]">"institution"</span>: <span className="text-[#F5F0EC]">"{personalData.university}"</span>,{'\n'}
-                    {'    '}<span className="text-[#FF7A36]">"core_stack"</span>: [<span className="text-[#FF5A1F]">"React"</span>, <span className="text-[#FF2D20]">"Laravel"</span>, <span className="text-[#777BB4]">"PHP"</span>, <span className="text-[#00758F]">"MySQL"</span>],{'\n'}
-                    {'    '}<span className="text-[#FF7A36]">"version_control"</span>: [<span className="text-[#F05032]">"Git"</span>, <span className="text-[#F5F0EC]">"GitHub"</span>],{'\n'}
-                    {'    '}<span className="text-[#FF7A36]">"ambition"</span>: <span className="text-[#FF9E66]">"Engineer useful, impactful web systems"</span>{'\n'}
-                    {'  '}<span className="text-[#8E7D75]">&#125;</span>{'\n'}
-                    <span className="text-[#8E7D75]">&#125;</span>
-                  </code>
-                </pre>
-              </div>
-            </div>
 
           </div>
 
@@ -184,3 +126,5 @@ export const About = () => {
     </section>
   );
 };
+
+export default About;
