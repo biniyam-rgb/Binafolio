@@ -79,14 +79,31 @@ export const Hero = () => {
               ========================================================================= */}
           <div className="hero-col-left flex flex-col items-start text-left z-20">
             
-            {/* 1. Luminous orange-amber outlined badge with waving hand */}
-            <div className="flex items-center gap-3 mb-5">
+            {/* 1. Luminous orange-amber outlined badge with Biniyam's avatar photo icon */}
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="flex items-center gap-3 mb-5"
+            >
               <span className="h-2.5 w-2.5 rounded-full bg-[#FF5A1F] shadow-[0_0_12px_#FF5A1F,0_0_22px_#FF7A36] shrink-0 animate-pulse" />
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#140D0A]/90 border border-[#FF7A36]/60 shadow-[0_0_25px_rgba(255,90,31,0.38),inset_0_0_15px_rgba(255,90,31,0.18)] text-xs sm:text-sm font-medium text-[#F5F0EC] backdrop-blur-md">
-                <span className="text-base select-none inline-block animate-wave origin-[70%_70%]">👋</span>
+              <div className="hero-avatar-badge cursor-pointer">
+                {/* Biniyam Portrait Icon */}
+                <div className="hero-avatar-wrapper">
+                  <img 
+                    src="/assets/character.jpg" 
+                    alt="Biniyam Gebrie" 
+                    className="hero-avatar-img" 
+                  />
+                  {/* Live Active Status Indicator Beacon */}
+                  <span className="hero-avatar-status">
+                    <span className="hero-avatar-status-ping" />
+                  </span>
+                </div>
                 <span>Hey, I'm <strong className="font-extrabold text-white tracking-wide drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">Biniyam</strong></span>
+                <span className="text-base select-none inline-block animate-wave origin-[70%_70%]">👋</span>
               </div>
-            </div>
+            </motion.div>
 
             {/* 2. Headline: Software \n Developer| */}
             <div className="mb-4">
