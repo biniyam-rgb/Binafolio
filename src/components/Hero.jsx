@@ -63,6 +63,7 @@ const MySqlDolphinIcon = ({ className = "" }) => (
 
 export const Hero = () => {
   const [activeTab, setActiveTab] = useState('app'); // 'app' | 'api'
+  const [isCardHovered, setIsCardHovered] = useState(false);
 
   return (
     <section id="home" className="hero-wrapper relative min-h-screen flex flex-col justify-between pt-32 sm:pt-36 pb-12 overflow-hidden">
@@ -205,43 +206,47 @@ export const Hero = () => {
               }}
             >
 
-              {/* Dual-Tone Ambient Backlight Glow behind Editor (Orange & Luminous Teal/Cyan) with Delayed Blossom */}
+              {/* Dual-Tone Ambient Backlight Glow behind Editor (Orange & Luminous Teal/Cyan) with Delayed Blossom & Reactive Bloom */}
               <motion.div 
                 initial={{ opacity: 0, scale: 0.7 }}
-                animate={{ opacity: 0.85, scale: 1 }}
-                transition={{ duration: 1.3, delay: 0.35, ease: 'easeOut' }}
+                animate={{ opacity: isCardHovered ? 1 : 0.85, scale: isCardHovered ? 1.14 : 1 }}
+                transition={{ duration: 0.45, ease: 'easeOut' }}
                 className="pointer-events-none"
                 style={{
                   position: 'absolute',
                   inset: '-2.5rem',
                   borderRadius: '40px',
                   zIndex: -10,
-                  background: 'radial-gradient(circle at 35% 35%, rgba(255, 90, 31, 0.42) 0%, rgba(255, 122, 54, 0.16) 45%, transparent 70%)',
+                  background: 'radial-gradient(circle at 35% 35%, rgba(255, 90, 31, 0.48) 0%, rgba(255, 122, 54, 0.18) 45%, transparent 70%)',
                   filter: 'blur(60px)',
                   transform: 'translateZ(0)'
                 }}
               />
               <motion.div 
                 initial={{ opacity: 0, scale: 0.7 }}
-                animate={{ opacity: 0.75, scale: 1 }}
-                transition={{ duration: 1.3, delay: 0.4, ease: 'easeOut' }}
+                animate={{ opacity: isCardHovered ? 0.95 : 0.75, scale: isCardHovered ? 1.12 : 1 }}
+                transition={{ duration: 0.45, ease: 'easeOut' }}
                 className="pointer-events-none"
                 style={{
                   position: 'absolute',
                   inset: '-3rem',
                   borderRadius: '50px',
                   zIndex: -10,
-                  background: 'radial-gradient(circle at 80% 25%, rgba(0, 216, 255, 0.3) 0%, transparent 55%), radial-gradient(circle at 20% 85%, rgba(0, 216, 255, 0.18) 0%, transparent 50%)',
+                  background: 'radial-gradient(circle at 80% 25%, rgba(0, 216, 255, 0.35) 0%, transparent 55%), radial-gradient(circle at 20% 85%, rgba(0, 216, 255, 0.22) 0%, transparent 50%)',
                   filter: 'blur(55px)',
                   transform: 'translateZ(0)'
                 }}
               />
 
-              {/* ================= ELLIPTICAL ORBITAL RING SVG WITH DELAYED ENTRANCE ================= */}
+              {/* ================= ELLIPTICAL ORBITAL RING SVG WITH DELAYED ENTRANCE & HOVER REACTION ================= */}
               <motion.svg 
                 initial={{ opacity: 0, scale: 0.75, rotate: -35 }}
-                animate={{ opacity: 1, scale: 1, rotate: -15 }}
-                transition={{ duration: 1.2, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                animate={{ 
+                  opacity: 1, 
+                  scale: isCardHovered ? 1.04 : 1, 
+                  rotate: isCardHovered ? -12 : -15 
+                }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className="pointer-events-none select-none drop-shadow-[0_0_25px_rgba(255,90,31,0.65)]"
                 style={{
                   position: 'absolute',
@@ -409,16 +414,26 @@ export const Hero = () => {
                 <MySqlDolphinIcon />
               </motion.div>
 
-              {/* ================= THE 3D-ANGLED ISOMETRIC GLASS TERMINAL (WITH DELAYED ENTRANCE) ================= */}
+              {/* ================= THE 3D-ANGLED ISOMETRIC GLASS TERMINAL (WITH DELAYED ENTRANCE & 3D HOVER ANIMATION) ================= */}
               <motion.div
                 initial={{ opacity: 0, y: 55, scale: 0.9, rotateY: -22, rotateX: 18, rotateZ: 3 }}
                 animate={{ opacity: 1, y: 0, scale: 1, rotateY: -12, rotateX: 8, rotateZ: 1 }}
+                whileHover={{
+                  y: -14,
+                  scale: 1.04,
+                  rotateY: -2,
+                  rotateX: 4,
+                  rotateZ: 0,
+                  transition: { duration: 0.38, ease: [0.16, 1, 0.3, 1] }
+                }}
+                onMouseEnter={() => setIsCardHovered(true)}
+                onMouseLeave={() => setIsCardHovered(false)}
                 transition={{ 
                   duration: 1.1, 
                   delay: 0.48, 
                   ease: [0.16, 1, 0.3, 1] 
                 }}
-                className="relative z-20 w-full rounded-2xl overflow-hidden bg-[#070a10]/95 backdrop-blur-2xl border-r border-b border-white/[0.08]"
+                className="code-terminal-card relative z-20 w-full rounded-2xl overflow-hidden bg-[#070a10]/95 backdrop-blur-2xl border-r border-b border-white/[0.08]"
                 style={{
                   width: '100%',
                   maxWidth: '480px',
@@ -433,21 +448,30 @@ export const Hero = () => {
                   `,
                 }}
               >
+                {/* Diagonal Specular Sheen (Sweeps smoothly across glass on hover) */}
+                <div className="code-terminal-sheen" />
+
                 {/* Luminous Orange-Amber Laser Beams fiercely bordering left and top edges */}
-                <div className="absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-[#FFE8D6] via-[#FF5A1F] to-transparent shadow-[0_0_18px_#FF5A1F,0_0_30px_#FF7A36] pointer-events-none z-30" />
-                <div className="absolute top-0 left-0 bottom-0 w-[2.5px] bg-gradient-to-b from-[#FFE8D6] via-[#FF5A1F] to-transparent shadow-[0_0_18px_#FF5A1F,0_0_30px_#FF7A36] pointer-events-none z-30" />
+                <div className="code-laser-top absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-[#FFE8D6] via-[#FF5A1F] to-transparent shadow-[0_0_18px_#FF5A1F,0_0_30px_#FF7A36] pointer-events-none z-30 transition-all duration-300" />
+                <div className="code-laser-left absolute top-0 left-0 bottom-0 w-[2.5px] bg-gradient-to-b from-[#FFE8D6] via-[#FF5A1F] to-transparent shadow-[0_0_18px_#FF5A1F,0_0_30px_#FF7A36] pointer-events-none z-30 transition-all duration-300" />
 
                 {/* Intense Vertex Halo at top-left corner */}
-                <div className="absolute -top-1.5 -left-1.5 w-6 h-6 rounded-full bg-[#FFE8D6] blur-[3.5px] shadow-[0_0_25px_#FF5A1F,0_0_45px_#FF7A36] pointer-events-none z-30 opacity-90 animate-pulse" />
+                <div className="code-corner-halo absolute -top-1.5 -left-1.5 w-6 h-6 rounded-full bg-[#FFE8D6] blur-[3.5px] shadow-[0_0_25px_#FF5A1F,0_0_45px_#FF7A36] pointer-events-none z-30 opacity-90 animate-pulse transition-all duration-300" />
 
                 {/* IDE Header: macOS Window Controls & Tabs */}
-                <div className="flex items-center justify-between px-4 sm:px-5 py-3 bg-[#05070c] border-b border-white/[0.08] select-none">
+                <div className="flex items-center justify-between px-4 sm:px-5 py-3 bg-[#05070c] border-b border-white/[0.08] select-none relative z-20">
                   
-                  {/* Left: Red, Yellow, Green Window Dots */}
+                  {/* Left: Red, Yellow, Green Window Dots with Hover Glyphs */}
                   <div className="flex items-center gap-2">
-                    <span className="h-3 w-3 rounded-full bg-[#FF5F56] shadow-[0_0_8px_#FF5F56] border border-[#FF5F56]/60 cursor-pointer hover:opacity-85 transition-opacity" />
-                    <span className="h-3 w-3 rounded-full bg-[#FFBD2E] shadow-[0_0_8px_#FFBD2E] border border-[#FFBD2E]/60 cursor-pointer hover:opacity-85 transition-opacity" />
-                    <span className="h-3 w-3 rounded-full bg-[#27C93F] shadow-[0_0_8px_#27C93F] border border-[#27C93F]/60 cursor-pointer hover:opacity-85 transition-opacity" />
+                    <span className="code-window-dot bg-[#FF5F56] shadow-[0_0_8px_#FF5F56] border border-[#FF5F56]/60 cursor-pointer">
+                      <span className="code-window-dot-icon">×</span>
+                    </span>
+                    <span className="code-window-dot bg-[#FFBD2E] shadow-[0_0_8px_#FFBD2E] border border-[#FFBD2E]/60 cursor-pointer">
+                      <span className="code-window-dot-icon">–</span>
+                    </span>
+                    <span className="code-window-dot bg-[#27C93F] shadow-[0_0_8px_#27C93F] border border-[#27C93F]/60 cursor-pointer">
+                      <span className="code-window-dot-icon">+</span>
+                    </span>
                   </div>
 
                   {/* Center Tabs: App.jsx (Active) & api.php (Inactive) */}
@@ -461,7 +485,7 @@ export const Hero = () => {
                           : 'text-[#64748B] hover:text-[#94A3B8] hover:bg-white/[0.04]'
                       }`}
                     >
-                      <ReactIcon size={14} className="text-[#00D8FF] drop-shadow-[0_0_8px_#00D8FF] animate-spin-slow" />
+                      <ReactIcon size={14} className="code-react-atom text-[#00D8FF] drop-shadow-[0_0_8px_#00D8FF] animate-spin-slow" />
                       <span className="text-white drop-shadow-[0_0_6px_rgba(255,255,255,0.4)]">App.jsx</span>
                       <X className="h-3 w-3 ml-0.5 text-[#00D8FF]/70 hover:text-white" />
                     </button>
@@ -489,7 +513,7 @@ export const Hero = () => {
                 </div>
 
                 {/* IDE Code Editor Body with Spacious Layout & Clear Gray Line Numbers 1-7 */}
-                <div className="p-5 sm:p-6 font-mono text-xs sm:text-[13px] leading-[2.1] overflow-x-auto min-h-[220px] flex flex-col justify-center">
+                <div className="p-5 sm:p-6 font-mono text-xs sm:text-[13px] leading-[2.1] overflow-x-auto min-h-[220px] flex flex-col justify-center relative z-20">
                   <AnimatePresence mode="wait">
                     {activeTab === 'app' ? (
                       <motion.div
@@ -533,8 +557,8 @@ export const Hero = () => {
                           </span>
                         </div>
 
-                        {/* Line 4 */}
-                        <div className="flex items-baseline">
+                        {/* Line 4 - Active Highlighted Line on Hover */}
+                        <div className="flex items-baseline code-line-active px-1.5 -mx-1.5 rounded transition-colors duration-200">
                           <span className="w-8 shrink-0 select-none text-[#64748B] font-mono text-left font-semibold">4</span>
                           <span className="whitespace-pre pl-5">
                             <span className="text-[#38BDF8]">stack</span>
@@ -567,11 +591,12 @@ export const Hero = () => {
                           </span>
                         </div>
 
-                        {/* Line 7 */}
+                        {/* Line 7 with Pulsing Cyan Terminal Cursor */}
                         <div className="flex items-baseline">
                           <span className="w-8 shrink-0 select-none text-[#64748B] font-mono text-left font-semibold">7</span>
                           <span className="whitespace-pre pl-2">
                             <span className="text-[#FFB37C] font-medium">&#125;;</span>
+                            <span className="code-terminal-cursor" />
                           </span>
                         </div>
                       </motion.div>
@@ -623,8 +648,8 @@ export const Hero = () => {
                           </span>
                         </div>
 
-                        {/* Line 4 */}
-                        <div className="flex items-baseline">
+                        {/* Line 4 - Active Highlighted Line on Hover */}
+                        <div className="flex items-baseline code-line-active px-1.5 -mx-1.5 rounded transition-colors duration-200">
                           <span className="w-8 shrink-0 select-none text-[#64748B] font-mono text-left font-semibold">4</span>
                           <span className="whitespace-pre pl-8">
                             <span className="text-[#FB923C] font-semibold">'focus'</span>{' '}
@@ -649,11 +674,12 @@ export const Hero = () => {
                           </span>
                         </div>
 
-                        {/* Line 7 */}
+                        {/* Line 7 with Pulsing Cyan Terminal Cursor */}
                         <div className="flex items-baseline">
                           <span className="w-8 shrink-0 select-none text-[#64748B] font-mono text-left font-semibold">7</span>
                           <span className="whitespace-pre pl-2">
                             <span className="text-[#64748B]">// Ready for production</span>
+                            <span className="code-terminal-cursor" />
                           </span>
                         </div>
                       </motion.div>

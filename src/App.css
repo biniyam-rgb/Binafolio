@@ -370,6 +370,122 @@
   box-shadow: 0 0 6px #FF5A1F;
 }
 
+/* =========================================================================
+   3D Code Container Card Hover Animations & Interactive Effects
+   ========================================================================= */
+.code-terminal-card {
+  position: relative;
+  cursor: pointer;
+  transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+  will-change: transform, box-shadow;
+}
+
+/* Hyper-glow box-shadow and brightened top-left laser edges on hover */
+.code-terminal-card:hover {
+  border-top-color: #FFA066 !important;
+  border-left-color: #FFA066 !important;
+  box-shadow: 
+    -18px -18px 65px 0px rgba(255, 90, 31, 0.85),
+    -6px -6px 28px 2px rgba(255, 122, 54, 0.95),
+    0 45px 95px -10px rgba(0, 0, 0, 0.98),
+    0 0 65px rgba(0, 216, 255, 0.38) !important;
+}
+
+/* Diagonal glass sheen reflection that sweeps smoothly across card on hover */
+.code-terminal-sheen {
+  position: absolute;
+  top: 0;
+  left: -160%;
+  width: 160%;
+  height: 100%;
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.03) 40%,
+    rgba(255, 122, 54, 0.16) 50%,
+    rgba(255, 255, 255, 0.08) 56%,
+    transparent 75%
+  );
+  transform: skewX(-22deg);
+  transition: left 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 25;
+}
+
+.code-terminal-card:hover .code-terminal-sheen {
+  left: 160%;
+}
+
+/* Laser edge beams accelerate brightness on hover */
+.code-terminal-card:hover .code-laser-top {
+  filter: brightness(1.35) drop-shadow(0 0 10px #FF5A1F);
+}
+
+.code-terminal-card:hover .code-laser-left {
+  filter: brightness(1.35) drop-shadow(0 0 10px #FF5A1F);
+}
+
+.code-terminal-card:hover .code-corner-halo {
+  transform: scale(1.4);
+  filter: brightness(1.4) drop-shadow(0 0 18px #FF5A1F);
+}
+
+/* macOS Window dots show subtle action glyphs on card hover */
+.code-window-dot {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 9999px;
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.7);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  user-select: none;
+}
+
+.code-window-dot-icon {
+  opacity: 0;
+  transform: scale(0.6);
+  transition: all 0.2s ease;
+}
+
+.code-terminal-card:hover .code-window-dot-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Line highlight on stack definition when hovered */
+.code-terminal-card:hover .code-line-active {
+  background: rgba(255, 90, 31, 0.09);
+  box-shadow: inset 2px 0 0 #FF7A36;
+}
+
+/* Interactive blinking terminal cursor */
+.code-terminal-cursor {
+  display: inline-block;
+  width: 7px;
+  height: 14px;
+  background: #00D8FF;
+  box-shadow: 0 0 8px #00D8FF, 0 0 14px rgba(0, 216, 255, 0.85);
+  margin-left: 6px;
+  vertical-align: middle;
+  animation: terminal-cursor-blink 1s steps(2, start) infinite;
+}
+
+@keyframes terminal-cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* React Atom fast spin on hover */
+.code-terminal-card:hover .code-react-atom {
+  animation: spin-slow 2.8s linear infinite !important;
+}
+
 
 
 
