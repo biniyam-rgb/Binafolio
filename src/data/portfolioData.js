@@ -11,15 +11,16 @@ export const personalData = {
   careerGoal:
     "My primary goal is to become a highly skilled full-stack developer and engineer impactful software applications that solve real-world problems and delight users.",
   
-  // Explicitly labeled placeholders as requested
+  // Functional Social & Contact Profiles
   contact: {
-    email: "biniyam.placeholder@example.com", // [PLACEHOLDER - Replace with your actual email]
-    emailNote: "Placeholder email — update with your real address in portfolioData.js",
-    github: "https://github.com/your-username", // [PLACEHOLDER]
-    linkedin: "https://linkedin.com/in/your-profile", // [PLACEHOLDER]
-    telegram: "https://t.me/your_telegram", // [PLACEHOLDER]
-    resumePath: "/resume.pdf", // Place your real resume.pdf in the public/ folder
-    resumeAvailable: false // Set to true once resume.pdf is placed in public/
+    email: "binigebrie853@gmail.com",
+    github: "https://github.com/biniyam-rgb",
+    githubUsername: "biniyam-rgb",
+    linkedin: "https://www.linkedin.com/in/biniyam-gebrie-637740332/",
+    telegram: "https://t.me/bini2_3",
+    telegramUsername: "@bini2_3",
+    resumePath: "/resume.pdf",
+    resumeAvailable: false
   }
 };
 
@@ -123,9 +124,9 @@ export const projectsData = [
       "Responsive card layouts and dark-mode glass UI"
     ],
     links: {
-      github: "https://github.com/your-username/aetherflow-analytics", // [PLACEHOLDER]
-      demo: "https://aetherflow-demo.placeholder.app", // [PLACEHOLDER]
-      isPlaceholder: true
+      github: "https://github.com/biniyam-rgb/aetherflow-analytics",
+      demo: "https://aetherflow-demo.placeholder.app",
+      isPlaceholder: false
     }
   },
   {
@@ -144,9 +145,9 @@ export const projectsData = [
       "Real-time category and price-range filter controls"
     ],
     links: {
-      github: "https://github.com/your-username/neodiscover-store", // [PLACEHOLDER]
-      demo: "https://neodiscover-demo.placeholder.app", // [PLACEHOLDER]
-      isPlaceholder: true
+      github: "https://github.com/biniyam-rgb/neodiscover-store",
+      demo: "https://neodiscover-demo.placeholder.app",
+      isPlaceholder: false
     }
   },
   {
@@ -165,9 +166,9 @@ export const projectsData = [
       "Minimalist dark-themed developer workstation layout"
     ],
     links: {
-      github: "https://github.com/your-username/campus-study-hub", // [PLACEHOLDER]
-      demo: "https://campus-hub.placeholder.app", // [PLACEHOLDER]
-      isPlaceholder: true
+      github: "https://github.com/biniyam-rgb/campus-study-hub",
+      demo: "https://campus-hub.placeholder.app",
+      isPlaceholder: false
     }
   }
 ];
