@@ -182,7 +182,7 @@ export const Skills = () => {
           className="skills-grid-layout"
         >
           <AnimatePresence>
-            {filteredSkills.map((skill, index) => {
+            {filteredSkills.map((skill) => {
               const IconComponent = TechIconMap[skill.id];
               const theme = skillThemeMap[skill.id] || {
                 border: 'rgba(255, 90, 31, 0.4)',
@@ -241,15 +241,6 @@ export const Skills = () => {
                       boxShadow: `0 0 14px ${theme.subheadColor}`
                     }}
                   />
-
-                  {/* 5. Terminal Tech Index Indicator (e.g. // 01) at top-right */}
-                  <div 
-                    className="absolute top-3.5 right-4 text-[10px] font-mono tracking-wider opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-1 group-hover:translate-x-0 select-none flex items-center gap-1 font-bold pointer-events-none"
-                    style={{ color: theme.subheadColor }}
-                  >
-                    <span className="opacity-60">//</span>
-                    <span className="text-white/70">0{index + 1}</span>
-                  </div>
 
                   <div>
                     {/* Top Row: Icon squircle on left, Badge pill on right */}
