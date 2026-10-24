@@ -184,7 +184,7 @@ export const journeyData = [
       "Engaging deeply with core computer science and engineering disciplines: Object-Oriented Programming, Data Structures & Algorithms, Database Systems, Software Architecture, and System Analysis.",
     focusPoints: [
       "Mastering software design principles & architectural design",
-      "Deepening algorithmic thinking & problem solving",
+      "Deepening algorithmic thinking & problem-solving",
       "Collaborating on engineering course deliverables"
     ]
   },
