@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight, Mail, X, Code2, MapPin } from 'lucide-react';
-import { ReactIcon, LaravelIcon } from './TechIcons';
+import { ReactIcon, LaravelIcon, GithubIcon, LinkedinIcon, TelegramIcon } from './TechIcons';
+import { personalData } from '../data/portfolioData';
 
 // =========================================================================
 // 3D Isometric Mini-Cube Component for Glowing Orbit Path
@@ -214,6 +215,42 @@ export const Hero = ({
                 <Mail size={16} className="hero-btn-mail-icon" />
                 <span>Let's Connect</span>
               </a>
+
+              {/* Quick Social Connect Pills */}
+              <div className="flex items-center gap-2 pl-0 sm:pl-1">
+                <a
+                  href={personalData.contact.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hero-social-pill group"
+                  title="GitHub: @biniyam-rgb"
+                  aria-label="GitHub Profile"
+                >
+                  <GithubIcon size={17} className="text-[#C4B6AE] group-hover:text-[#FF7A36] transition-colors" />
+                </a>
+
+                <a
+                  href={personalData.contact.telegram}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hero-social-pill group"
+                  title="Telegram: @bini2_3"
+                  aria-label="Telegram Direct"
+                >
+                  <TelegramIcon size={17} className="text-[#C4B6AE] group-hover:text-[#229ED9] transition-colors" />
+                </a>
+
+                <a
+                  href={personalData.contact.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hero-social-pill group"
+                  title="LinkedIn: Biniyam Gebrie"
+                  aria-label="LinkedIn Profile"
+                >
+                  <LinkedinIcon size={17} className="text-[#C4B6AE] group-hover:text-[#0A66C2] transition-colors" />
+                </a>
+              </div>
             </motion.div>
 
             {/* 6. Modern Floating Glass Status Bar */}
