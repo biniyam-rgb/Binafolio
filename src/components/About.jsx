@@ -86,12 +86,12 @@ const InteractiveStorySlider = ({ isExpanded, setIsExpanded }) => {
           {isExpanded ? (
             <>
               <span className="text-xs">📖</span>
-              <span>Full Story Mode (3 Min)</span>
+              <span>Full Story Mode</span>
             </>
           ) : (
             <>
               <Zap className="h-3 w-3 text-[#FF5A1F] fill-[#FF5A1F]" />
-              <span>Quick TL;DR (30 Sec)</span>
+              <span>Quick Mode</span>
             </>
           )}
         </div>
@@ -116,11 +116,11 @@ const InteractiveStorySlider = ({ isExpanded, setIsExpanded }) => {
             </span>
           </div>
         ) : (
-          /* When Handle is on the Right: Left side shows "⚡ Quick TL;DR <<<" */
+          /* When Handle is on the Right: Left side shows "⚡ Quick Mode <<<" */
           <div className="absolute left-3 sm:left-4 right-[65%] h-full flex items-center justify-start gap-2 sm:gap-3 pointer-events-none pl-2 sm:pl-3">
             <span className="text-[#F5F0EC] font-mono font-bold text-xs sm:text-sm flex items-center gap-1.5 whitespace-nowrap">
               <span className="text-[#FF5A1F]">⚡</span>
-              <span>Quick TL;DR</span>
+              <span>Quick Mode</span>
             </span>
             <span className="text-[#8E7D75] font-mono font-bold tracking-widest text-xs hidden sm:inline">
               &lt; &lt; &lt;

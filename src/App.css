@@ -1021,6 +1021,109 @@
 }
 
 /* =========================================================================
+   JOURNEY SECTION TIMELINE & CARD HOVER ANIMATIONS
+   ========================================================================= */
+.journey-card-1 {
+  border-radius: 20px;
+  background: rgba(12, 8, 6, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid #FF5A1F;
+  box-shadow: 
+    0 0 32px rgba(255, 90, 31, 0.28),
+    0 0 65px rgba(255, 90, 31, 0.12),
+    0 16px 36px -6px rgba(0, 0, 0, 0.9);
+  transition: box-shadow 0.25s ease,
+              border-color 0.25s ease,
+              background-color 0.25s ease;
+}
+
+.journey-card-1:hover {
+  background: rgba(18, 11, 8, 0.92);
+  border-color: #FFA066 !important;
+  box-shadow: 
+    0 0 45px rgba(255, 90, 31, 0.5),
+    0 0 85px rgba(255, 90, 31, 0.2),
+    0 18px 40px -8px rgba(0, 0, 0, 0.95) !important;
+}
+
+.journey-card-2 {
+  border-radius: 20px;
+  background: rgba(12, 8, 6, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid transparent;
+  background-image: 
+    linear-gradient(rgba(12, 8, 6, 0.9), rgba(12, 8, 6, 0.9)), 
+    linear-gradient(135deg, #00D8FF 0%, #00D8FF 35%, #FF7A36 70%, #FF5A1F 100%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 
+    -14px -14px 35px -6px rgba(0, 216, 255, 0.28),
+    14px 14px 35px -6px rgba(255, 90, 31, 0.28),
+    0 16px 36px -6px rgba(0, 0, 0, 0.9);
+  transition: box-shadow 0.25s ease,
+              border-color 0.25s ease,
+              background-color 0.25s ease;
+}
+
+.journey-card-2:hover {
+  background-image: 
+    linear-gradient(rgba(18, 11, 8, 0.94), rgba(18, 11, 8, 0.94)), 
+    linear-gradient(135deg, #38BDF8 0%, #00D8FF 35%, #FFA066 70%, #FF5A1F 100%);
+  box-shadow: 
+    -16px -16px 42px -4px rgba(0, 216, 255, 0.45),
+    16px 16px 42px -4px rgba(255, 90, 31, 0.45),
+    0 18px 40px -8px rgba(0, 0, 0, 0.95) !important;
+}
+
+.journey-card-3 {
+  border-radius: 20px;
+  background: rgba(12, 8, 6, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(70, 42, 32, 0.85);
+  box-shadow: 
+    0 0 18px rgba(255, 122, 54, 0.08),
+    0 16px 36px -6px rgba(0, 0, 0, 0.9);
+  transition: box-shadow 0.25s ease,
+              border-color 0.25s ease,
+              background-color 0.25s ease;
+}
+
+.journey-card-3:hover {
+  background: rgba(18, 11, 8, 0.92);
+  border-color: #FF7A36 !important;
+  box-shadow: 
+    0 0 35px rgba(255, 122, 54, 0.38),
+    0 0 65px rgba(255, 122, 54, 0.15),
+    0 18px 40px -8px rgba(0, 0, 0, 0.95) !important;
+}
+
+.journey-card-4 {
+  border-radius: 20px;
+  background: rgba(12, 8, 6, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(85, 48, 36, 0.85);
+  box-shadow: 
+    0 0 20px rgba(255, 90, 31, 0.1),
+    0 16px 36px -6px rgba(0, 0, 0, 0.9);
+  transition: box-shadow 0.25s ease,
+              border-color 0.25s ease,
+              background-color 0.25s ease;
+}
+
+.journey-card-4:hover {
+  background: rgba(18, 11, 8, 0.92);
+  border-color: #FF5A1F !important;
+  box-shadow: 
+    0 0 38px rgba(255, 90, 31, 0.38),
+    0 0 70px rgba(255, 90, 31, 0.18),
+    0 18px 40px -8px rgba(0, 0, 0, 0.95) !important;
+}
+
+/* =========================================================================
    PROJECTS SECTION LAYOUT
    ========================================================================= */
 
