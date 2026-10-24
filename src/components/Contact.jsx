@@ -1,9 +1,42 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Copy, Check, Send, MapPin, Sparkles, ExternalLink, AlertCircle } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from './TechIcons';
+import { Mail, Copy, Check, Send, MapPin, ExternalLink, ArrowUpRight, MessageSquare, Sparkles } from 'lucide-react';
+import { GithubIcon, LinkedinIcon, TelegramIcon } from './TechIcons';
 import confetti from 'canvas-confetti';
 import { personalData } from '../data/portfolioData';
+
+const socialChannels = [
+  {
+    name: 'GitHub',
+    handle: personalData.contact.githubUsername || 'biniyam-rgb',
+    tag: 'Code & Repos',
+    href: personalData.contact.github,
+    icon: GithubIcon,
+    accent: '#FF7A36',
+    borderHover: 'hover:border-[#FF5A1F]',
+    glowClass: 'hover:shadow-[0_0_28px_rgba(255,90,31,0.4)]'
+  },
+  {
+    name: 'Telegram',
+    handle: personalData.contact.telegramUsername || '@bini2_3',
+    tag: 'Direct Chat',
+    href: personalData.contact.telegram,
+    icon: TelegramIcon,
+    accent: '#00D8FF',
+    borderHover: 'hover:border-[#00D8FF]',
+    glowClass: 'hover:shadow-[0_0_28px_rgba(0,216,255,0.4)]'
+  },
+  {
+    name: 'LinkedIn',
+    handle: 'Biniyam Gebrie',
+    tag: 'Network',
+    href: personalData.contact.linkedin,
+    icon: LinkedinIcon,
+    accent: '#0A66C2',
+    borderHover: 'hover:border-[#0A66C2]',
+    glowClass: 'hover:shadow-[0_0_28px_rgba(10,102,194,0.4)]'
+  }
+];
 
 export const Contact = () => {
   const [copied, setCopied] = useState(false);
@@ -14,211 +47,255 @@ export const Contact = () => {
     navigator.clipboard.writeText(personalData.contact.email);
     setCopied(true);
     
-    // Trigger confetti celebration
     try {
       confetti({
-        particleCount: 40,
+        particleCount: 45,
         spread: 60,
         origin: { y: 0.8 },
-        colors: ['#FF5A1F', '#FF7A36', '#FF9E66', '#FFFFFF']
+        colors: ['#FF5A1F', '#FF7A36', '#00D8FF', '#FFFFFF']
       });
-    } catch (e) {
+    } catch {
       // ignore in environments without canvas
     }
 
-    setTimeout(() => setCopied(false), 2500);
+    setTimeout(() => setCopied(false), 2400);
   };
 
   const mailtoLink = `mailto:${personalData.contact.email}?subject=${encodeURIComponent(
-    subject || 'Connecting regarding software opportunities'
+    subject || 'Full-Stack Collaboration Opportunity'
   )}&body=${encodeURIComponent(message)}`;
 
   return (
-    <section id="contact" className="relative py-14 sm:py-18 overflow-hidden">
-      {/* Background Warm Radial Light */}
+    <section id="contact" className="relative py-16 sm:py-20 overflow-hidden">
+      {/* Background Warm Ambient Radial Glow */}
       <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[720px] rounded-full pointer-events-none"
         style={{
-          background: 'radial-gradient(circle, rgba(255, 90, 31, 0.16) 0%, rgba(125, 41, 14, 0.08) 50%, transparent 75%)',
-          filter: 'blur(90px)',
+          background: 'radial-gradient(circle, rgba(255, 90, 31, 0.15) 0%, rgba(125, 41, 14, 0.06) 50%, transparent 75%)',
+          filter: 'blur(95px)',
           transform: 'translateZ(0)'
         }}
       />
 
       <div className="container-custom relative z-10">
 
-        {/* Section Header */}
-        <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+        {/* Section Header: Minimal, crisp, animated */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col items-center text-center max-w-xl mx-auto mb-10 sm:mb-12"
+        >
           <div className="badge-orange-pill mb-3">
-            <Mail className="h-3.5 w-3.5" />
-            <span>GET IN TOUCH</span>
+            <Sparkles className="h-3.5 w-3.5" />
+            <span>CONTACT</span>
           </div>
-          <h2 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#F5F0EC]">
-            Let's Build <span className="text-gradient-orange">Something</span>
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+            Let's <span className="text-gradient-orange drop-shadow-[0_0_25px_rgba(255,90,31,0.5)]">Connect</span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#C4B6AE]">
-            I am always interested in discussing software engineering, web development projects, learning opportunities, and collaboration.
+          <p className="mt-2.5 text-xs sm:text-sm text-[#C4B6AE]">
+            Open for software engineering opportunities, projects, and collaborations.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Contact Layout */}
-        <div className="contact-grid-layout max-w-5xl mx-auto">
+        {/* Contact Layout: 2 Columns */}
+        <div className="contact-grid-layout max-w-5xl mx-auto items-stretch">
           
-          {/* Left Column: Direct Connect & Configuration Notice */}
-          <div className="space-y-5">
+          {/* Left Column: Email & Direct Channels */}
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="space-y-4 flex flex-col justify-between"
+          >
             
-            {/* Email Card with One-Click Copy */}
-            <div className="portfolio-card p-6 bg-[#140C09] border-[#3A241C] relative overflow-hidden group">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#FF5A1F]/15 border border-[#FF5A1F]/30 text-[#FF5A1F]">
-                  <Mail className="h-6 w-6" />
+            {/* 1. Email Card with Confetti Copy & Launch */}
+            <div className="contact-interactive-card portfolio-card p-5 sm:p-6 bg-[#120B08]/90 border-[#3A241C] hover:border-[#FF7A36] hover:shadow-[0_0_30px_rgba(255,90,31,0.25)] group">
+              <div className="flex items-center justify-between mb-3.5">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#FF5A1F]/15 border border-[#FF5A1F]/35 text-[#FF5A1F] group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                    <Mail className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-white group-hover:text-[#FFA066] transition-colors">Direct Email</h3>
+                    <span className="text-[11px] font-mono text-[#8E7D75]">Primary Inbox</span>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-sm font-bold text-[#F5F0EC]">Email Communication</h3>
-                  <span className="text-xs font-mono text-[#8E7D75]">Direct channel</span>
-                </div>
+
+                <span className="flex items-center gap-1.5 text-[10.5px] font-mono text-[#10B981] px-2 py-0.5 rounded-full bg-[#10B981]/10 border border-[#10B981]/25">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-ping" />
+                  <span>Available</span>
+                </span>
               </div>
 
-              <div className="p-3 rounded-xl bg-[#0A0706] border border-[#3A241C] mb-4 flex items-center justify-between gap-2">
-                <span className="font-mono text-xs text-[#C4B6AE] truncate">
+              {/* Email Address Pill */}
+              <div className="p-2.5 sm:p-3 rounded-xl bg-[#090605] border border-[#2E1A12] mb-3 flex items-center justify-between gap-2 group-hover:border-[#FF5A1F]/40 transition-colors">
+                <span className="font-mono text-xs sm:text-[13px] text-white truncate select-all font-medium pl-1">
                   {personalData.contact.email}
                 </span>
                 <button
                   onClick={handleCopyEmail}
-                  className="shrink-0 p-2 rounded-lg bg-[#1C110D] text-[#FF7A36] hover:bg-[#FF5A1F] hover:text-white transition-colors"
+                  className="shrink-0 px-3 py-1.5 rounded-lg bg-[#180E0A] border border-[#3A241C] text-[#FF7A36] hover:bg-[#FF5A1F] hover:text-white hover:border-[#FF7A36] hover:shadow-[0_0_12px_rgba(255,90,31,0.5)] transition-all flex items-center gap-1.5 text-xs font-mono font-bold active:scale-95 cursor-pointer"
                   title="Copy email to clipboard"
                 >
-                  {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                  {copied ? (
+                    <>
+                      <Check className="h-3.5 w-3.5 text-white" />
+                      <span className="text-white">Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="h-3.5 w-3.5" />
+                      <span>Copy</span>
+                    </>
+                  )}
                 </button>
               </div>
 
-              <div className="flex items-center justify-between">
+              <a
+                href={`mailto:${personalData.contact.email}`}
+                className="btn-primary-orange text-xs !py-2.5 w-full text-center flex items-center justify-center gap-2 group/btn"
+              >
+                <span>Open In Mail App</span>
+                <ExternalLink className="h-3.5 w-3.5 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+              </a>
+            </div>
+
+            {/* 2. Direct Social Channels (Animated Cards with Hover Glows) */}
+            <div className="portfolio-card p-5 sm:p-6 bg-[#120B08]/90 border-[#3A241C] space-y-3">
+              <div className="flex items-center justify-between mb-1">
+                <h3 className="text-xs font-bold text-white uppercase tracking-wider font-mono flex items-center gap-2">
+                  <MessageSquare className="h-3.5 w-3.5 text-[#FF7A36]" />
+                  <span>Social Profiles</span>
+                </h3>
+                <span className="text-[10px] font-mono text-[#8E7D75]">
+                  Instant Links
+                </span>
+              </div>
+
+              <div className="space-y-2">
+                {socialChannels.map((channel) => {
+                  const Icon = channel.icon;
+                  return (
+                    <a
+                      key={channel.name}
+                      href={channel.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={`contact-interactive-card flex items-center justify-between p-3 rounded-xl bg-[#090605] border border-[#2A1810] text-[#C4B6AE] hover:text-white ${channel.borderHover} ${channel.glowClass} hover:-translate-y-1 hover:scale-[1.015] transition-all duration-300 group select-none`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div 
+                          className="flex h-9 w-9 items-center justify-center rounded-lg transition-all duration-300 group-hover:scale-115 group-hover:rotate-6"
+                          style={{
+                            background: `${channel.accent}15`,
+                            border: `1px solid ${channel.accent}40`,
+                            color: channel.accent
+                          }}
+                        >
+                          <Icon size={18} />
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-bold text-white group-hover:text-white transition-colors">
+                              {channel.name}
+                            </span>
+                            <span className="text-[10px] font-mono text-[#8E7D75] px-1.5 py-0.5 rounded bg-[#140C09] border border-[#2E1A12]">
+                              {channel.tag}
+                            </span>
+                          </div>
+                          <div className="text-[11px] font-mono text-[#8E7D75] group-hover:text-[#FFA066] transition-colors">
+                            {channel.handle}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-1.5">
+                        <div className="p-1 rounded-md bg-[#140C09] border border-[#2E1A12] group-hover:border-[#FF5A1F]/60 transition-colors">
+                          <ArrowUpRight className="h-3.5 w-3.5 text-[#8E7D75] group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
+                        </div>
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
+
+              {/* Campus Location Tag */}
+              <div className="pt-2 flex items-center gap-1.5 text-[11px] font-mono text-[#8E7D75]">
+                <MapPin className="h-3 w-3 text-[#FF5A1F] shrink-0" />
+                <span>Wollo University, Ethiopia</span>
+              </div>
+            </div>
+
+          </motion.div>
+
+          {/* Right Column: Direct Message Launcher */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="h-full"
+          >
+            <div className="contact-interactive-card portfolio-card p-6 sm:p-7 bg-[#120B08]/90 border-[#3A241C] hover:border-[#FF7A36]/60 hover:shadow-[0_0_35px_rgba(255,90,31,0.2)] transition-all duration-300 h-full flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-5">
+                  <div>
+                    <h3 className="text-lg font-bold text-white">
+                      Send a Message
+                    </h3>
+                    <p className="mt-0.5 text-xs text-[#8E7D75]">
+                      Drop a quick note directly to my inbox.
+                    </p>
+                  </div>
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#FF5A1F]/15 border border-[#FF5A1F]/30 text-[#FF5A1F]">
+                    <Send className="h-4 w-4" />
+                  </div>
+                </div>
+
+                <div className="space-y-3.5">
+                  <div>
+                    <label className="block text-[11px] font-mono uppercase tracking-wider text-[#C4B6AE] mb-1">
+                      Subject
+                    </label>
+                    <input
+                      type="text"
+                      value={subject}
+                      onChange={(e) => setSubject(e.target.value)}
+                      placeholder="e.g. Full-Stack Project Collaboration"
+                      className="contact-input text-xs sm:text-sm"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-mono uppercase tracking-wider text-[#C4B6AE] mb-1">
+                      Message
+                    </label>
+                    <textarea
+                      rows={5}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      placeholder="Hi Biniyam, I'd like to discuss..."
+                      className="contact-textarea text-xs sm:text-sm"
+                      style={{ resize: 'none' }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-5 mt-4 border-t border-[#2A1810]">
                 <a
-                  href={`mailto:${personalData.contact.email}`}
-                  className="btn-primary-orange text-xs !py-2.5 !px-4 w-full text-center"
+                  href={mailtoLink}
+                  className="btn-primary-orange w-full text-xs !py-3 inline-flex items-center justify-center gap-2 group font-bold shadow-[0_0_20px_rgba(255,90,31,0.4)]"
                 >
-                  <span>Open In Email Client</span>
-                  <ExternalLink className="h-3.5 w-3.5" />
+                  <span>Launch Message</span>
+                  <Send className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </a>
               </div>
             </div>
-
-            {/* Social & Code Platforms */}
-            <div className="portfolio-card p-6 bg-[#140C09] border-[#3A241C] space-y-4">
-              <h3 className="text-sm font-bold text-[#F5F0EC] mb-2 flex items-center justify-between">
-                <span>Social Profiles</span>
-                <span className="text-[11px] font-mono text-[#8E7D75]">Placeholders</span>
-              </h3>
-
-              {/* GitHub Link */}
-              <a
-                href={personalData.contact.github}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center justify-between p-3 rounded-xl bg-[#1C110D] border border-[#3A241C] text-[#C4B6AE] hover:text-white hover:border-[#FF5A1F] transition-all group"
-              >
-                <div className="flex items-center gap-3">
-                  <GithubIcon size={20} className="text-[#FF7A36]" />
-                  <div>
-                    <div className="text-xs font-bold text-[#F5F0EC]">GitHub</div>
-                    <div className="text-[10px] font-mono text-[#8E7D75]">Repositories &amp; Code</div>
-                  </div>
-                </div>
-                <ExternalLink className="h-4 w-4 text-[#8E7D75] group-hover:text-[#FF5A1F] transition-colors" />
-              </a>
-
-              {/* LinkedIn Link */}
-              <a
-                href={personalData.contact.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center justify-between p-3 rounded-xl bg-[#1C110D] border border-[#3A241C] text-[#C4B6AE] hover:text-white hover:border-[#FF5A1F] transition-all group"
-              >
-                <div className="flex items-center gap-3">
-                  <LinkedinIcon size={20} className="text-[#0A66C2]" />
-                  <div>
-                    <div className="text-xs font-bold text-[#F5F0EC]">LinkedIn</div>
-                    <div className="text-[10px] font-mono text-[#8E7D75]">Professional Network</div>
-                  </div>
-                </div>
-                <ExternalLink className="h-4 w-4 text-[#8E7D75] group-hover:text-[#FF5A1F] transition-colors" />
-              </a>
-
-              {/* Location Tag */}
-              <div className="pt-2 flex items-center gap-2 text-xs font-mono text-[#8E7D75]">
-                <MapPin className="h-3.5 w-3.5 text-[#FF5A1F]" />
-                <span>{personalData.location}</span>
-                <span className="text-[#3A241C]">•</span>
-                <span>{personalData.university}</span>
-              </div>
-            </div>
-
-            {/* Configuration Box for Biniyam */}
-            <div className="rounded-xl border border-[#3A241C]/60 bg-[#1C110D]/50 p-4 text-xs text-[#8E7D75] flex items-start gap-2.5">
-              <AlertCircle className="h-4 w-4 text-[#FF7A36] shrink-0 mt-0.5" />
-              <p>
-                <strong className="text-[#F5F0EC]">Developer Note:</strong> No fake contact form database is used. All contact links are configured in <code className="text-[#FF7A36]">src/data/portfolioData.js</code>.
-              </p>
-            </div>
-
-          </div>
-
-          {/* Right Column: Direct Mail Composer (Launches real mail client with prefilled text) */}
-          <div>
-            <div className="portfolio-card p-6 sm:p-8 bg-[#140C09] border-[#3A241C]">
-              <div className="mb-6">
-                <h3 className="text-xl font-bold text-[#F5F0EC]">
-                  Direct Email Launcher
-                </h3>
-                <p className="mt-1 text-xs sm:text-sm text-[#8E7D75]">
-                  Compose your note here to launch directly in your default email client with your message intact.
-                </p>
-              </div>
-
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-[#C4B6AE] mb-1.5">
-                    Subject Line
-                  </label>
-                  <input
-                    type="text"
-                    value={subject}
-                    onChange={(e) => setSubject(e.target.value)}
-                    placeholder="e.g. Inquiring about a Full-Stack Collaboration"
-                    className="contact-input"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-[#C4B6AE] mb-1.5">
-                    Message Body
-                  </label>
-                  <textarea
-                    rows={5}
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Hello Biniyam, I saw your portfolio and would like to discuss..."
-                    className="contact-textarea"
-                    style={{ resize: 'none' }}
-                  />
-                </div>
-
-                <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
-                  <div className="text-xs font-mono text-[#8E7D75] text-center sm:text-left">
-                    Opens mailto directly with no backend storage
-                  </div>
-
-                  <a
-                    href={mailtoLink}
-                    className="btn-primary-orange w-full sm:w-auto text-xs !py-3 !px-6 inline-flex items-center justify-center gap-2"
-                  >
-                    <span>Launch Email</span>
-                    <Send className="h-3.5 w-3.5" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+          </motion.div>
 
         </div>
 
@@ -226,3 +303,5 @@ export const Contact = () => {
     </section>
   );
 };
+
+export default Contact;

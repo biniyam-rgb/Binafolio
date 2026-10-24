@@ -403,6 +403,31 @@
   transform: scale(1.15);
 }
 
+/* Quick Social Micro-Pills (Hero) */
+.hero-social-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 9999px;
+  background: rgba(14, 9, 7, 0.85);
+  border: 1px solid rgba(255, 122, 54, 0.35);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.55), 0 0 14px rgba(255, 90, 31, 0.12);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.hero-social-pill:hover {
+  transform: translateY(-3px) scale(1.08);
+  border-color: #FF7A36;
+  background: rgba(26, 16, 12, 0.95);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65), 0 0 22px rgba(255, 90, 31, 0.45);
+}
+
 /* =========================================================================
    Modern Bottom Meta Floating Status Bar
    ========================================================================= */
@@ -1185,7 +1210,40 @@
 .contact-textarea:focus {
   outline: none;
   border-color: var(--primary-orange);
-  box-shadow: 0 0 15px -3px rgba(255, 90, 31, 0.3);
+  box-shadow: 0 0 18px -2px rgba(255, 90, 31, 0.45);
 }
+
+/* Interactive Contact Hover Cards & Specular Sheen */
+.contact-interactive-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow, border-color;
+}
+
+.contact-interactive-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -130%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.04) 30%,
+    rgba(255, 122, 54, 0.14) 50%,
+    transparent 100%
+  );
+  transform: skewX(-22deg);
+  transition: left 0.75s ease;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.contact-interactive-card:hover::before {
+  left: 130%;
+}
+
 
 
