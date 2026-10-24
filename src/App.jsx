@@ -9,6 +9,7 @@ import { Journey } from './components/Journey';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { ResumeModal } from './components/ResumeModal';
+import { CustomCursor } from './components/CustomCursor';
 import './App.css';
 
 export function App() {
@@ -23,6 +24,9 @@ export function App() {
 
   return (
     <div className="relative min-h-screen bg-[#07090e] text-[#F5F0EC] overflow-hidden selection:bg-[#FF5A1F] selection:text-white">
+      {/* Animated interactive cursor */}
+      <CustomCursor />
+
       {/* Ambient background glows */}
       <BackgroundGlows />
 
