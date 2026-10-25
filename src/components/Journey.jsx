@@ -207,7 +207,7 @@ const JourneyCard = ({ index, isLeft }) => {
 
 export const Journey = () => {
   return (
-    <section id="journey" className="relative py-16 sm:py-24">
+    <section id="journey" className="relative py-16 sm:py-24 overflow-hidden w-full max-w-full">
       <div className="container-custom relative z-10">
 
         {/* Section Heading: Centered "Learning" in white, "Journey" in bold orange, 2-line subtitle below */}
