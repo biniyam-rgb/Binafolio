@@ -127,7 +127,7 @@ export const Skills = () => {
   });
 
   return (
-    <section id="skills" className="relative py-14 sm:py-20 bg-[#0E0907]/60">
+    <section id="skills" className="relative py-14 sm:py-20 bg-[#0E0907]/60 overflow-hidden w-full max-w-full">
       <div className="container-custom relative z-10">
 
         {/* Section Header matching reference screenshot */}
