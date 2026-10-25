@@ -118,6 +118,30 @@ const skillThemeMap = {
   }
 };
 
+// Staggered card animation with orderly time delay between each tech stack card (React first, Laravel second, PHP third, etc.)
+const skillCardVariants = {
+  hidden: { 
+    opacity: 0, 
+    y: 35, 
+    scale: 0.92 
+  },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      delay: i * 0.16, // Sequential time delay between each tech stack
+      duration: 0.55,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  }),
+  exit: { 
+    opacity: 0, 
+    scale: 0.9, 
+    transition: { duration: 0.2 } 
+  }
+};
+
 export const Skills = () => {
   const [activeCategory, setActiveCategory] = useState('all');
 
@@ -176,13 +200,13 @@ export const Skills = () => {
           </div>
         </div>
 
-        {/* Skills Cards Grid matching reference image */}
+        {/* Skills Cards Grid with orderly staggered card entrance */}
         <motion.div 
           layout
           className="skills-grid-layout"
         >
-          <AnimatePresence>
-            {filteredSkills.map((skill) => {
+          <AnimatePresence mode="popLayout">
+            {filteredSkills.map((skill, index) => {
               const IconComponent = TechIconMap[skill.id];
               const theme = skillThemeMap[skill.id] || {
                 border: 'rgba(255, 90, 31, 0.4)',
@@ -201,11 +225,13 @@ export const Skills = () => {
               return (
                 <motion.div
                   layout
-                  key={skill.id}
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.3 }}
+                  key={`${activeCategory}-${skill.id}`}
+                  custom={index}
+                  variants={skillCardVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: '-40px' }}
+                  exit="exit"
                   whileHover={{ 
                     y: -8, 
                     scale: 1.02,
