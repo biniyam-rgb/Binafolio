@@ -170,7 +170,7 @@ export const Navbar = ({ onOpenResume, onNavClick }) => {
                       key={link.name}
                       href={link.href}
                       onClick={(e) => handleLinkClick(e, link.href)}
-                      className={`flex flex-col items-center justify-center py-2.5 px-2 rounded-xl text-xs transition-all ${
+                      className={`flex flex-col items-center justify-center py-2.5 px-2 rounded-xl text-[11px] sm:text-xs transition-all ${
                         isActive
                           ? 'bg-[#FF5A1F]/15 text-[#FF7A36] border border-[#FF5A1F]/60 shadow-[0_0_15px_rgba(255,90,31,0.35)] font-semibold'
                           : 'text-white hover:bg-white/[0.08] hover:text-[#FF7A36]'
