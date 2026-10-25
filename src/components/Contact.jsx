@@ -88,31 +88,25 @@ export const Contact = () => {
     setErrorMessage('');
 
     try {
-      const response = await fetch(`https://formsubmit.co/ajax/${personalData.contact.email}`, {
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
         body: JSON.stringify({
+          access_key: '64551254-4491-4b0f-a641-30a21a5c48d4',
           name: name.trim(),
           email: email.trim(),
-          _subject: `Portfolio Message from ${name.trim()}`,
           message: message.trim(),
-          _template: 'table',
-          _captcha: 'false'
+          subject: `Portfolio Message from ${name.trim()}`,
+          from_name: name.trim()
         })
       });
 
       const data = await response.json().catch(() => ({}));
 
-      // Accept HTTP 200 or FormSubmit activation notice on initial submission
-      if (
-        response.ok ||
-        data.success === 'true' ||
-        data.success === true ||
-        (data.message && data.message.includes('Activation'))
-      ) {
+      if (data && data.success) {
         setSubmittedData({ name: name.trim(), email: email.trim() });
         setStatus('success');
         setName('');
@@ -130,10 +124,10 @@ export const Contact = () => {
           // ignore in environments without canvas
         }
       } else {
-        throw new Error(data.message || 'Unable to send message right now. Please try again.');
+        throw new Error(data?.message || 'Unable to send message right now. Please try again.');
       }
     } catch (err) {
-      console.error('Contact submission error:', err);
+      console.error('Web3Forms submission error:', err);
       setErrorMessage(
         err.message || 'Network error: could not send message directly. Please verify connection or try again.'
       );
@@ -389,6 +383,7 @@ export const Contact = () => {
                         </label>
                         <input
                           type="text"
+                          name="name"
                           required
                           value={name}
                           onChange={(e) => setName(e.target.value)}
@@ -406,6 +401,7 @@ export const Contact = () => {
                         </label>
                         <input
                           type="email"
+                          name="email"
                           required
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
@@ -425,6 +421,7 @@ export const Contact = () => {
                       </label>
                       <textarea
                         rows={4}
+                        name="message"
                         required
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
