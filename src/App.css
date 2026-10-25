@@ -1213,6 +1213,13 @@
   box-shadow: 0 0 18px -2px rgba(255, 90, 31, 0.45);
 }
 
+.contact-input:disabled,
+.contact-textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(0.2);
+}
+
 /* Interactive Contact Hover Cards & Specular Sheen */
 .contact-interactive-card {
   position: relative;
