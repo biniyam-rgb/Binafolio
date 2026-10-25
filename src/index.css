@@ -31,7 +31,13 @@ html {
   font-family: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background-color: var(--bg-primary);
   color: var(--main-text);
+  width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
+  overflow-x: clip;
+  overscroll-behavior: none;
+  overscroll-behavior-x: none;
+  touch-action: pan-y;
   line-height: 1.5;
 }
 
@@ -39,10 +45,24 @@ body {
   background-color: var(--bg-primary);
   color: var(--main-text);
   min-height: 100vh;
-  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden !important;
+  overflow-x: clip !important;
+  overscroll-behavior: none !important;
+  overscroll-behavior-x: none !important;
+  touch-action: pan-y;
   position: relative;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
+  position: relative;
 }
 
 img, svg, video {
