@@ -51,6 +51,9 @@ export const Navbar = ({ onOpenResume, onNavClick }) => {
     if (target) {
       target.scrollIntoView({ behavior: 'smooth' });
     }
+    if (href === '#skills') {
+      window.dispatchEvent(new CustomEvent('trigger-skills-animation'));
+    }
   };
 
   return (
