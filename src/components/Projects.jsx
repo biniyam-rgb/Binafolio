@@ -8,7 +8,7 @@ export const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
 
   return (
-    <section id="projects" className="relative py-12 sm:py-16">
+    <section id="projects" className="relative py-12 sm:py-16 overflow-hidden w-full max-w-full">
       <div className="container-custom relative z-10">
 
         {/* Section Header */}
