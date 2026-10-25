@@ -121,21 +121,25 @@ export const Navbar = ({ onOpenResume, onNavClick }) => {
             <a
               href="#contact"
               onClick={(e) => handleLinkClick(e, '#contact')}
-              className="hidden sm:inline-flex items-center gap-2 rounded-full px-4 sm:px-4.5 py-1.5 border border-[#FF5A1F]/45 bg-[#140C09]/90 backdrop-blur-xl hover:border-[#FF7A36] shadow-[0_0_18px_rgba(255,90,31,0.3),inset_0_0_10px_rgba(255,90,31,0.15)] hover:shadow-[0_0_28px_rgba(255,90,31,0.6),inset_0_0_14px_rgba(255,90,31,0.28)] hover:scale-105 active:scale-95 transition-all duration-300 group cursor-pointer"
+              className="ready-hire-btn hidden sm:inline-flex items-center gap-2 rounded-full px-4 sm:px-4.5 py-1.5 border border-[#FF5A1F]/45 bg-[#140C09]/90 backdrop-blur-xl hover:border-[#FF7A36] active:scale-95 group cursor-pointer"
               title="Ready for Hire — Let's connect!"
             >
+              {/* Luminous Animated Shimmer Light Beam */}
+              <span className="ready-hire-shimmer" />
+
               {/* Live Pulsing Emerald Beacon */}
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10B981] shadow-[0_0_8px_#10B981]"></span>
               </span>
 
-              {/* Sexy Gradient Text */}
-              <span className="font-['Plus_Jakarta_Sans',sans-serif] text-xs font-black tracking-wider uppercase bg-gradient-to-r from-[#FFFFFF] via-[#FFF2EB] to-[#FFA066] bg-clip-text text-transparent group-hover:from-white group-hover:via-[#FFA066] group-hover:to-[#FF5A1F] transition-all">
+              {/* Animated Continuous Gradient Text */}
+              <span className="ready-hire-text font-['Plus_Jakarta_Sans',sans-serif] text-xs font-black tracking-wider uppercase">
                 Ready For Hire
               </span>
 
-              <Sparkles className="h-3.5 w-3.5 text-[#FF7A36] group-hover:rotate-45 group-hover:scale-115 transition-transform duration-300" />
+              {/* Continuously Twinkling & Rotating Sparkles */}
+              <Sparkles className="ready-hire-sparkle h-3.5 w-3.5 text-[#FF7A36] group-hover:scale-125 transition-transform duration-300" />
             </a>
 
             {/* Mobile Menu Toggle Button */}
@@ -187,16 +191,19 @@ export const Navbar = ({ onOpenResume, onNavClick }) => {
                 <a
                   href="#contact"
                   onClick={(e) => handleLinkClick(e, '#contact')}
-                  className="w-full inline-flex items-center justify-center gap-2.5 rounded-xl border border-[#FF5A1F]/50 bg-gradient-to-r from-[#1E110A] via-[#2A160E] to-[#1E110A] py-2.5 text-xs font-black tracking-wider uppercase text-white shadow-[0_0_22px_rgba(255,90,31,0.4)] hover:scale-102 transition-all cursor-pointer"
+                  className="ready-hire-btn w-full inline-flex items-center justify-center gap-2.5 rounded-xl border border-[#FF5A1F]/50 bg-gradient-to-r from-[#1E110A] via-[#2A160E] to-[#1E110A] py-2.5 text-xs font-black tracking-wider uppercase text-white shadow-[0_0_22px_rgba(255,90,31,0.4)] hover:scale-102 transition-all cursor-pointer"
                 >
+                  {/* Luminous Animated Shimmer Light Beam */}
+                  <span className="ready-hire-shimmer" />
+
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10B981] shadow-[0_0_6px_#10B981]"></span>
                   </span>
-                  <span className="bg-gradient-to-r from-white via-[#FFF0E6] to-[#FFA066] bg-clip-text text-transparent">
+                  <span className="ready-hire-text font-['Plus_Jakarta_Sans',sans-serif] font-black tracking-wider uppercase">
                     Ready For Hire
                   </span>
-                  <Sparkles className="h-3.5 w-3.5 text-[#FF7A36]" />
+                  <Sparkles className="ready-hire-sparkle h-3.5 w-3.5 text-[#FF7A36]" />
                 </a>
               </div>
             </div>
