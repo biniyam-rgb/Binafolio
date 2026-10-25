@@ -300,31 +300,31 @@ export const Hero = ({
               {/* Dual-Tone Ambient Backlight Glow behind Editor (Orange & Luminous Teal/Cyan) with Delayed Blossom & Reactive Bloom */}
               <motion.div 
                 initial={{ opacity: 0, scale: 0.7 }}
-                animate={{ opacity: isCardHovered ? 1 : 0.85, scale: isCardHovered ? 1.14 : 1 }}
+                animate={{ opacity: isCardHovered ? 1 : 0.85, scale: isCardHovered ? 1.08 : 1 }}
                 transition={{ duration: 0.45, ease: 'easeOut' }}
                 className="pointer-events-none"
                 style={{
                   position: 'absolute',
-                  inset: '-2.5rem',
+                  inset: '-0.5rem',
                   borderRadius: '40px',
                   zIndex: -10,
                   background: 'radial-gradient(circle at 35% 35%, rgba(255, 90, 31, 0.48) 0%, rgba(255, 122, 54, 0.18) 45%, transparent 70%)',
-                  filter: 'blur(60px)',
+                  filter: 'blur(35px)',
                   transform: 'translateZ(0)'
                 }}
               />
               <motion.div 
                 initial={{ opacity: 0, scale: 0.7 }}
-                animate={{ opacity: isCardHovered ? 0.95 : 0.75, scale: isCardHovered ? 1.12 : 1 }}
+                animate={{ opacity: isCardHovered ? 0.95 : 0.75, scale: isCardHovered ? 1.06 : 1 }}
                 transition={{ duration: 0.45, ease: 'easeOut' }}
                 className="pointer-events-none"
                 style={{
                   position: 'absolute',
-                  inset: '-3rem',
+                  inset: '-0.5rem',
                   borderRadius: '50px',
                   zIndex: -10,
                   background: 'radial-gradient(circle at 80% 25%, rgba(0, 216, 255, 0.35) 0%, transparent 55%), radial-gradient(circle at 20% 85%, rgba(0, 216, 255, 0.22) 0%, transparent 50%)',
-                  filter: 'blur(55px)',
+                  filter: 'blur(35px)',
                   transform: 'translateZ(0)'
                 }}
               />
@@ -334,16 +334,17 @@ export const Hero = ({
                 initial={{ opacity: 0, scale: 0.75, rotate: -35 }}
                 animate={{ 
                   opacity: 1, 
-                  scale: isCardHovered ? 1.04 : 1, 
+                  scale: isCardHovered ? 1.03 : 1, 
                   rotate: isCardHovered ? -12 : -15 
                 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className="pointer-events-none select-none drop-shadow-[0_0_25px_rgba(255,90,31,0.65)]"
                 style={{
                   position: 'absolute',
-                  width: '640px',
-                  height: '640px',
-                  zIndex: -10
+                  width: 'clamp(220px, 70vw, 415px)',
+                  height: 'clamp(220px, 70vw, 415px)',
+                  zIndex: -10,
+                  pointerEvents: 'none'
                 }}
                 viewBox="0 0 740 740"
               >
@@ -388,27 +389,27 @@ export const Hero = ({
               {/* Positioned strictly outside along the orbital perimeter so they NEVER overlap code lines */}
               
               {/* Cube 1: Below terminal left */}
-              <div style={{ position: 'absolute', bottom: '-30px', left: '10%', zIndex: 10, pointerEvents: 'none' }}>
+              <div style={{ position: 'absolute', bottom: '-26px', left: '10%', zIndex: 10, pointerEvents: 'none' }}>
                 <IsometricCube size={22} delay={0} />
               </div>
 
               {/* Cube 2: Below terminal center */}
-              <div style={{ position: 'absolute', bottom: '-46px', left: '38%', zIndex: 10, pointerEvents: 'none' }}>
+              <div style={{ position: 'absolute', bottom: '-40px', left: '38%', zIndex: 10, pointerEvents: 'none' }}>
                 <IsometricCube size={24} delay={0.8} />
               </div>
 
               {/* Cube 3: Below terminal far right */}
-              <div style={{ position: 'absolute', bottom: '-32px', right: '24%', zIndex: 10, pointerEvents: 'none' }}>
+              <div style={{ position: 'absolute', bottom: '-28px', right: '24%', zIndex: 10, pointerEvents: 'none' }}>
                 <IsometricCube size={20} delay={1.4} />
               </div>
 
               {/* Cube 4: Mid-left flank orbit */}
-              <div style={{ position: 'absolute', bottom: '24%', left: '-32px', zIndex: 10, pointerEvents: 'none' }}>
+              <div style={{ position: 'absolute', bottom: '24%', left: '0px', zIndex: 10, pointerEvents: 'none' }}>
                 <IsometricCube size={22} delay={2.1} />
               </div>
 
               {/* Cube 5: Top-left outer orbit */}
-              <div style={{ position: 'absolute', top: '-26px', left: '14%', zIndex: 10, pointerEvents: 'none' }}>
+              <div style={{ position: 'absolute', top: '-24px', left: '14%', zIndex: 10, pointerEvents: 'none' }}>
                 <IsometricCube size={18} delay={1.1} />
               </div>
 
@@ -427,8 +428,8 @@ export const Hero = ({
                 }}
                 style={{
                   position: 'absolute',
-                  top: '-30px',
-                  right: '-16px',
+                  top: '-24px',
+                  right: '-6px',
                   zIndex: 30
                 }}
                 className="p-2.5 sm:p-3 rounded-2xl bg-[#03111b]/92 border-2 border-[#00D8FF] shadow-[0_0_25px_rgba(0,216,255,0.6),inset_0_0_12px_rgba(0,216,255,0.25)] backdrop-blur-xl hover:rotate-0 hover:scale-115 transition-all duration-300 cursor-pointer"
@@ -450,7 +451,7 @@ export const Hero = ({
                 style={{
                   position: 'absolute',
                   top: '38%',
-                  left: '-32px',
+                  left: '-8px',
                   zIndex: 30
                 }}
                 className="p-2.5 sm:p-3 rounded-2xl bg-[#190705]/92 border-2 border-[#FF2D20] shadow-[0_0_25px_rgba(255,45,32,0.6),inset_0_0_12px_rgba(255,45,32,0.25)] backdrop-blur-xl hover:rotate-0 hover:scale-115 transition-all duration-300 cursor-pointer"
@@ -471,8 +472,8 @@ export const Hero = ({
                 }}
                 style={{
                   position: 'absolute',
-                  top: '56%',
-                  right: '-28px',
+                  top: '54%',
+                  right: '-8px',
                   zIndex: 30
                 }}
                 className="p-2 sm:p-2.5 rounded-2xl bg-[#191605]/92 border-2 border-[#F7DF1E] shadow-[0_0_25px_rgba(247,223,30,0.55),inset_0_0_12px_rgba(247,223,30,0.25)] backdrop-blur-xl hover:rotate-0 hover:scale-110 transition-all duration-300 cursor-pointer"
@@ -495,8 +496,8 @@ export const Hero = ({
                 }}
                 style={{
                   position: 'absolute',
-                  bottom: '-30px',
-                  right: '8px',
+                  bottom: '-24px',
+                  right: '12px',
                   zIndex: 30
                 }}
                 className="px-3 py-1.5 sm:py-2 rounded-2xl bg-[#04121c]/92 border-2 border-[#00D8FF] shadow-[0_0_25px_rgba(0,216,255,0.6),inset_0_0_12px_rgba(0,216,255,0.25)] backdrop-blur-xl hover:rotate-0 hover:scale-110 transition-all duration-300 cursor-pointer"
