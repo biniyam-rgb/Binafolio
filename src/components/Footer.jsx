@@ -11,7 +11,7 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="relative border-t border-[#3A241C] bg-[#0A0706] py-12 text-[#C4B6AE]">
+    <footer className="relative border-t border-[#3A241C] bg-[#0A0706] py-12 text-[#C4B6AE] overflow-hidden w-full max-w-full">
       <div className="container-custom">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
 
