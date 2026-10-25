@@ -1259,5 +1259,95 @@
   left: 130%;
 }
 
+/* =========================================================================
+   "Ready For Hire" Animated Glowing & Shimmer CTA
+   ========================================================================= */
+@keyframes hireGlowPulse {
+  0%, 100% {
+    box-shadow: 0 0 16px rgba(255, 90, 31, 0.35), 0 0 28px rgba(255, 122, 54, 0.18), inset 0 0 10px rgba(255, 90, 31, 0.15);
+    border-color: rgba(255, 90, 31, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(255, 90, 31, 0.7), 0 0 45px rgba(255, 122, 54, 0.35), inset 0 0 14px rgba(255, 90, 31, 0.3);
+    border-color: rgba(255, 122, 54, 0.9);
+  }
+}
 
+@keyframes hireShimmerSweep {
+  0% {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+  35%, 100% {
+    transform: translateX(250%) skewX(-20deg);
+  }
+}
 
+@keyframes hireGradientText {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes sparkleTwinkle {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.85;
+    filter: drop-shadow(0 0 4px rgba(255, 122, 54, 0.5));
+  }
+  25% {
+    transform: scale(1.3) rotate(22deg);
+    opacity: 1;
+    filter: drop-shadow(0 0 12px rgba(255, 122, 54, 0.9));
+  }
+  50% {
+    transform: scale(0.92) rotate(-10deg);
+    opacity: 0.9;
+  }
+  75% {
+    transform: scale(1.22) rotate(15deg);
+    opacity: 1;
+    filter: drop-shadow(0 0 9px rgba(255, 122, 54, 0.8));
+  }
+}
+
+.ready-hire-btn {
+  position: relative;
+  overflow: hidden;
+  animation: hireGlowPulse 3.2s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+.ready-hire-btn:hover {
+  animation: none;
+  box-shadow: 0 0 35px rgba(255, 90, 31, 0.85), 0 0 60px rgba(255, 122, 54, 0.45), inset 0 0 18px rgba(255, 90, 31, 0.35) !important;
+  border-color: #FF7A36 !important;
+  transform: scale(1.05);
+}
+
+.ready-hire-shimmer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.32) 50%, transparent 100%);
+  animation: hireShimmerSweep 3.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+.ready-hire-text {
+  background: linear-gradient(90deg, #FFFFFF 0%, #FFF2EB 20%, #FFA066 45%, #FF5A1F 65%, #FFFFFF 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: hireGradientText 4.5s linear infinite;
+}
+
+.ready-hire-sparkle {
+  animation: sparkleTwinkle 2.6s ease-in-out infinite;
+}
