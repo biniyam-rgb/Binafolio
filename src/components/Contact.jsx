@@ -185,15 +185,15 @@ export const Contact = () => {
 
           {/* Left Column: Email & Direct Channels */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-4 flex flex-col justify-between"
           >
 
             {/* 1. Email Card with Confetti Copy & Launch */}
-            <div className="contact-interactive-card portfolio-card p-5 sm:p-6 bg-[#120B08]/90 border-[#3A241C] hover:border-[#FF7A36] hover:shadow-[0_0_30px_rgba(255,90,31,0.25)] group">
+            <div className="contact-interactive-card portfolio-card p-4 sm:p-6 bg-[#120B08]/90 border-[#3A241C] hover:border-[#FF7A36] hover:shadow-[0_0_30px_rgba(255,90,31,0.25)] group">
               <div className="flex items-center justify-between mb-3.5">
                 <div className="flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#FF5A1F]/15 border border-[#FF5A1F]/35 text-[#FF5A1F] group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
@@ -245,7 +245,7 @@ export const Contact = () => {
             </div>
 
             {/* 2. Direct Social Channels (Animated Cards with Hover Glows) */}
-            <div className="portfolio-card p-5 sm:p-6 bg-[#120B08]/90 border-[#3A241C] space-y-3">
+            <div className="portfolio-card p-4 sm:p-6 bg-[#120B08]/90 border-[#3A241C] space-y-3">
               <div className="flex items-center justify-between mb-1">
                 <h3 className="text-xs font-bold text-white uppercase tracking-wider font-mono flex items-center gap-2">
                   <MessageSquare className="h-3.5 w-3.5 text-[#FF7A36]" />
@@ -314,13 +314,13 @@ export const Contact = () => {
 
           {/* Right Column: Direct Message Launcher */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
             className="h-full"
           >
-            <div className="contact-interactive-card portfolio-card p-6 sm:p-7 bg-[#120B08]/90 border-[#3A241C] hover:border-[#FF7A36]/60 hover:shadow-[0_0_35px_rgba(255,90,31,0.2)] transition-all duration-300 h-full flex flex-col justify-between">
+            <div className="contact-interactive-card portfolio-card p-4 sm:p-6 md:p-7 bg-[#120B08]/90 border-[#3A241C] hover:border-[#FF7A36]/60 hover:shadow-[0_0_35px_rgba(255,90,31,0.2)] transition-all duration-300 h-full flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-5">
                   <div>
