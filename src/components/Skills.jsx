@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useAnimation, useInView } from 'framer-motion';
 import { skillsData } from '../data/portfolioData';
 import { TechIconMap } from './TechIcons';
 
@@ -144,6 +144,42 @@ const skillCardVariants = {
 
 export const Skills = () => {
   const [activeCategory, setActiveCategory] = useState('all');
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: false, margin: '-60px' });
+  const controls = useAnimation();
+
+  // 1. Initial / Scroll in-view trigger
+  useEffect(() => {
+    if (isInView) {
+      controls.start('visible');
+    }
+  }, [isInView, controls]);
+
+  // 2. Tab Category change trigger
+  useEffect(() => {
+    if (isInView) {
+      controls.set('hidden');
+      controls.start('visible');
+    }
+  }, [activeCategory]);
+
+  // 3. Navbar "#skills" click trigger
+  useEffect(() => {
+    let timer;
+    const handleNavTrigger = () => {
+      controls.set('hidden');
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        controls.start('visible');
+      }, 300);
+    };
+
+    window.addEventListener('trigger-skills-animation', handleNavTrigger);
+    return () => {
+      window.removeEventListener('trigger-skills-animation', handleNavTrigger);
+      if (timer) clearTimeout(timer);
+    };
+  }, [controls]);
 
   const filteredSkills = skillsData.filter((skill) => {
     if (activeCategory === 'all') return true;
@@ -151,7 +187,11 @@ export const Skills = () => {
   });
 
   return (
-    <section id="skills" className="relative py-14 sm:py-20 bg-[#0E0907]/60 overflow-hidden w-full max-w-full">
+    <section 
+      id="skills" 
+      ref={sectionRef} 
+      className="relative py-14 sm:py-20 bg-[#0E0907]/60 overflow-hidden w-full max-w-full"
+    >
       <div className="container-custom relative z-10">
 
         {/* Section Header matching reference screenshot */}
@@ -229,8 +269,7 @@ export const Skills = () => {
                   custom={index}
                   variants={skillCardVariants}
                   initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: '-40px' }}
+                  animate={controls}
                   exit="exit"
                   whileHover={{ 
                     y: -8, 
