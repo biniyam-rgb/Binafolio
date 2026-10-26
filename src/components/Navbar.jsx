@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, User, Code2, Folder, Route, Mail, Sparkles, Menu, X } from 'lucide-react';
+import { Home, User, Code2, Folder, Route, Mail, Sparkles, Menu, X, Power, Zap } from 'lucide-react';
+import confetti from 'canvas-confetti';
 
 const navLinks = [
   { name: 'Home', href: '#home', icon: Home },
@@ -15,6 +16,39 @@ export const Navbar = ({ onOpenResume, onNavClick }) => {
   const [activeSection, setActiveSection] = useState('home');
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isToggled, setIsToggled] = useState(() => {
+    try {
+      const saved = localStorage.getItem('portfolio_nav_toggle');
+      return saved !== null ? JSON.parse(saved) : false;
+    } catch {
+      return false;
+    }
+  });
+
+  const handleToggle = () => {
+    const next = !isToggled;
+    setIsToggled(next);
+    try {
+      localStorage.setItem('portfolio_nav_toggle', JSON.stringify(next));
+    } catch {
+      // ignore
+    }
+    if (next) {
+      try {
+        confetti({
+          particleCount: 26,
+          spread: 55,
+          origin: { y: 0.12, x: 0.82 },
+          colors: ['#FF5A1F', '#FF7A36', '#FFA26B', '#FFFFFF'],
+          ticks: 100,
+          gravity: 1.2,
+          scalar: 0.8
+        });
+      } catch {
+        // ignore
+      }
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -119,8 +153,56 @@ export const Navbar = ({ onOpenResume, onNavClick }) => {
             })}
           </nav>
 
-          {/* ================= RIGHT: Sleek Glowing "Ready For Hire" CTA Button ================= */}
-          <div className="flex items-center gap-3">
+          {/* ================= RIGHT: Sleek Glowing "Ready For Hire" CTA Button & Toggle Button ================= */}
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            {/* Interactive Toggle Button: Dark Gray (#1E1E24) when OFF <-> Glowing Orange (#FF5A1F) when ON */}
+            <button
+              type="button"
+              role="switch"
+              aria-checked={isToggled}
+              aria-label={`Toggle mode: ${isToggled ? 'ON (Glowing Orange)' : 'OFF (Dark Gray)'}`}
+              onClick={handleToggle}
+              className="relative inline-flex items-center gap-1.5 sm:gap-2 rounded-full px-2.5 sm:px-3 py-1.5 border transition-all duration-300 active:scale-95 cursor-pointer outline-none select-none backdrop-blur-xl group"
+              style={{
+                backgroundColor: isToggled ? '#FF5A1F' : '#1E1E24',
+                borderColor: isToggled ? '#FF8E55' : '#33333E',
+                boxShadow: isToggled
+                  ? '0 0 18px rgba(255, 90, 31, 0.65), 0 2px 10px rgba(255, 90, 31, 0.35)'
+                  : '0 2px 8px rgba(0, 0, 0, 0.5)'
+              }}
+              title={`Toggle Button: ${isToggled ? 'ON (Glowing Orange)' : 'OFF (Dark Gray)'}`}
+            >
+              {isToggled ? (
+                <Zap className="h-3.5 w-3.5 text-white fill-white transition-transform duration-300 group-hover:scale-110" />
+              ) : (
+                <Power className="h-3.5 w-3.5 text-[#9E9EAE] transition-transform duration-300 group-hover:scale-110" />
+              )}
+              <span
+                className="font-mono text-[11px] font-bold tracking-wider transition-colors duration-200"
+                style={{ color: isToggled ? '#FFFFFF' : '#B0B0C0' }}
+              >
+                {isToggled ? 'ON' : 'OFF'}
+              </span>
+              <span
+                className="relative inline-flex items-center w-7 h-4 rounded-full p-0.5 transition-colors duration-300"
+                style={{
+                  backgroundColor: isToggled ? '#C84411' : '#121216',
+                  border: isToggled ? '1px solid rgba(255,255,255,0.3)' : '1px solid #2B2B36'
+                }}
+              >
+                <motion.span
+                  layout
+                  transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                  className="inline-block w-3 h-3 rounded-full"
+                  style={{
+                    backgroundColor: isToggled ? '#FFFFFF' : '#4E4E5C',
+                    boxShadow: isToggled ? '0 0 6px #FFFFFF' : 'none',
+                    marginLeft: isToggled ? 'auto' : '0'
+                  }}
+                />
+              </span>
+            </button>
+
             <a
               href="#contact"
               onClick={(e) => handleLinkClick(e, '#contact')}
