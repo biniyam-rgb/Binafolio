@@ -5,7 +5,7 @@ export const BackgroundGlows = () => {
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
       {/* 1. Intensely glowing, highly visible amber-orange square grid with vibrant intersection dots */}
       <div 
-        className="absolute inset-0 opacity-90"
+        className="absolute inset-0 opacity-90 hero-square-grid"
         style={{
           backgroundImage: `
             radial-gradient(circle at 0px 0px, rgba(255, 122, 54, 0.95) 2.2px, rgba(255, 90, 31, 0.45) 3.5px, transparent 4px),
