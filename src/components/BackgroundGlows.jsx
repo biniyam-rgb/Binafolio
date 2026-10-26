@@ -12,7 +12,7 @@ export const BackgroundGlows = () => {
             linear-gradient(to right, rgba(255, 90, 31, 0.24) 1.5px, transparent 1.5px),
             linear-gradient(to bottom, rgba(255, 90, 31, 0.24) 1.5px, transparent 1.5px)
           `,
-          backgroundSize: '44px 44px, 44px 44px, 44px 44px',
+          backgroundSize: '40px 40px, 40px 40px, 40px 40px',
         }}
       />
 
