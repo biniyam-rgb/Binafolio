@@ -10,7 +10,6 @@ import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { ResumeModal } from './components/ResumeModal';
 import { CustomCursor } from './components/CustomCursor';
-import { FloatingToggleButton } from './components/FloatingToggleButton';
 import './App.css';
 
 export function App() {
@@ -118,9 +117,6 @@ export function App() {
 
       {/* Minimal footer */}
       <Footer />
-
-      {/* Floating Toggle Button (Dark Gray #1E1E24 when OFF <-> Glowing Orange #FF5A1F when ON) */}
-      <FloatingToggleButton />
 
       {/* Resume Download / Configuration Modal */}
       <ResumeModal
