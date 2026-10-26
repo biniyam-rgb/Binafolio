@@ -792,7 +792,16 @@ html[data-theme="light"] nav.hidden.md\:flex {
 }
 
 html[data-theme="light"] .nav-link-btn {
-  color: #475569 !important;
+  color: #1E293B !important;
+}
+
+html[data-theme="light"] .nav-link-icon {
+  color: #1E293B !important;
+  filter: none !important;
+}
+
+html[data-theme="light"] .nav-link-label {
+  color: #0F172A !important;
 }
 
 html[data-theme="light"] .nav-link-btn:hover {
@@ -800,15 +809,31 @@ html[data-theme="light"] .nav-link-btn:hover {
   background-color: rgba(255, 90, 31, 0.08) !important;
 }
 
+html[data-theme="light"] .nav-link-btn:hover .nav-link-icon {
+  color: #FF5A1F !important;
+  filter: drop-shadow(0 0 6px #FF5A1F) !important;
+}
+
 html[data-theme="light"] .nav-link-btn.active {
   color: #FF5A1F !important;
-  background-color: rgba(255, 90, 31, 0.14) !important;
+  background: rgba(255, 90, 31, 0.14) !important;
+  border-color: #FF5A1F !important;
+  box-shadow: 0 0 14px rgba(255, 90, 31, 0.25) !important;
+}
+
+html[data-theme="light"] .nav-link-btn.active .nav-link-icon {
+  color: #FF5A1F !important;
+  filter: drop-shadow(0 0 6px #FF5A1F) !important;
 }
 
 html[data-theme="light"] .ready-hire-btn {
-  background-color: rgba(255, 255, 255, 0.95) !important;
+  background-color: #FFFFFF !important;
   border-color: #FF7A36 !important;
   box-shadow: 0 4px 14px rgba(255, 90, 31, 0.22) !important;
+}
+
+html[data-theme="light"] .ready-hire-text {
+  color: #0F172A !important;
 }
 
 /* Badges & Pills */
