@@ -644,3 +644,194 @@ input, textarea {
   animation: wave 2.2s infinite ease-in-out;
 }
 
+/* =========================================================================
+   LIGHT / NORMAL MODE THEME SYSTEM
+   ========================================================================= */
+
+html[data-theme="light"],
+body[data-theme="light"] {
+  --bg-primary: #F8F9FA;
+  --bg-secondary: #F1F3F5;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F8F9FA;
+  --bg-card-elevated: #FFFFFF;
+  --primary-orange: #FF5A1F;
+  --bright-orange: #FF6B2B;
+  --burnt-orange: #E04B16;
+  --main-text: #0F172A;
+  --secondary-text: #334155;
+  --muted-text: #64748B;
+  --subtle-borders: rgba(0, 0, 0, 0.08);
+  --subtle-borders-hover: rgba(255, 90, 31, 0.4);
+  --highlight-border: rgba(255, 90, 31, 0.5);
+  --glow-orange: rgba(255, 90, 31, 0.1);
+  --glow-orange-intense: rgba(255, 90, 31, 0.22);
+  background-color: #F8F9FA !important;
+  color: #0F172A !important;
+}
+
+/* Global root backgrounds & base text in light mode */
+html[data-theme="light"] body,
+html[data-theme="light"] #root,
+html[data-theme="light"] main,
+html[data-theme="light"] .bg-\[\#07090e\] {
+  background-color: #F8F9FA !important;
+  color: #0F172A !important;
+}
+
+/* Typography in light mode */
+html[data-theme="light"] h1,
+html[data-theme="light"] h2,
+html[data-theme="light"] h3,
+html[data-theme="light"] h4,
+html[data-theme="light"] .text-white,
+html[data-theme="light"] .text-\[\#F5F0EC\],
+html[data-theme="light"] strong {
+  color: #0F172A !important;
+}
+
+html[data-theme="light"] .text-\[\#C4B6AE\],
+html[data-theme="light"] p {
+  color: #334155 !important;
+}
+
+html[data-theme="light"] .text-\[\#8E7D75\] {
+  color: #64748B !important;
+}
+
+/* Portfolio Cards & Containers in light mode */
+html[data-theme="light"] .portfolio-card,
+html[data-theme="light"] .bg-\[\#140C09\],
+html[data-theme="light"] .bg-\[\#120B08\],
+html[data-theme="light"] .bg-\[\#0D0806\],
+html[data-theme="light"] .bg-\[\#1C110D\],
+html[data-theme="light"] .bg-\[\#160E0A\],
+html[data-theme="light"] .bg-\[\#0E0806\],
+html[data-theme="light"] .contact-interactive-card {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 10px 25px -4px rgba(0, 0, 0, 0.05), 0 0 16px rgba(255, 90, 31, 0.04) !important;
+}
+
+html[data-theme="light"] .portfolio-card:hover,
+html[data-theme="light"] .contact-interactive-card:hover {
+  border-color: #FF7A36 !important;
+  box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.09), 0 0 24px rgba(255, 90, 31, 0.16) !important;
+}
+
+/* Inner card boxes, inputs & pills */
+html[data-theme="light"] .bg-\[\#090605\],
+html[data-theme="light"] .bg-\[\#180E0A\] {
+  background-color: #F1F5F9 !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  color: #0F172A !important;
+}
+
+/* Form inputs & textareas */
+html[data-theme="light"] input,
+html[data-theme="light"] textarea {
+  background-color: #FFFFFF !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  color: #0F172A !important;
+}
+
+html[data-theme="light"] input:focus,
+html[data-theme="light"] textarea:focus {
+  border-color: #FF5A1F !important;
+  box-shadow: 0 0 0 3px rgba(255, 90, 31, 0.15) !important;
+}
+
+html[data-theme="light"] input::placeholder,
+html[data-theme="light"] textarea::placeholder {
+  color: #94A3B8 !important;
+}
+
+/* Borders in light mode */
+html[data-theme="light"] .border-\[\#3A241C\],
+html[data-theme="light"] .border-\[\#2E1A12\],
+html[data-theme="light"] .border-\[\#5A3629\] {
+  border-color: rgba(0, 0, 0, 0.09) !important;
+}
+
+/* Header & Floating Navigation Capsule */
+html[data-theme="light"] header > div > div {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 12px 35px -8px rgba(0, 0, 0, 0.08), 0 0 20px rgba(255, 90, 31, 0.08) !important;
+}
+
+html[data-theme="light"] nav.hidden.md\:flex {
+  background-color: rgba(241, 245, 249, 0.95) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+html[data-theme="light"] .nav-link-btn {
+  color: #475569 !important;
+}
+
+html[data-theme="light"] .nav-link-btn:hover {
+  color: #FF5A1F !important;
+  background-color: rgba(255, 90, 31, 0.08) !important;
+}
+
+html[data-theme="light"] .nav-link-btn.active {
+  color: #FF5A1F !important;
+  background-color: rgba(255, 90, 31, 0.12) !important;
+}
+
+html[data-theme="light"] .ready-hire-btn {
+  background-color: #FFFFFF !important;
+  border-color: #FF7A36 !important;
+  box-shadow: 0 4px 14px rgba(255, 90, 31, 0.2) !important;
+}
+
+/* Badges & Pills */
+html[data-theme="light"] .badge-orange-pill {
+  background-color: #FFF2EB !important;
+  border-color: #FFD4C2 !important;
+  color: #E0440E !important;
+}
+
+/* Ambient Background grid in light mode */
+html[data-theme="light"] .fixed.inset-0.pointer-events-none > div:first-child {
+  opacity: 0.25 !important;
+}
+
+/* Footer in light mode */
+html[data-theme="light"] footer,
+html[data-theme="light"] .bg-\[\#0A0706\] {
+  background-color: #F1F3F5 !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #475569 !important;
+}
+
+html[data-theme="light"] footer a.p-2\.5 {
+  background-color: #FFFFFF !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  color: #475569 !important;
+}
+
+html[data-theme="light"] footer a.p-2\.5:hover {
+  background-color: #FF5A1F !important;
+  color: #FFFFFF !important;
+}
+
+/* Seamless theme transition */
+html,
+body,
+header,
+header > div > div,
+nav,
+footer,
+.portfolio-card,
+.contact-interactive-card,
+input,
+textarea {
+  transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+
