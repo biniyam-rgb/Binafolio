@@ -293,27 +293,70 @@ export const Navbar = ({ onOpenResume, onNavClick }) => {
             {/* Mobile Menu Toggle Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden rounded-full p-2 text-white hover:text-[#FF7A36] bg-white/[0.08] border border-white/[0.15] hover:border-[#FF5A1F]/50 transition-colors shadow-sm"
-              aria-label="Toggle navigation menu"
+              className={`md:hidden rounded-full p-2 transition-all duration-200 border cursor-pointer ${
+                theme === 'light'
+                  ? 'text-[#0F172A] hover:text-[#FF5A1F] bg-black/[0.04] border-black/[0.1] hover:border-[#FF5A1F]'
+                  : 'text-white hover:text-[#FF7A36] bg-white/[0.08] border-white/[0.15] hover:border-[#FF5A1F]/50'
+              }`}
+              aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             >
-              {mobileMenuOpen ? <X className="h-5 w-5 text-white" /> : <Menu className="h-5 w-5 text-white" />}
+              {mobileMenuOpen ? (
+                <X className="h-5 w-5 transition-transform duration-200" />
+              ) : (
+                <Menu className="h-5 w-5 transition-transform duration-200" />
+              )}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Drawer Menu: Impeccably Organized & Theme-Aware */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden container-custom mt-2"
+            initial={{ opacity: 0, y: -12, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -12, scale: 0.98 }}
+            transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+            className="md:hidden container-custom mt-2 sm:mt-3 px-3 sm:px-4"
           >
-            <div className="rounded-2xl border border-[#FF5A1F]/30 backdrop-blur-2xl bg-[#07090e]/95 p-4 shadow-[0_15px_40px_rgba(0,0,0,0.9),0_0_25px_rgba(255,90,31,0.2)]">
-              <div className="grid grid-cols-3 gap-2">
+            <div
+              className={`rounded-3xl border backdrop-blur-2xl p-4 sm:p-5 transition-colors duration-300 ${
+                theme === 'light'
+                  ? 'bg-white/95 border-slate-200/80 shadow-[0_20px_45px_rgba(0,0,0,0.12),0_0_25px_rgba(255,90,31,0.12)]'
+                  : 'bg-[#0B0E17]/95 border-[#FF5A1F]/30 shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_25px_rgba(255,90,31,0.2)]'
+              }`}
+            >
+              {/* Header: Menu Title & Status */}
+              <div
+                className="flex items-center justify-between pb-3 mb-3 border-b"
+                style={{
+                  borderColor: theme === 'light' ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.08)'
+                }}
+              >
+                <div className="flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-[#FF5A1F] animate-pulse" />
+                  <span
+                    className="font-mono text-xs font-bold tracking-wider uppercase"
+                    style={{ color: theme === 'light' ? '#64748B' : '#94A3B8' }}
+                  >
+                    Quick Navigation
+                  </span>
+                </div>
+                <span
+                  className="font-mono text-[11px] px-2 py-0.5 rounded-full border"
+                  style={{
+                    backgroundColor: theme === 'light' ? 'rgba(255,90,31,0.08)' : 'rgba(255,90,31,0.15)',
+                    borderColor: 'rgba(255,90,31,0.3)',
+                    color: '#FF7A36'
+                  }}
+                >
+                  6 Sections
+                </span>
+              </div>
+
+              {/* Organized 2-Column Grid of Navigation Cards */}
+              <div className="grid grid-cols-2 gap-2.5">
                 {navLinks.map((link) => {
                   const Icon = link.icon;
                   const isActive = activeSection === link.href.substring(1);
@@ -322,36 +365,72 @@ export const Navbar = ({ onOpenResume, onNavClick }) => {
                       key={link.name}
                       href={link.href}
                       onClick={(e) => handleLinkClick(e, link.href)}
-                      className={`flex flex-col items-center justify-center py-2.5 px-2 rounded-xl text-[11px] sm:text-xs transition-all ${
+                      className={`flex items-center gap-2.5 p-2.5 rounded-2xl border transition-all duration-200 active:scale-97 cursor-pointer ${
                         isActive
-                          ? 'bg-[#FF5A1F]/15 text-[#FF7A36] border border-[#FF5A1F]/60 shadow-[0_0_15px_rgba(255,90,31,0.35)] font-semibold'
-                          : 'text-white hover:bg-white/[0.08] hover:text-[#FF7A36]'
+                          ? theme === 'light'
+                            ? 'bg-[#FF5A1F]/10 border-[#FF5A1F]/50 shadow-[0_0_14px_rgba(255,90,31,0.18)]'
+                            : 'bg-[#FF5A1F]/15 border-[#FF5A1F]/60 shadow-[0_0_16px_rgba(255,90,31,0.3)]'
+                          : theme === 'light'
+                            ? 'bg-slate-50/80 border-slate-200/60 hover:bg-slate-100 hover:border-[#FF5A1F]/40'
+                            : 'bg-white/[0.03] border-white/[0.06] hover:bg-white/[0.08] hover:border-[#FF5A1F]/40'
                       }`}
                     >
-                      <Icon className="h-4 w-4 mb-1 text-white drop-shadow-[0_0_3px_rgba(255,255,255,0.45)]" />
-                      <span>{link.name}</span>
+                      {/* Icon container */}
+                      <div
+                        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl transition-colors ${
+                          isActive
+                            ? 'bg-[#FF5A1F] text-white shadow-[0_0_10px_rgba(255,90,31,0.6)]'
+                            : theme === 'light'
+                              ? 'bg-slate-200/70 text-[#0F172A]'
+                              : 'bg-white/[0.08] text-white'
+                        }`}
+                      >
+                        <Icon className="h-4 w-4" />
+                      </div>
+
+                      {/* Label & Active dot */}
+                      <div className="flex flex-1 items-center justify-between min-w-0 pr-1">
+                        <span
+                          className={`text-xs sm:text-sm font-bold tracking-tight truncate ${
+                            isActive
+                              ? 'text-[#FF5A1F]'
+                              : theme === 'light'
+                                ? 'text-[#0F172A]'
+                                : 'text-[#F1F5F9]'
+                          }`}
+                        >
+                          {link.name}
+                        </span>
+
+                        {isActive && (
+                          <span className="h-1.5 w-1.5 rounded-full bg-[#FF5A1F] shadow-[0_0_8px_#FF5A1F] shrink-0" />
+                        )}
+                      </div>
                     </a>
                   );
                 })}
               </div>
 
-              <div className="pt-3 mt-3 border-t border-white/[0.08]">
+              {/* Bottom Section: Ready For Hire CTA */}
+              <div
+                className="pt-3.5 mt-3.5 border-t"
+                style={{
+                  borderColor: theme === 'light' ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.08)'
+                }}
+              >
                 <a
                   href="#contact"
                   onClick={(e) => handleLinkClick(e, '#contact')}
-                  className="ready-hire-btn w-full inline-flex items-center justify-center gap-2.5 rounded-xl border border-[#FF5A1F]/50 bg-gradient-to-r from-[#1E110A] via-[#2A160E] to-[#1E110A] py-2.5 text-xs font-black tracking-wider uppercase text-white shadow-[0_0_22px_rgba(255,90,31,0.4)] hover:scale-102 transition-all cursor-pointer"
+                  className="ready-hire-btn w-full inline-flex items-center justify-center gap-2.5 rounded-2xl border border-[#FF5A1F]/50 bg-gradient-to-r from-[#FF5A1F] to-[#FF7A36] py-3 text-xs font-black tracking-wider uppercase text-white shadow-[0_0_24px_rgba(255,90,31,0.45)] active:scale-98 transition-all cursor-pointer"
                 >
-                  {/* Luminous Animated Shimmer Light Beam */}
-                  <span className="ready-hire-shimmer" />
-
                   <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10B981] shadow-[0_0_6px_#10B981]"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-white shadow-[0_0_6px_#FFFFFF]"></span>
                   </span>
-                  <span className="ready-hire-text font-['Plus_Jakarta_Sans',sans-serif] font-black tracking-wider uppercase">
-                    Ready For Hire
+                  <span className="font-['Plus_Jakarta_Sans',sans-serif] font-black tracking-wider uppercase text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">
+                    Ready For Hire — Let's Connect
                   </span>
-                  <Sparkles className="ready-hire-sparkle h-3.5 w-3.5 text-[#FF7A36]" />
+                  <Sparkles className="h-4 w-4 text-white" />
                 </a>
               </div>
             </div>
