@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, User, Code2, Folder, Route, Mail, Sparkles, Menu, X, Power, Zap } from 'lucide-react';
+import { Home, User, Code2, Folder, Route, Mail, Sparkles, Menu, X, Sun, Moon } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 const navLinks = [
@@ -16,37 +16,68 @@ export const Navbar = ({ onOpenResume, onNavClick }) => {
   const [activeSection, setActiveSection] = useState('home');
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isToggled, setIsToggled] = useState(() => {
+  const [theme, setTheme] = useState(() => {
     try {
-      const saved = localStorage.getItem('portfolio_nav_toggle');
-      return saved !== null ? JSON.parse(saved) : false;
+      const saved = localStorage.getItem('portfolio_theme');
+      return saved === 'light' ? 'light' : 'dark';
     } catch {
-      return false;
+      return 'dark';
     }
   });
 
-  const handleToggle = () => {
-    const next = !isToggled;
-    setIsToggled(next);
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    if (document.body) {
+      document.body.setAttribute('data-theme', theme);
+    }
     try {
-      localStorage.setItem('portfolio_nav_toggle', JSON.stringify(next));
+      localStorage.setItem('portfolio_theme', theme);
+    } catch {
+      // ignore storage errors
+    }
+  }, [theme]);
+
+  const handleThemeToggle = () => {
+    const nextTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(nextTheme);
+    document.documentElement.setAttribute('data-theme', nextTheme);
+    if (document.body) {
+      document.body.setAttribute('data-theme', nextTheme);
+    }
+    try {
+      localStorage.setItem('portfolio_theme', nextTheme);
     } catch {
       // ignore
     }
-    if (next) {
-      try {
+
+    window.dispatchEvent(
+      new CustomEvent('theme-change', { detail: { theme: nextTheme } })
+    );
+
+    try {
+      if (nextTheme === 'light') {
         confetti({
-          particleCount: 26,
-          spread: 55,
+          particleCount: 32,
+          spread: 60,
           origin: { y: 0.12, x: 0.82 },
-          colors: ['#FF5A1F', '#FF7A36', '#FFA26B', '#FFFFFF'],
-          ticks: 100,
+          colors: ['#FF5A1F', '#FFB800', '#FFA066', '#FFFFFF'],
+          ticks: 90,
           gravity: 1.2,
           scalar: 0.8
         });
-      } catch {
-        // ignore
+      } else {
+        confetti({
+          particleCount: 32,
+          spread: 60,
+          origin: { y: 0.12, x: 0.82 },
+          colors: ['#00D8FF', '#FF5A1F', '#A78BFA', '#FFFFFF'],
+          ticks: 90,
+          gravity: 1.2,
+          scalar: 0.8
+        });
       }
+    } catch {
+      // ignore
     }
   };
 
@@ -155,53 +186,85 @@ export const Navbar = ({ onOpenResume, onNavClick }) => {
 
           {/* ================= RIGHT: Sleek Glowing "Ready For Hire" CTA Button & Toggle Button ================= */}
           <div className="flex items-center gap-2 sm:gap-2.5">
-            {/* Interactive Toggle Button: Dark Gray (#1E1E24) when OFF <-> Glowing Orange (#FF5A1F) when ON */}
-            <button
+            {/* Professional Animated Theme Switcher (Night Mode <-> Normal Mode) */}
+            <motion.button
               type="button"
               role="switch"
-              aria-checked={isToggled}
-              aria-label={`Toggle mode: ${isToggled ? 'ON (Glowing Orange)' : 'OFF (Dark Gray)'}`}
-              onClick={handleToggle}
-              className="relative inline-flex items-center gap-1.5 sm:gap-2 rounded-full px-2.5 sm:px-3 py-1.5 border transition-all duration-300 active:scale-95 cursor-pointer outline-none select-none backdrop-blur-xl group"
-              style={{
-                backgroundColor: isToggled ? '#FF5A1F' : '#1E1E24',
-                borderColor: isToggled ? '#FF8E55' : '#33333E',
-                boxShadow: isToggled
-                  ? '0 0 18px rgba(255, 90, 31, 0.65), 0 2px 10px rgba(255, 90, 31, 0.35)'
-                  : '0 2px 8px rgba(0, 0, 0, 0.5)'
-              }}
-              title={`Toggle Button: ${isToggled ? 'ON (Glowing Orange)' : 'OFF (Dark Gray)'}`}
+              aria-checked={theme === 'light'}
+              aria-label={`Current mode: ${theme === 'dark' ? 'Night Mode' : 'Normal Mode'}. Click to switch theme.`}
+              onClick={handleThemeToggle}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.94 }}
+              transition={{ type: 'spring', stiffness: 450, damping: 25 }}
+              className={`theme-toggle-btn relative inline-flex items-center gap-1.5 sm:gap-2 rounded-full px-2.5 sm:px-3 py-1.5 border transition-all duration-300 cursor-pointer outline-none select-none backdrop-blur-xl ${
+                theme === 'light'
+                  ? 'bg-gradient-to-r from-[#FFF5EB] to-[#FFE8D6] border-[#FF8E55] shadow-[0_0_20px_rgba(255,90,31,0.35),0_2px_8px_rgba(255,122,54,0.2)]'
+                  : 'bg-[#10121A]/90 border-white/[0.12] hover:border-[#FF5A1F]/50 shadow-[0_4px_16px_rgba(0,0,0,0.6),0_0_12px_rgba(255,90,31,0.15)]'
+              }`}
+              title={theme === 'dark' ? 'Switch to Normal Mode (Day)' : 'Switch to Night Mode (Dark)'}
             >
-              {isToggled ? (
-                <Zap className="h-3.5 w-3.5 text-white fill-white transition-transform duration-300 group-hover:scale-110" />
-              ) : (
-                <Power className="h-3.5 w-3.5 text-[#9E9EAE] transition-transform duration-300 group-hover:scale-110" />
-              )}
+              {/* Animated Icon: Sun in Normal mode, Moon in Night mode */}
+              <div className="relative flex items-center justify-center w-4 h-4">
+                <AnimatePresence mode="wait" initial={false}>
+                  {theme === 'light' ? (
+                    <motion.div
+                      key="sun"
+                      initial={{ rotate: -90, scale: 0.2, opacity: 0 }}
+                      animate={{ rotate: 0, scale: 1, opacity: 1 }}
+                      exit={{ rotate: 90, scale: 0.2, opacity: 0 }}
+                      transition={{ duration: 0.22, ease: 'easeOut' }}
+                      className="text-[#FF5A1F]"
+                    >
+                      <Sun className="h-4 w-4 text-[#FF5A1F] drop-shadow-[0_0_6px_rgba(255,90,31,0.7)]" />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="moon"
+                      initial={{ rotate: 90, scale: 0.2, opacity: 0 }}
+                      animate={{ rotate: 0, scale: 1, opacity: 1 }}
+                      exit={{ rotate: -90, scale: 0.2, opacity: 0 }}
+                      transition={{ duration: 0.22, ease: 'easeOut' }}
+                      className="text-[#00D8FF]"
+                    >
+                      <Moon className="h-4 w-4 text-[#00D8FF] fill-[#00D8FF]/20 drop-shadow-[0_0_6px_rgba(0,216,255,0.7)]" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Mode Label */}
               <span
-                className="font-mono text-[11px] font-bold tracking-wider transition-colors duration-200"
-                style={{ color: isToggled ? '#FFFFFF' : '#B0B0C0' }}
-              >
-                {isToggled ? 'ON' : 'OFF'}
-              </span>
-              <span
-                className="relative inline-flex items-center w-7 h-4 rounded-full p-0.5 transition-colors duration-300"
+                className="font-mono text-[11px] font-extrabold tracking-wider uppercase transition-colors duration-200"
                 style={{
-                  backgroundColor: isToggled ? '#C84411' : '#121216',
-                  border: isToggled ? '1px solid rgba(255,255,255,0.3)' : '1px solid #2B2B36'
+                  color: theme === 'light' ? '#C2410C' : '#CBD5E1',
+                  textShadow: theme === 'light' ? '0 0 10px rgba(255,90,31,0.3)' : '0 0 8px rgba(0,216,255,0.3)'
                 }}
               >
-                <motion.span
-                  layout
-                  transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                  className="inline-block w-3 h-3 rounded-full"
-                  style={{
-                    backgroundColor: isToggled ? '#FFFFFF' : '#4E4E5C',
-                    boxShadow: isToggled ? '0 0 6px #FFFFFF' : 'none',
-                    marginLeft: isToggled ? 'auto' : '0'
-                  }}
-                />
+                {theme === 'light' ? 'Normal' : 'Night'}
               </span>
-            </button>
+
+              {/* Sleek Sliding Capsule Switch */}
+              <div
+                className="relative inline-flex items-center w-8 h-4 rounded-full p-0.5 transition-colors duration-300"
+                style={{
+                  backgroundColor: theme === 'light' ? '#FFD4B2' : '#080A0F',
+                  border: theme === 'light' ? '1px solid rgba(255,90,31,0.4)' : '1px solid rgba(255,255,255,0.1)'
+                }}
+              >
+                <motion.div
+                  layout
+                  transition={{ type: 'spring', stiffness: 500, damping: 28 }}
+                  className="h-3 w-3 rounded-full flex items-center justify-center transition-all"
+                  style={{
+                    backgroundColor: theme === 'light' ? '#FF5A1F' : '#00D8FF',
+                    boxShadow: theme === 'light' ? '0 0 8px #FF5A1F' : '0 0 8px #00D8FF',
+                    marginLeft: theme === 'light' ? 'auto' : '0'
+                  }}
+                >
+                  <span className="w-1 h-1 rounded-full bg-white opacity-90" />
+                </motion.div>
+              </div>
+            </motion.button>
 
             <a
               href="#contact"
