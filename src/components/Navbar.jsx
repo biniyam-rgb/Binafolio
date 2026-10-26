@@ -132,16 +132,22 @@ export const Navbar = ({ onOpenResume, onNavClick }) => {
         {/* Floating glassmorphic capsule centered at the top */}
         <div 
           className={`w-full flex items-center justify-between px-5 sm:px-7 py-2.5 rounded-full border transition-all duration-300 ${
-            scrolled 
-              ? 'border-[#FF5A1F]/35 bg-[#07090e] shadow-[0_15px_45px_-10px_rgba(0,0,0,0.98),0_0_30px_rgba(255,90,31,0.2)]' 
-              : 'border-white/[0.1] backdrop-blur-2xl bg-[#07090e]/85 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.9),0_0_25px_rgba(255,90,31,0.15)]'
+            theme === 'light'
+              ? scrolled 
+                ? 'border-[#FF5A1F]/40 bg-white/95 shadow-[0_15px_45px_-10px_rgba(0,0,0,0.1),0_0_20px_rgba(255,90,31,0.12)]' 
+                : 'border-slate-300/80 backdrop-blur-2xl bg-white/90 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.08),0_0_20px_rgba(255,90,31,0.08)]'
+              : scrolled 
+                ? 'border-[#FF5A1F]/35 bg-[#07090e] shadow-[0_15px_45px_-10px_rgba(0,0,0,0.98),0_0_30px_rgba(255,90,31,0.2)]' 
+                : 'border-white/[0.1] backdrop-blur-2xl bg-[#07090e]/85 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.9),0_0_25px_rgba(255,90,31,0.15)]'
           }`}
         >
           {/* ================= LEFT: </> BinaFolio ● ================= */}
           <a
             href="#home"
             onClick={(e) => handleLinkClick(e, '#home')}
-            className={`flex items-center gap-2 text-base sm:text-lg font-bold tracking-tight text-[#F5F0EC] group py-1 transition-all duration-300 ${
+            className={`flex items-center gap-2 text-base sm:text-lg font-bold tracking-tight group py-1 transition-all duration-300 ${
+              theme === 'light' ? 'text-[#0F172A]' : 'text-[#F5F0EC]'
+            } ${
               scrolled 
                 ? 'opacity-0 pointer-events-none -translate-x-2' 
                 : 'opacity-100 translate-x-0'
@@ -152,13 +158,25 @@ export const Navbar = ({ onOpenResume, onNavClick }) => {
             <span className="font-mono text-base sm:text-lg font-black tracking-tighter" style={{ color: '#FF7A36', textShadow: '0 0 10px rgba(255, 90, 31, 0.8)' }}>&lt;/&gt;</span>
             <span className="font-['Inter'] font-extrabold tracking-tight text-base sm:text-lg">
               <span style={{ color: '#FF7A36', textShadow: '0 0 14px rgba(255, 122, 54, 0.8)' }}>Bina</span>
-              <span style={{ color: '#FFFFFF', textShadow: '0 0 14px rgba(255, 255, 255, 0.45)' }}>Folio</span>
+              <span 
+                className="transition-colors duration-200"
+                style={{ 
+                  color: theme === 'light' ? '#0F172A' : '#FFFFFF', 
+                  textShadow: theme === 'light' ? 'none' : '0 0 14px rgba(255, 255, 255, 0.45)' 
+                }}
+              >
+                Folio
+              </span>
             </span>
             <span className="h-2 w-2 rounded-full bg-[#FF5A1F] shadow-[0_0_10px_#FF5A1F,0_0_16px_#FF7A36] ml-0.5 animate-pulse" />
           </a>
 
-          {/* ================= CENTER (Primary Nav): Centered Dark Glass Capsule ================= */}
-          <nav className="hidden md:flex items-center gap-1 lg:gap-1.5 px-3 py-1.5 rounded-full bg-[#0a0e17]/90 border border-[#FF5A1F]/30 shadow-[0_0_20px_rgba(255,90,31,0.15),inset_0_0_12px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+          {/* ================= CENTER (Primary Nav): Centered Capsule ================= */}
+          <nav className={`hidden md:flex items-center gap-1 lg:gap-1.5 px-3 py-1.5 rounded-full border transition-all duration-300 backdrop-blur-xl ${
+            theme === 'light'
+              ? 'bg-[#EBF0F5]/90 border-slate-300/80 shadow-[0_2px_12px_rgba(0,0,0,0.06)]'
+              : 'bg-[#0a0e17]/90 border-[#FF5A1F]/30 shadow-[0_0_20px_rgba(255,90,31,0.15),inset_0_0_12px_rgba(0,0,0,0.5)]'
+          }`}>
             {navLinks.map((link) => {
               const Icon = link.icon;
               const isActive = activeSection === link.href.substring(1);
@@ -269,7 +287,11 @@ export const Navbar = ({ onOpenResume, onNavClick }) => {
             <a
               href="#contact"
               onClick={(e) => handleLinkClick(e, '#contact')}
-              className="ready-hire-btn hidden sm:inline-flex items-center gap-2 rounded-full px-4 sm:px-4.5 py-1.5 border border-[#FF5A1F]/45 bg-[#140C09]/90 backdrop-blur-xl hover:border-[#FF7A36] active:scale-95 group cursor-pointer"
+              className={`ready-hire-btn hidden sm:inline-flex items-center gap-2 rounded-full px-4 sm:px-4.5 py-1.5 border backdrop-blur-xl hover:border-[#FF7A36] active:scale-95 group cursor-pointer transition-all ${
+                theme === 'light'
+                  ? 'border-[#FF5A1F]/50 bg-white shadow-[0_2px_12px_rgba(255,90,31,0.18)]'
+                  : 'border-[#FF5A1F]/45 bg-[#140C09]/90'
+              }`}
               title="Ready for Hire — Let's connect!"
             >
               {/* Luminous Animated Shimmer Light Beam */}
