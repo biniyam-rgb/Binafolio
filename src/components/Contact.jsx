@@ -99,7 +99,7 @@ export const Contact = () => {
       // Standard RFC-compliant email pattern
       const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
       if (!emailRegex.test(trimmed)) {
-        return 'Please enter a valid email address (e.g. name@example.com).';
+        return 'Please enter a valid email address.';
       }
       return '';
     }
@@ -473,24 +473,16 @@ export const Contact = () => {
                 ) : (
                   <form onSubmit={handleSubmit} noValidate className="space-y-3.5">
                     {/* Name & Email Inputs Grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                       <div>
-                        <div className="flex items-center justify-between mb-1">
-                          <label
-                            htmlFor="contact-name"
-                            className="text-[11px] font-mono uppercase tracking-wider text-[#C4B6AE] flex items-center gap-1.5 cursor-pointer"
-                          >
-                            <User className="h-3 w-3 text-[#FF5A1F]" />
-                            <span>Name</span>
-                            <span className="text-[#FF5A1F]">*</span>
-                          </label>
-                          {touched.name && !errors.name && name.trim().length >= 2 && (
-                            <span className="flex items-center gap-1 text-[10px] font-mono text-[#10B981]">
-                              <CheckCircle2 className="w-3 h-3" />
-                              <span>Valid</span>
-                            </span>
-                          )}
-                        </div>
+                        <label
+                          htmlFor="contact-name"
+                          className="block text-[11px] font-mono uppercase tracking-wider text-[#C4B6AE] mb-1.5 flex items-center gap-1.5 cursor-pointer"
+                        >
+                          <User className="h-3 w-3 text-[#FF5A1F]" />
+                          <span>Name</span>
+                          <span className="text-[#FF5A1F]">*</span>
+                        </label>
                         <input
                           ref={nameRef}
                           id="contact-name"
@@ -501,11 +493,7 @@ export const Contact = () => {
                           onBlur={() => handleBlur('name')}
                           placeholder="e.g. Biniyam Gebrie"
                           className={`contact-input text-xs sm:text-sm ${
-                            touched.name && errors.name
-                              ? 'has-error'
-                              : touched.name && !errors.name && name.trim().length >= 2
-                              ? 'is-valid'
-                              : ''
+                            touched.name && errors.name ? 'has-error' : ''
                           }`}
                           disabled={status === 'submitting'}
                           aria-invalid={Boolean(touched.name && errors.name)}
@@ -525,22 +513,14 @@ export const Contact = () => {
                       </div>
 
                       <div>
-                        <div className="flex items-center justify-between mb-1">
-                          <label
-                            htmlFor="contact-email"
-                            className="text-[11px] font-mono uppercase tracking-wider text-[#C4B6AE] flex items-center gap-1.5 cursor-pointer"
-                          >
-                            <Mail className="h-3 w-3 text-[#FF5A1F]" />
-                            <span>Email</span>
-                            <span className="text-[#FF5A1F]">*</span>
-                          </label>
-                          {touched.email && !errors.email && email.trim() && (
-                            <span className="flex items-center gap-1 text-[10px] font-mono text-[#10B981]">
-                              <CheckCircle2 className="w-3 h-3" />
-                              <span>Valid</span>
-                            </span>
-                          )}
-                        </div>
+                        <label
+                          htmlFor="contact-email"
+                          className="block text-[11px] font-mono uppercase tracking-wider text-[#C4B6AE] mb-1.5 flex items-center gap-1.5 cursor-pointer"
+                        >
+                          <Mail className="h-3 w-3 text-[#FF5A1F]" />
+                          <span>Email</span>
+                          <span className="text-[#FF5A1F]">*</span>
+                        </label>
                         <input
                           ref={emailRef}
                           id="contact-email"
@@ -551,11 +531,7 @@ export const Contact = () => {
                           onBlur={() => handleBlur('email')}
                           placeholder="e.g. bini@gmail.com"
                           className={`contact-input text-xs sm:text-sm ${
-                            touched.email && errors.email
-                              ? 'has-error'
-                              : touched.email && !errors.email && email.trim()
-                              ? 'is-valid'
-                              : ''
+                            touched.email && errors.email ? 'has-error' : ''
                           }`}
                           disabled={status === 'submitting'}
                           aria-invalid={Boolean(touched.email && errors.email)}
@@ -577,22 +553,14 @@ export const Contact = () => {
 
                     {/* Message Area */}
                     <div>
-                      <div className="flex items-center justify-between mb-1">
-                        <label
-                          htmlFor="contact-message"
-                          className="text-[11px] font-mono uppercase tracking-wider text-[#C4B6AE] mb-1 flex items-center gap-1.5 cursor-pointer"
-                        >
-                          <MessageSquare className="h-3 w-3 text-[#FF5A1F]" />
-                          <span>Message</span>
-                          <span className="text-[#FF5A1F]">*</span>
-                        </label>
-                        {touched.message && !errors.message && message.trim().length >= 10 && (
-                          <span className="flex items-center gap-1 text-[10px] font-mono text-[#10B981]">
-                            <CheckCircle2 className="w-3 h-3" />
-                            <span>Valid</span>
-                          </span>
-                        )}
-                      </div>
+                      <label
+                        htmlFor="contact-message"
+                        className="block text-[11px] font-mono uppercase tracking-wider text-[#C4B6AE] mb-1.5 flex items-center gap-1.5 cursor-pointer"
+                      >
+                        <MessageSquare className="h-3 w-3 text-[#FF5A1F]" />
+                        <span>Message</span>
+                        <span className="text-[#FF5A1F]">*</span>
+                      </label>
                       <textarea
                         ref={messageRef}
                         id="contact-message"
@@ -603,11 +571,7 @@ export const Contact = () => {
                         onBlur={() => handleBlur('message')}
                         placeholder="Hi Biniyam, I'd like to talk about a full-stack project or collaboration..."
                         className={`contact-textarea text-xs sm:text-sm ${
-                          touched.message && errors.message
-                            ? 'has-error'
-                            : touched.message && !errors.message && message.trim().length >= 10
-                            ? 'is-valid'
-                            : ''
+                          touched.message && errors.message ? 'has-error' : ''
                         }`}
                         style={{ resize: 'none' }}
                         disabled={status === 'submitting'}
