@@ -287,12 +287,12 @@ export const Navbar = ({ onOpenResume, onNavClick }) => {
             <a
               href="#contact"
               onClick={(e) => handleLinkClick(e, '#contact')}
-              className={`ready-hire-btn hidden sm:inline-flex items-center gap-2 rounded-full px-4 sm:px-4.5 py-1.5 border backdrop-blur-xl hover:border-[#FF7A36] active:scale-95 group cursor-pointer transition-all ${
+              className={`ready-hire-btn hidden sm:inline-flex items-center gap-2 rounded-full px-4 sm:px-4.5 py-1.5 border backdrop-blur-xl hover:border-[#10B981] active:scale-95 group cursor-pointer transition-all ${
                 theme === 'light'
-                  ? 'border-[#FF5A1F]/50 bg-white shadow-[0_2px_12px_rgba(255,90,31,0.18)]'
-                  : 'border-[#FF5A1F]/45 bg-[#140C09]/90'
+                  ? 'border-[#10B981]/50 bg-white shadow-[0_2px_12px_rgba(16,185,129,0.2)]'
+                  : 'border-[#10B981]/45 bg-[#091F18]/90'
               }`}
-              title="Ready for Hire — Let's connect!"
+              title="Available for Hire — Let's connect!"
             >
               {/* Luminous Animated Shimmer Light Beam */}
               <span className="ready-hire-shimmer" />
@@ -305,11 +305,11 @@ export const Navbar = ({ onOpenResume, onNavClick }) => {
 
               {/* Animated Continuous Gradient Text */}
               <span className="ready-hire-text font-['Plus_Jakarta_Sans',sans-serif] text-xs font-black tracking-wider uppercase">
-                Ready For Hire
+                Available for Hire
               </span>
 
               {/* Continuously Twinkling & Rotating Sparkles */}
-              <Sparkles className="ready-hire-sparkle h-3.5 w-3.5 text-[#FF7A36] group-hover:scale-125 transition-transform duration-300" />
+              <Sparkles className="ready-hire-sparkle h-3.5 w-3.5 text-[#10B981] group-hover:scale-125 transition-transform duration-300" />
             </a>
 
             {/* Mobile Menu Toggle Button */}
@@ -443,14 +443,14 @@ export const Navbar = ({ onOpenResume, onNavClick }) => {
                 <a
                   href="#contact"
                   onClick={(e) => handleLinkClick(e, '#contact')}
-                  className="ready-hire-btn w-full inline-flex items-center justify-center gap-2.5 rounded-2xl border border-[#FF5A1F]/50 bg-gradient-to-r from-[#FF5A1F] to-[#FF7A36] py-3 text-xs font-black tracking-wider uppercase text-white shadow-[0_0_24px_rgba(255,90,31,0.45)] active:scale-98 transition-all cursor-pointer"
+                  className="ready-hire-btn w-full inline-flex items-center justify-center gap-2.5 rounded-2xl border border-[#10B981]/50 bg-gradient-to-r from-[#059669] to-[#10B981] py-3 text-xs font-black tracking-wider uppercase text-white shadow-[0_0_24px_rgba(16,185,129,0.45)] active:scale-98 transition-all cursor-pointer"
                 >
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-white shadow-[0_0_6px_#FFFFFF]"></span>
                   </span>
                   <span className="font-['Plus_Jakarta_Sans',sans-serif] font-black tracking-wider uppercase text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">
-                    Ready For Hire — Let's Connect
+                    Available for Hire — Let's Connect
                   </span>
                   <Sparkles className="h-4 w-4 text-white" />
                 </a>
