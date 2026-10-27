@@ -113,7 +113,7 @@ export const Hero = ({
               ========================================================================= */}
           <div className="hero-col-left flex flex-col items-start text-left z-20">
             
-            {/* 1. Luminous badge with Biniyam's avatar photo icon & Available for Hire status */}
+            {/* 1. Luminous badge with Biniyam's avatar photo icon */}
             <motion.div 
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -140,19 +140,6 @@ export const Hero = ({
                 <span>Hey, I'm <strong className="font-extrabold text-white tracking-wide drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">Biniyam</strong></span>
                 <span className="text-base select-none inline-block animate-wave origin-[70%_70%]">👋</span>
               </div>
-
-              {/* Luminous Green "Available for Hire" Badge */}
-              <a
-                href="#contact"
-                className="hero-available-badge"
-                title="Available for Hire — Let's connect!"
-              >
-                <span className="hero-available-pulse">
-                  <span className="hero-available-ping" />
-                  <span className="hero-available-core" />
-                </span>
-                <span>Available for Hire</span>
-              </a>
             </motion.div>
 
             {/* 2. Headline: Software \n Developer| */}
