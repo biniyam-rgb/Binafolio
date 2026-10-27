@@ -828,12 +828,13 @@ html[data-theme="light"] .nav-link-btn.active .nav-link-icon {
 
 html[data-theme="light"] .ready-hire-btn {
   background-color: #FFFFFF !important;
-  border-color: #FF7A36 !important;
-  box-shadow: 0 4px 14px rgba(255, 90, 31, 0.22) !important;
+  border-color: #10B981 !important;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.22) !important;
 }
 
 html[data-theme="light"] .ready-hire-text {
-  color: #0F172A !important;
+  color: #065F46 !important;
+  -webkit-text-fill-color: #065F46 !important;
 }
 
 /* Badges & Pills */
