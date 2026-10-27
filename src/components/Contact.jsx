@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   Mail,
@@ -58,9 +58,83 @@ export const Contact = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [touched, setTouched] = useState({ name: false, email: false, message: false });
+  const [errors, setErrors] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'error'
   const [errorMessage, setErrorMessage] = useState('');
   const [submittedData, setSubmittedData] = useState({ name: '', email: '' });
+
+  const nameRef = useRef(null);
+  const emailRef = useRef(null);
+  const messageRef = useRef(null);
+
+  const validateField = (fieldName, value) => {
+    const trimmed = (value || '').trim();
+
+    if (fieldName === 'name') {
+      if (!trimmed) {
+        return 'Please enter your name.';
+      }
+      if (trimmed.length < 2) {
+        return 'Name must be at least 2 characters.';
+      }
+      if (trimmed.length > 60) {
+        return 'Name cannot exceed 60 characters.';
+      }
+      // Allows Unicode letters (including international alphabets), spaces, hyphens, and apostrophes
+      const nameRegex = /^[\p{L}\s'.-]+$/u;
+      if (!nameRegex.test(trimmed)) {
+        return 'Name should only contain letters, spaces, or hyphens.';
+      }
+      return '';
+    }
+
+    if (fieldName === 'email') {
+      if (!trimmed) {
+        return 'Please enter your email address.';
+      }
+      if (trimmed.length > 100) {
+        return 'Email address is too long.';
+      }
+      // Standard RFC-compliant email pattern
+      const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+      if (!emailRegex.test(trimmed)) {
+        return 'Please enter a valid email address (e.g. name@example.com).';
+      }
+      return '';
+    }
+
+    if (fieldName === 'message') {
+      if (!trimmed) {
+        return 'Please enter a message.';
+      }
+      if (trimmed.length < 10) {
+        return 'Message must be at least 10 characters.';
+      }
+      return '';
+    }
+
+    return '';
+  };
+
+  const handleChange = (fieldName, value) => {
+    if (fieldName === 'name') setName(value);
+    else if (fieldName === 'email') setEmail(value);
+    else if (fieldName === 'message') setMessage(value);
+
+    // If the field was already touched, validate in real time so the error clears immediately upon correction
+    if (touched[fieldName]) {
+      const fieldError = validateField(fieldName, value);
+      setErrors((prev) => ({ ...prev, [fieldName]: fieldError }));
+    }
+  };
+
+  const handleBlur = (fieldName) => {
+    setTouched((prev) => ({ ...prev, [fieldName]: true }));
+    const val = fieldName === 'name' ? name : fieldName === 'email' ? email : message;
+    const fieldError = validateField(fieldName, val);
+    setErrors((prev) => ({ ...prev, [fieldName]: fieldError }));
+  };
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(personalData.contact.email);
@@ -82,7 +156,28 @@ export const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name.trim() || !email.trim() || !message.trim()) return;
+
+    const nameError = validateField('name', name);
+    const emailError = validateField('email', email);
+    const messageError = validateField('message', message);
+
+    setTouched({ name: true, email: true, message: true });
+    setErrors({
+      name: nameError,
+      email: emailError,
+      message: messageError
+    });
+
+    if (nameError || emailError || messageError) {
+      if (nameError && nameRef.current) {
+        nameRef.current.focus();
+      } else if (emailError && emailRef.current) {
+        emailRef.current.focus();
+      } else if (messageError && messageRef.current) {
+        messageRef.current.focus();
+      }
+      return;
+    }
 
     setStatus('submitting');
     setErrorMessage('');
@@ -112,6 +207,8 @@ export const Contact = () => {
         setName('');
         setEmail('');
         setMessage('');
+        setTouched({ name: false, email: false, message: false });
+        setErrors({ name: '', email: '', message: '' });
 
         try {
           confetti({
@@ -138,6 +235,8 @@ export const Contact = () => {
   const handleReset = () => {
     setStatus('idle');
     setErrorMessage('');
+    setTouched({ name: false, email: false, message: false });
+    setErrors({ name: '', email: '', message: '' });
   };
 
   const fallbackMailto = `mailto:${personalData.contact.email}?subject=${encodeURIComponent(
@@ -372,64 +471,160 @@ export const Contact = () => {
                     </button>
                   </motion.div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-3.5">
+                  <form onSubmit={handleSubmit} noValidate className="space-y-3.5">
                     {/* Name & Email Inputs Grid */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-[11px] font-mono uppercase tracking-wider text-[#C4B6AE] mb-1 flex items-center gap-1.5">
-                          <User className="h-3 w-3 text-[#FF5A1F]" />
-                          <span>Name</span>
-                          <span className="text-[#FF5A1F]">*</span>
-                        </label>
+                        <div className="flex items-center justify-between mb-1">
+                          <label
+                            htmlFor="contact-name"
+                            className="text-[11px] font-mono uppercase tracking-wider text-[#C4B6AE] flex items-center gap-1.5 cursor-pointer"
+                          >
+                            <User className="h-3 w-3 text-[#FF5A1F]" />
+                            <span>Name</span>
+                            <span className="text-[#FF5A1F]">*</span>
+                          </label>
+                          {touched.name && !errors.name && name.trim().length >= 2 && (
+                            <span className="flex items-center gap-1 text-[10px] font-mono text-[#10B981]">
+                              <CheckCircle2 className="w-3 h-3" />
+                              <span>Valid</span>
+                            </span>
+                          )}
+                        </div>
                         <input
+                          ref={nameRef}
+                          id="contact-name"
                           type="text"
                           name="name"
-                          required
                           value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          placeholder="e.g. Biniyam"
-                          className="contact-input text-xs sm:text-sm"
+                          onChange={(e) => handleChange('name', e.target.value)}
+                          onBlur={() => handleBlur('name')}
+                          placeholder="e.g. Biniyam Gebrie"
+                          className={`contact-input text-xs sm:text-sm ${
+                            touched.name && errors.name
+                              ? 'has-error'
+                              : touched.name && !errors.name && name.trim().length >= 2
+                              ? 'is-valid'
+                              : ''
+                          }`}
                           disabled={status === 'submitting'}
+                          aria-invalid={Boolean(touched.name && errors.name)}
+                          aria-describedby={touched.name && errors.name ? 'contact-name-error' : undefined}
                         />
+                        {touched.name && errors.name && (
+                          <motion.p
+                            id="contact-name-error"
+                            initial={{ opacity: 0, y: -4 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="contact-field-error"
+                          >
+                            <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                            <span>{errors.name}</span>
+                          </motion.p>
+                        )}
                       </div>
 
                       <div>
-                        <label className="block text-[11px] font-mono uppercase tracking-wider text-[#C4B6AE] mb-1 flex items-center gap-1.5">
-                          <Mail className="h-3 w-3 text-[#FF5A1F]" />
-                          <span>Email</span>
-                          <span className="text-[#FF5A1F]">*</span>
-                        </label>
+                        <div className="flex items-center justify-between mb-1">
+                          <label
+                            htmlFor="contact-email"
+                            className="text-[11px] font-mono uppercase tracking-wider text-[#C4B6AE] flex items-center gap-1.5 cursor-pointer"
+                          >
+                            <Mail className="h-3 w-3 text-[#FF5A1F]" />
+                            <span>Email</span>
+                            <span className="text-[#FF5A1F]">*</span>
+                          </label>
+                          {touched.email && !errors.email && email.trim() && (
+                            <span className="flex items-center gap-1 text-[10px] font-mono text-[#10B981]">
+                              <CheckCircle2 className="w-3 h-3" />
+                              <span>Valid</span>
+                            </span>
+                          )}
+                        </div>
                         <input
+                          ref={emailRef}
+                          id="contact-email"
                           type="email"
                           name="email"
-                          required
                           value={email}
-                          onChange={(e) => setEmail(e.target.value)}
+                          onChange={(e) => handleChange('email', e.target.value)}
+                          onBlur={() => handleBlur('email')}
                           placeholder="e.g. bini@gmail.com"
-                          className="contact-input text-xs sm:text-sm"
+                          className={`contact-input text-xs sm:text-sm ${
+                            touched.email && errors.email
+                              ? 'has-error'
+                              : touched.email && !errors.email && email.trim()
+                              ? 'is-valid'
+                              : ''
+                          }`}
                           disabled={status === 'submitting'}
+                          aria-invalid={Boolean(touched.email && errors.email)}
+                          aria-describedby={touched.email && errors.email ? 'contact-email-error' : undefined}
                         />
+                        {touched.email && errors.email && (
+                          <motion.p
+                            id="contact-email-error"
+                            initial={{ opacity: 0, y: -4 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="contact-field-error"
+                          >
+                            <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                            <span>{errors.email}</span>
+                          </motion.p>
+                        )}
                       </div>
                     </div>
 
                     {/* Message Area */}
                     <div>
-                      <label className="block text-[11px] font-mono uppercase tracking-wider text-[#C4B6AE] mb-1 flex items-center gap-1.5">
-                        <MessageSquare className="h-3 w-3 text-[#FF5A1F]" />
-                        <span>Message</span>
-                        <span className="text-[#FF5A1F]">*</span>
-                      </label>
+                      <div className="flex items-center justify-between mb-1">
+                        <label
+                          htmlFor="contact-message"
+                          className="text-[11px] font-mono uppercase tracking-wider text-[#C4B6AE] mb-1 flex items-center gap-1.5 cursor-pointer"
+                        >
+                          <MessageSquare className="h-3 w-3 text-[#FF5A1F]" />
+                          <span>Message</span>
+                          <span className="text-[#FF5A1F]">*</span>
+                        </label>
+                        {touched.message && !errors.message && message.trim().length >= 10 && (
+                          <span className="flex items-center gap-1 text-[10px] font-mono text-[#10B981]">
+                            <CheckCircle2 className="w-3 h-3" />
+                            <span>Valid</span>
+                          </span>
+                        )}
+                      </div>
                       <textarea
+                        ref={messageRef}
+                        id="contact-message"
                         rows={4}
                         name="message"
-                        required
                         value={message}
-                        onChange={(e) => setMessage(e.target.value)}
+                        onChange={(e) => handleChange('message', e.target.value)}
+                        onBlur={() => handleBlur('message')}
                         placeholder="Hi Biniyam, I'd like to talk about a full-stack project or collaboration..."
-                        className="contact-textarea text-xs sm:text-sm"
+                        className={`contact-textarea text-xs sm:text-sm ${
+                          touched.message && errors.message
+                            ? 'has-error'
+                            : touched.message && !errors.message && message.trim().length >= 10
+                            ? 'is-valid'
+                            : ''
+                        }`}
                         style={{ resize: 'none' }}
                         disabled={status === 'submitting'}
+                        aria-invalid={Boolean(touched.message && errors.message)}
+                        aria-describedby={touched.message && errors.message ? 'contact-message-error' : undefined}
                       />
+                      {touched.message && errors.message && (
+                        <motion.p
+                          id="contact-message-error"
+                          initial={{ opacity: 0, y: -4 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="contact-field-error"
+                        >
+                          <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                          <span>{errors.message}</span>
+                        </motion.p>
+                      )}
                     </div>
 
                     {/* Error Banner */}
