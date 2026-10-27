@@ -287,29 +287,14 @@ export const Navbar = ({ onOpenResume, onNavClick }) => {
             <a
               href="#contact"
               onClick={(e) => handleLinkClick(e, '#contact')}
-              className={`ready-hire-btn hidden sm:inline-flex items-center gap-2 rounded-full px-4 sm:px-4.5 py-1.5 border backdrop-blur-xl hover:border-[#10B981] active:scale-95 group cursor-pointer transition-all ${
-                theme === 'light'
-                  ? 'border-[#10B981]/50 bg-white shadow-[0_2px_12px_rgba(16,185,129,0.2)]'
-                  : 'border-[#10B981]/45 bg-[#091F18]/90'
-              }`}
+              className="hero-available-badge hidden sm:inline-flex"
               title="Available for Hire — Let's connect!"
             >
-              {/* Luminous Animated Shimmer Light Beam */}
-              <span className="ready-hire-shimmer" />
-
-              {/* Live Pulsing Emerald Beacon */}
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10B981] shadow-[0_0_8px_#10B981]"></span>
+              <span className="hero-available-pulse">
+                <span className="hero-available-ping" />
+                <span className="hero-available-core" />
               </span>
-
-              {/* Animated Continuous Gradient Text */}
-              <span className="ready-hire-text font-['Plus_Jakarta_Sans',sans-serif] text-xs font-black tracking-wider uppercase">
-                Available for Hire
-              </span>
-
-              {/* Continuously Twinkling & Rotating Sparkles */}
-              <Sparkles className="ready-hire-sparkle h-3.5 w-3.5 text-[#10B981] group-hover:scale-125 transition-transform duration-300" />
+              <span>Available for Hire</span>
             </a>
 
             {/* Mobile Menu Toggle Button */}
